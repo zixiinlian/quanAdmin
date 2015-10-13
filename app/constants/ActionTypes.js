@@ -1,11 +1,11 @@
 import keyMirror from 'react/lib/keyMirror';
 
 export default {
-  Add: keyMirror({
+  QuanAdmin_Add: keyMirror({
     addQuan: null
   }),
 
-  List: keyMirror({
+  QuanAdmin_List: keyMirror({
     getQuanList: null
   })
 };
