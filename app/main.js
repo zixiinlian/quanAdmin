@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import QuanAdminApp from './QuanAdminApp';
 import { createRedux } from 'redux';
 import { Provider } from 'redux/react';
-import * as stores from '../stores';
+import configureStore from './store/configureStore';
 
-const redux = createRedux(stores);
+const store = configureStore();
 
 React.render(
-    <Provider redux={redux}>
+    <Provider store={store}>
         {() => <QuanAdminApp />}
-  	</Provider>
+  	</Provider>,
     document.getElementById("root")
 );
