@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
 class QuanBatchManagement extends Component {
 	constructor(props) {
@@ -21,6 +22,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+  	pushState
   };
 }
 
