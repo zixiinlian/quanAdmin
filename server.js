@@ -10,7 +10,17 @@ var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 
-app.use(function(req, res) {
+app.get('/QuanBatchList', function(req, res){
+	res.json([
+		{ batchId: 1},
+		{ batchId: 2},
+		{ batchId: 3},
+		{ batchId: 4},
+		{ batchId: 5}
+	]);
+});
+
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
 

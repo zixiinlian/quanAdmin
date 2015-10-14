@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerStateReducer as router } from 'redux-router';
-import add from './add';
+import quanBatchManagement from './quanBatchManagement';
 
 const rootReducer = combineReducers({
-  add,
+  quanBatchManagement,
   router
 });
 

@@ -16,7 +16,6 @@ class QuanAdminApp extends Component {
 	        I''m master page.
 	      </div>
 	      <div>
-	      	This is from router.
 	      	{children}
 	      </div>
       </div>

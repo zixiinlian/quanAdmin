@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
+import { fetchQuanBatchList } from '../actions';
+import QuanBatchList from '../components/QuanBatchList';
 
 class QuanBatchManagement extends Component {
 	constructor(props) {
 		super(props);
 	}
 
+	componentDidMount() {
+		const { fetchQuanBatchList } = this.props;
+	    fetchQuanBatchList();
+	}
+
 	render() {
+		const {quanBatchList} = this.props;
+
 		return (
 			<div>
-		        Now you see me.
-		    </div>
+				<QuanBatchList quanBatchList={quanBatchList} />
+			</div>
 		);
 	}
 }
 
 function mapStateToProps(state) {
-	return {};
+	const {quanBatchList} = state.quanBatchManagement;
+	return {
+		quanBatchList
+	};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-  	pushState
+  	pushState,
+  	fetchQuanBatchList: () => dispatch(fetchQuanBatchList())
   };
 }
 
