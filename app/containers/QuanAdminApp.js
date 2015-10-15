@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
-import { resetErrorMessage } from '../actions';
 
 class QuanAdminApp extends Component {
   constructor(props) {
@@ -40,11 +38,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushState
   };
 }
 
-export default connect(mapStateToProps, {
-  resetErrorMessage,
-  mapDispatchToProps
-})(QuanAdminApp);
+export default connect(mapStateToProps, mapDispatchToProps)(QuanAdminApp);
