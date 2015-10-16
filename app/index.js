@@ -31175,7 +31175,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reducers = __webpack_require__(406);
+	var _reducers = __webpack_require__(407);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -32453,7 +32453,7 @@
 	
 	var _containersQuanBatchManagement2 = _interopRequireDefault(_containersQuanBatchManagement);
 	
-	var _containersQuanBatchCreation = __webpack_require__(405);
+	var _containersQuanBatchCreation = __webpack_require__(406);
 	
 	var _containersQuanBatchCreation2 = _interopRequireDefault(_containersQuanBatchCreation);
 	
@@ -32586,6 +32586,10 @@
 	
 	var _componentsQuanBatchSearch2 = _interopRequireDefault(_componentsQuanBatchSearch);
 	
+	var _componentsIssueQuan = __webpack_require__(405);
+	
+	var _componentsIssueQuan2 = _interopRequireDefault(_componentsIssueQuan);
+	
 	var QuanBatchManagement = (function (_Component) {
 		_inherits(QuanBatchManagement, _Component);
 	
@@ -32629,7 +32633,8 @@
 					'div',
 					null,
 					_react2['default'].createElement(_componentsQuanBatchSearch2['default'], searchProps),
-					_react2['default'].createElement(_componentsQuanBatchList2['default'], listProps)
+					_react2['default'].createElement(_componentsQuanBatchList2['default'], listProps),
+					true ? _react2['default'].createElement(_componentsIssueQuan2['default'], null) : undefiend
 				);
 			}
 		}]);
@@ -32678,9 +32683,6 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	exports.requestQuanBatchList = requestQuanBatchList;
 	exports.receiveQuanBatchList = receiveQuanBatchList;
 	exports.fetchQuanBatchList = fetchQuanBatchList;
@@ -32743,7 +32745,7 @@
 	        'Accept': 'application/json',
 	        'Content-Type': 'application/json'
 	      },
-	      body: JSON.stringify(_extends({}, quanBatchSearchCriteria))
+	      body: JSON.stringify(quanBatchSearchCriteria)
 	    }).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
@@ -32769,7 +32771,7 @@
 	
 	function receiveDispatchChannelList(json) {
 	  return {
-	    type: RECEIVE_QUAN_BATCH_LIST,
+	    type: RECEIVE_DISPATCH_CHANNEL_LIST,
 	    dispatchChannelList: json
 	  };
 	}
@@ -33141,21 +33143,21 @@
 /* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(2);
 	
@@ -33167,111 +33169,117 @@
 	  function QuanBatchList(props) {
 	    _classCallCheck(this, QuanBatchList);
 	
-	    _get(Object.getPrototypeOf(QuanBatchList.prototype), 'constructor', this).call(this, props);
+	    _get(Object.getPrototypeOf(QuanBatchList.prototype), "constructor", this).call(this, props);
+	    this.handleIssueQuan = this.handleIssueQuan.bind(this);
 	  }
 	
 	  _createClass(QuanBatchList, [{
-	    key: 'render',
+	    key: "handleIssueQuan",
+	    value: function handleIssueQuan(e) {}
+	  }, {
+	    key: "render",
 	    value: function render() {
+	      var _this = this;
+	
 	      var quanBatchList = this.props.quanBatchList;
 	
-	      return _react2['default'].createElement(
-	        'table',
+	      return _react2["default"].createElement(
+	        "table",
 	        null,
-	        _react2['default'].createElement(
-	          'thead',
+	        _react2["default"].createElement(
+	          "thead",
 	          null,
-	          _react2['default'].createElement(
-	            'tr',
+	          _react2["default"].createElement(
+	            "tr",
 	            null,
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '批次号'
+	              "批次号"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '批次名称'
+	              "批次名称"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '创建时间'
+	              "创建时间"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '发放类型'
+	              "发放类型"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '发放时间'
+	              "发放时间"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '发放数量'
+	              "发放数量"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '创建人'
+	              "创建人"
 	            ),
-	            _react2['default'].createElement(
-	              'th',
+	            _react2["default"].createElement(
+	              "th",
 	              null,
-	              '操作'
+	              "操作"
 	            )
 	          )
 	        ),
-	        _react2['default'].createElement(
-	          'tbody',
+	        _react2["default"].createElement(
+	          "tbody",
 	          null,
 	          quanBatchList.map(function (batch, i) {
-	            return _react2['default'].createElement(
-	              'tr',
+	            return _react2["default"].createElement(
+	              "tr",
 	              { key: i },
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
 	                batch.batchId
 	              ),
-	              _react2['default'].createElement(
-	                'td',
+	              _react2["default"].createElement(
+	                "td",
 	                null,
-	                batch.batchId
+	                _react2["default"].createElement("a", { href: "javascirpt:void(0)", onClick: _this.handleIssueQuan })
 	              )
 	            );
 	          })
@@ -33283,8 +33291,8 @@
 	  return QuanBatchList;
 	})(_react.Component);
 	
-	exports['default'] = QuanBatchList;
-	module.exports = exports['default'];
+	exports["default"] = QuanBatchList;
+	module.exports = exports["default"];
 
 /***/ },
 /* 404 */
@@ -33349,7 +33357,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var dispatchTypeList = this.props.dispatchTypeList;
+	      var _props2 = this.props;
+	      var dispatchTypeList = _props2.dispatchTypeList;
+	      var dispatchChannelList = _props2.dispatchChannelList;
 	
 	      return _react2['default'].createElement(
 	        'div',
@@ -33378,8 +33388,18 @@
 	              _react2['default'].createElement(
 	                'td',
 	                null,
-	                '发放机构: ',
-	                _react2['default'].createElement('input', { type: 'text' })
+	                '发放机构:',
+	                _react2['default'].createElement(
+	                  'select',
+	                  { ref: 'dispatchChannel' },
+	                  dispatchChannelList.map(function (dispatchChannel) {
+	                    return _react2['default'].createElement(
+	                      'option',
+	                      { key: dispatchChannel.id, value: dispatchChannel.id },
+	                      dispatchChannel.desc
+	                    );
+	                  })
+	                )
 	              )
 	            ),
 	            _react2['default'].createElement(
@@ -33429,6 +33449,56 @@
 
 /***/ },
 /* 405 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var IssueQuan = (function (_Component) {
+	  _inherits(IssueQuan, _Component);
+	
+	  function IssueQuan(props) {
+	    _classCallCheck(this, IssueQuan);
+	
+	    _get(Object.getPrototypeOf(IssueQuan.prototype), 'constructor', this).call(this, props);
+	  }
+	
+	  _createClass(IssueQuan, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        'Hi, there.'
+	      );
+	    }
+	  }]);
+	
+	  return IssueQuan;
+	})(_react.Component);
+	
+	exports['default'] = IssueQuan;
+	module.exports = exports['default'];
+
+/***/ },
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33497,7 +33567,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 406 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33512,11 +33582,11 @@
 	
 	var _reduxRouter = __webpack_require__(178);
 	
-	var _shared = __webpack_require__(407);
+	var _shared = __webpack_require__(408);
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _quanBatchManagement = __webpack_require__(408);
+	var _quanBatchManagement = __webpack_require__(411);
 	
 	var _quanBatchManagement2 = _interopRequireDefault(_quanBatchManagement);
 	
@@ -33530,15 +33600,24 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 407 */
-/***/ function(module, exports) {
+/* 408 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
 		value: true
 	});
-	exports['default'] = quanBatchManagement;
+	exports['default'] = shared;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _reactAddonsUpdate = __webpack_require__(409);
+	
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+	
+	var _actions = __webpack_require__(400);
+	
 	var initialState = {
 		dispatchTypeList: [{
 			id: 1,
@@ -33556,55 +33635,14 @@
 		dispatchChannelList: []
 	};
 	
-	function quanBatchManagement(state, action) {
-		if (state === undefined) state = initialState;
-	
-		return state;
-	}
-	
-	module.exports = exports['default'];
-
-/***/ },
-/* 408 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-		value: true
-	});
-	exports['default'] = quanBatchManagement;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _reactAddonsUpdate = __webpack_require__(409);
-	
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-	
-	var _actions = __webpack_require__(400);
-	
-	var initialState = {
-		quanBatchList: [],
-		quanBatchSearchCriteria: {
-			batchId: '',
-			dispatchType: ''
-		}
-	};
-	
-	function quanBatchManagement(state, action) {
+	function shared(state, action) {
 		if (state === undefined) state = initialState;
 	
 		switch (action.type) {
-			case _actions.RECEIVE_QUAN_BATCH_LIST:
+			case _actions.RECEIVE_DISPATCH_CHANNEL_LIST:
 				{
 					return (0, _reactAddonsUpdate2['default'])(state, {
-						quanBatchList: { $set: action.quanBatchList }
-					});
-				}
-			case _actions.SET_QUAN_BATCH_SEARCH_CRITERIA:
-				{
-					return (0, _reactAddonsUpdate2['default'])(state, {
-						quanBatchSearchCriteria: { $set: action.quanBatchSearchCriteria }
+						dispatchChannelList: { $set: action.dispatchChannelList }
 					});
 				}
 			default:
@@ -33734,6 +33772,58 @@
 	
 	module.exports = update;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 411 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+	exports['default'] = quanBatchManagement;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _reactAddonsUpdate = __webpack_require__(409);
+	
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+	
+	var _actions = __webpack_require__(400);
+	
+	var initialState = {
+		quanBatchList: [],
+		quanBatchSearchCriteria: {
+			batchId: '',
+			dispatchType: ''
+		}
+	};
+	
+	function quanBatchManagement(state, action) {
+		if (state === undefined) state = initialState;
+	
+		switch (action.type) {
+			case _actions.RECEIVE_QUAN_BATCH_LIST:
+				{
+					return (0, _reactAddonsUpdate2['default'])(state, {
+						quanBatchList: { $set: action.quanBatchList }
+					});
+				}
+			case _actions.SET_QUAN_BATCH_SEARCH_CRITERIA:
+				{
+					return (0, _reactAddonsUpdate2['default'])(state, {
+						quanBatchSearchCriteria: { $set: action.quanBatchSearchCriteria }
+					});
+				}
+			default:
+				{
+					return state;
+				}
+		}
+	}
+	
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

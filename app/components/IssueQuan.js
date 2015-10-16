@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class QuanBatchList extends Component {
+export default class IssueQuan extends Component {
   constructor(props) {
     super(props);
   }
 
   render () {
     return (
-      Hi, there.
+      <div>Hi, there.</div>
     );
   }
 }

@@ -32,6 +32,7 @@ class QuanBatchManagement extends Component {
 			<div>
 				<QuanBatchSearch {...searchProps} />
 				<QuanBatchList {...listProps} />
+				{ true ? <IssueQuan /> : undefiend }
 			</div>
 		);
 	}
