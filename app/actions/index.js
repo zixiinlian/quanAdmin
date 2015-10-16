@@ -20,7 +20,7 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_QUAN_BATCH_LIST = 'REQUEST_QUAN_BATCH_LIST';
 
-export function requestQuanBatchList(reddit) {
+export function requestQuanBatchList() {
   return {
     type: REQUEST_QUAN_BATCH_LIST
   };
@@ -35,11 +35,44 @@ export function receiveQuanBatchList(json) {
   };
 }
 
-export function fetchQuanBatchList() {
+export function fetchQuanBatchList(quanBatchSearchCriteria) {
   return dispatch => {
     dispatch(requestQuanBatchList());
-    return fetch(`/QuanBatchList`)
+    return fetch(`/QuanBatchList`, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(quanBatchSearchCriteria)
+      })
       .then(response => response.json())
       .then(json => dispatch(receiveQuanBatchList(json)));
+  };
+}
+
+export const SET_QUAN_BATCH_SEARCH_CRITERIA = 'SET_QUAN_BATCH_SEARCH_CRITERIA';
+
+export function setQuanBatchSearchCriteria(quanBatchSearchCriteria) {
+  return {
+    type: SET_QUAN_BATCH_SEARCH_CRITERIA,
+    quanBatchSearchCriteria
+  };
+}
+
+export const RECEIVE_DISPATCH_CHANNEL_LIST = 'RECEIVE_DISPATCH_CHANNEL_LIST';
+
+export function receiveDispatchChannelList(json) {
+  return {
+    type: RECEIVE_DISPATCH_CHANNEL_LIST,
+    dispatchChannelList: json
+  };
+}
+
+export function fetchDispatchChannelList() {
+  return dispatch => {
+    return fetch(`/DispatchChannelList`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveDispatchChannelList(json)));
   };
 }

@@ -3,6 +3,11 @@ import React, { Component, PropTypes } from 'react';
 export default class QuanBatchList extends Component {
   constructor(props) {
     super(props);
+    this.handleIssueQuan = this.handleIssueQuan.bind(this);
+  }
+
+  handleIssueQuan(e){
+    
   }
 
   render () {
@@ -32,7 +37,7 @@ export default class QuanBatchList extends Component {
                 <td>{batch.batchId}</td>
                 <td>{batch.batchId}</td>
                 <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
+                <td><a href="javascirpt:void(0)" onClick={this.handleIssueQuan}></a></td>
               </tr>
             )
           }

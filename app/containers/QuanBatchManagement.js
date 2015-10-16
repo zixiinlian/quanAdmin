@@ -2,13 +2,21 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import { fetchQuanBatchList } from '../actions';
+import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
+import IssueQuan from '../components/IssueQuan';
 
 class QuanBatchManagement extends Component {
 	constructor(props) {
 		super(props);
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.quanBatchSearchCriteria !== this.props.quanBatchSearchCriteria){
+			const { fetchQuanBatchList } = this.props;
+	    	fetchQuanBatchList(nextProps.quanBatchSearchCriteria);
+		}
 	}
 
 	componentDidMount() {
@@ -17,12 +25,13 @@ class QuanBatchManagement extends Component {
 	}
 
 	render() {
-		const {quanBatchList, pushState} = this.props;
-
+		const {pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList} = this.props;
+		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList};
+		const listProps = {quanBatchList};
 		return (
 			<div>
-				<QuanBatchSearch pushState={pushState} />
-				<QuanBatchList quanBatchList={quanBatchList} />
+				<QuanBatchSearch {...searchProps} />
+				<QuanBatchList {...listProps} />
 			</div>
 		);
 	}
@@ -33,16 +42,22 @@ QuanBatchManagement.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const {quanBatchList} = state.quanBatchManagement;
+	const {quanBatchList, quanBatchSearchCriteria} = state.quanBatchManagement;
+	const {dispatchTypeList, dispatchChannelList} = state.shared;
 	return {
-		quanBatchList
+		quanBatchList,
+		quanBatchSearchCriteria,
+		dispatchTypeList,
+		dispatchChannelList
 	};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
   	pushState: bindActionCreators(pushState, dispatch),
-  	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch)
+  	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch),
+  	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
+  	setQuanBatchSearchCriteria: bindActionCreators(setQuanBatchSearchCriteria, dispatch)
   };
 }
 
