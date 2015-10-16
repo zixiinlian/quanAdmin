@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria} from '../actions';
+import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
@@ -24,15 +24,28 @@ class QuanBatchManagement extends Component {
 	    fetchQuanBatchList();
 	}
 
+	renderIssueQuan(){
+		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList} = this.props;
+		if(isShowIssueQuan){
+			let selectedQuanBatch = quanBatchList.filter((element) => {
+				return element.batchId === selectedQuanBatchId;
+			})[0];
+			return <IssueQuan {...selectedQuanBatch}></IssueQuan>;
+		}
+	}
+
 	render() {
-		const {pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList} = this.props;
+		const {
+			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList
+			, showIssueQuan
+		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList};
-		const listProps = {quanBatchList};
+		const listProps = {quanBatchList, showIssueQuan};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
 				<QuanBatchList {...listProps} />
-				{ true ? <IssueQuan /> : undefiend }
+				{ this.renderIssueQuan() }
 			</div>
 		);
 	}
@@ -43,13 +56,15 @@ QuanBatchManagement.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const {quanBatchList, quanBatchSearchCriteria} = state.quanBatchManagement;
+	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId} = state.quanBatchManagement;
 	const {dispatchTypeList, dispatchChannelList} = state.shared;
 	return {
 		quanBatchList,
 		quanBatchSearchCriteria,
 		dispatchTypeList,
-		dispatchChannelList
+		dispatchChannelList,
+		isShowIssueQuan,
+		selectedQuanBatchId
 	};
 }
 
@@ -58,6 +73,7 @@ function mapDispatchToProps(dispatch) {
   	pushState: bindActionCreators(pushState, dispatch),
   	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch),
   	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
+  	showIssueQuan: bindActionCreators(showIssueQuan, dispatch),
   	setQuanBatchSearchCriteria: bindActionCreators(setQuanBatchSearchCriteria, dispatch)
   };
 }

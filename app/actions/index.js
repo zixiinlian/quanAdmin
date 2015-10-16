@@ -76,3 +76,12 @@ export function fetchDispatchChannelList() {
       .then(json => dispatch(receiveDispatchChannelList(json)));
   };
 }
+
+export const SHOW_ISSUE_QUAN = 'SHOW_ISSUE_QUAN';
+
+export function showIssueQuan(selectedQuanBatchId) {
+  return {
+    type: SHOW_ISSUE_QUAN,
+    selectedQuanBatchId
+  };
+}

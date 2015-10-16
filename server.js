@@ -15,17 +15,17 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.post('/QuanBatchList', function(req, res){
 	if(Object.keys(req.body).length !== 0){
 		res.json([
-			{ batchId: 1},
-			{ batchId: 2}
+			{ batchId: 1, batchName: '批次1'},
+			{ batchId: 2, batchName: '批次2'}
 		]);
 	}
 	else{
 		res.json([
-			{ batchId: 1},
-			{ batchId: 2},
-			{ batchId: 3},
-			{ batchId: 4},
-			{ batchId: 5}
+			{ batchId: 1, batchName: '批次1'},
+			{ batchId: 2, batchName: '批次2'},
+			{ batchId: 3, batchName: '批次3'},
+			{ batchId: 4, batchName: '批次4'},
+			{ batchId: 5, batchName: '批次5'}
 		]);
 	}
 });

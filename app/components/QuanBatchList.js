@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import QuanBatchListItem from './QuanBatchListItem';
 
 export default class QuanBatchList extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class QuanBatchList extends Component {
   }
 
   render () {
-    const { quanBatchList } = this.props;
+    const { quanBatchList, showIssueQuan } = this.props;
     return (
       <table>
           <thead>
@@ -29,16 +30,7 @@ export default class QuanBatchList extends Component {
           <tbody>
           {
             quanBatchList.map((batch, i) =>
-              <tr key={i}>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td>{batch.batchId}</td>
-                <td><a href="javascirpt:void(0)" onClick={this.handleIssueQuan}></a></td>
-              </tr>
+              <QuanBatchListItem showIssueQuan={showIssueQuan} {...batch} key={i} />
             )
           }
           </tbody>
