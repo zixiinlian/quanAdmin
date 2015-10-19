@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan} from '../actions';
+import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
@@ -40,10 +40,10 @@ class QuanBatchManagement extends Component {
 	render() {
 		const {
 			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList
-			, showIssueQuan
+			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage
 		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList};
-		const listProps = {quanBatchList, showIssueQuan, dispatchTypeList};
+		const listProps = {quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -59,7 +59,7 @@ QuanBatchManagement.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId} = state.quanBatchManagement;
+	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager} = state.quanBatchManagement;
 	const {dispatchTypeList, dispatchChannelList} = state.shared;
 	return {
 		quanBatchList,
@@ -67,7 +67,8 @@ function mapStateToProps(state) {
 		dispatchTypeList,
 		dispatchChannelList,
 		isShowIssueQuan,
-		selectedQuanBatchId
+		selectedQuanBatchId,
+		quanBatchListPager
 	};
 }
 
@@ -78,6 +79,7 @@ function mapDispatchToProps(dispatch) {
   	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
   	showIssueQuan: bindActionCreators(showIssueQuan, dispatch),
   	hideIssueQuan: bindActionCreators(hideIssueQuan, dispatch),
+  	setQuanBatchListCurrentPage: bindActionCreators(setQuanBatchListCurrentPage, dispatch),
   	setQuanBatchSearchCriteria: bindActionCreators(setQuanBatchSearchCriteria, dispatch)
   };
 }

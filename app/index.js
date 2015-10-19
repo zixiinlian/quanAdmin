@@ -31175,7 +31175,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reducers = __webpack_require__(409);
+	var _reducers = __webpack_require__(414);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -32453,7 +32453,7 @@
 	
 	var _containersQuanBatchManagement2 = _interopRequireDefault(_containersQuanBatchManagement);
 	
-	var _containersQuanBatchCreation = __webpack_require__(408);
+	var _containersQuanBatchCreation = __webpack_require__(413);
 	
 	var _containersQuanBatchCreation2 = _interopRequireDefault(_containersQuanBatchCreation);
 	
@@ -32578,17 +32578,21 @@
 	
 	var _actions = __webpack_require__(400);
 	
-	var _componentsQuanBatchList = __webpack_require__(404);
+	var _componentsQuanBatchList = __webpack_require__(406);
 	
 	var _componentsQuanBatchList2 = _interopRequireDefault(_componentsQuanBatchList);
 	
-	var _componentsQuanBatchSearch = __webpack_require__(406);
+	var _componentsQuanBatchSearch = __webpack_require__(410);
 	
 	var _componentsQuanBatchSearch2 = _interopRequireDefault(_componentsQuanBatchSearch);
 	
-	var _componentsIssueQuan = __webpack_require__(407);
+	var _componentsIssueQuan = __webpack_require__(411);
 	
 	var _componentsIssueQuan2 = _interopRequireDefault(_componentsIssueQuan);
+	
+	var _componentsModalDialog = __webpack_require__(412);
+	
+	var _componentsModalDialog2 = _interopRequireDefault(_componentsModalDialog);
 	
 	var QuanBatchManagement = (function (_Component) {
 		_inherits(QuanBatchManagement, _Component);
@@ -32622,13 +32626,20 @@
 				var isShowIssueQuan = _props.isShowIssueQuan;
 				var selectedQuanBatchId = _props.selectedQuanBatchId;
 				var quanBatchList = _props.quanBatchList;
+				var hideIssueQuan = _props.hideIssueQuan;
 	
+				var selectedQuanBatch = null;
 				if (isShowIssueQuan) {
-					var selectedQuanBatch = quanBatchList.filter(function (element) {
+					selectedQuanBatch = quanBatchList.filter(function (element) {
 						return element.batchId === selectedQuanBatchId;
 					})[0];
-					return _react2['default'].createElement(_componentsIssueQuan2['default'], selectedQuanBatch);
 				}
+	
+				return _react2['default'].createElement(
+					_componentsModalDialog2['default'],
+					{ isShow: isShowIssueQuan, close: hideIssueQuan, title: '站外渠道按卡号段分发' },
+					_react2['default'].createElement(_componentsIssueQuan2['default'], selectedQuanBatch)
+				);
 			}
 		}, {
 			key: 'render',
@@ -32642,9 +32653,10 @@
 				var fetchDispatchChannelList = _props2.fetchDispatchChannelList;
 				var dispatchChannelList = _props2.dispatchChannelList;
 				var showIssueQuan = _props2.showIssueQuan;
+				var quanBatchListPager = _props2.quanBatchListPager;
 	
 				var searchProps = { pushState: pushState, dispatchTypeList: dispatchTypeList, setQuanBatchSearchCriteria: setQuanBatchSearchCriteria, quanBatchSearchCriteria: quanBatchSearchCriteria, fetchDispatchChannelList: fetchDispatchChannelList, dispatchChannelList: dispatchChannelList };
-				var listProps = { quanBatchList: quanBatchList, showIssueQuan: showIssueQuan };
+				var listProps = { quanBatchList: quanBatchList, showIssueQuan: showIssueQuan, dispatchTypeList: dispatchTypeList, quanBatchListPager: quanBatchListPager };
 				return _react2['default'].createElement(
 					'div',
 					null,
@@ -32668,6 +32680,7 @@
 		var quanBatchSearchCriteria = _state$quanBatchManagement.quanBatchSearchCriteria;
 		var isShowIssueQuan = _state$quanBatchManagement.isShowIssueQuan;
 		var selectedQuanBatchId = _state$quanBatchManagement.selectedQuanBatchId;
+		var quanBatchListPager = _state$quanBatchManagement.quanBatchListPager;
 		var _state$shared = state.shared;
 		var dispatchTypeList = _state$shared.dispatchTypeList;
 		var dispatchChannelList = _state$shared.dispatchChannelList;
@@ -32678,7 +32691,8 @@
 			dispatchTypeList: dispatchTypeList,
 			dispatchChannelList: dispatchChannelList,
 			isShowIssueQuan: isShowIssueQuan,
-			selectedQuanBatchId: selectedQuanBatchId
+			selectedQuanBatchId: selectedQuanBatchId,
+			quanBatchListPager: quanBatchListPager
 		};
 	}
 	
@@ -32688,6 +32702,7 @@
 			fetchQuanBatchList: (0, _redux.bindActionCreators)(_actions.fetchQuanBatchList, dispatch),
 			fetchDispatchChannelList: (0, _redux.bindActionCreators)(_actions.fetchDispatchChannelList, dispatch),
 			showIssueQuan: (0, _redux.bindActionCreators)(_actions.showIssueQuan, dispatch),
+			hideIssueQuan: (0, _redux.bindActionCreators)(_actions.hideIssueQuan, dispatch),
 			setQuanBatchSearchCriteria: (0, _redux.bindActionCreators)(_actions.setQuanBatchSearchCriteria, dispatch)
 		};
 	}
@@ -32711,6 +32726,7 @@
 	exports.receiveDispatchChannelList = receiveDispatchChannelList;
 	exports.fetchDispatchChannelList = fetchDispatchChannelList;
 	exports.showIssueQuan = showIssueQuan;
+	exports.hideIssueQuan = hideIssueQuan;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -32796,7 +32812,7 @@
 	    return (0, _isomorphicFetch2['default'])('/DispatchChannelList').then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
-	      return dispatch(receiveDispatchChannelList(json.data));
+	      return dispatch(receiveDispatchChannelList(json));
 	    });
 	  };
 	}
@@ -32809,6 +32825,16 @@
 	  return {
 	    type: SHOW_ISSUE_QUAN,
 	    selectedQuanBatchId: selectedQuanBatchId
+	  };
+	}
+	
+	var HIDE_ISSUE_QUAN = 'HIDE_ISSUE_QUAN';
+	
+	exports.HIDE_ISSUE_QUAN = HIDE_ISSUE_QUAN;
+	
+	function hideIssueQuan() {
+	  return {
+	    type: HIDE_ISSUE_QUAN
 	  };
 	}
 
@@ -33169,28 +33195,27 @@
 /* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 			value: true
 	});
 	exports.getQuanBatchList = getQuanBatchList;
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _isomorphicFetch = __webpack_require__(401);
 	
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 	
-	var apiServer = "http://192.168.155.169:8000/v1/";
+	var _queryString = __webpack_require__(404);
+	
+	// let apiServer = "http://192.168.155.169:8004/v1/";
 	
 	function getQuanBatchList(quanBatchSearchCriteria) {
-			var url = new URL(apiServer + "coupon/batches");
-			params = { first: "x", second: "y" };
-			Object.keys(params).forEach(function (key, value) {
-					url.searchParams.append(key, value);
-			});
-			return (0, _isomorphicFetch2["default"])(url, {
+			// let url = new URL(apiServer + "coupon/batches");
+			// url.search = stringify(quanBatchSearchCriteria);
+			return (0, _isomorphicFetch2['default'])('/QuanBatchList', {
 					method: 'get'
 					// headers: {
 					// 	'Accept': 'application/json',
@@ -33203,6 +33228,90 @@
 
 /***/ },
 /* 404 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strictUriEncode = __webpack_require__(405);
+	
+	exports.extract = function (str) {
+		return str.split('?')[1] || '';
+	};
+	
+	exports.parse = function (str) {
+		if (typeof str !== 'string') {
+			return {};
+		}
+	
+		str = str.trim().replace(/^(\?|#|&)/, '');
+	
+		if (!str) {
+			return {};
+		}
+	
+		return str.split('&').reduce(function (ret, param) {
+			var parts = param.replace(/\+/g, ' ').split('=');
+			// Firefox (pre 40) decodes `%3D` to `=`
+			// https://github.com/sindresorhus/query-string/pull/37
+			var key = parts.shift();
+			var val = parts.length > 0 ? parts.join('=') : undefined;
+	
+			key = decodeURIComponent(key);
+	
+			// missing `=` should be `null`:
+			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+			val = val === undefined ? null : decodeURIComponent(val);
+	
+			if (!ret.hasOwnProperty(key)) {
+				ret[key] = val;
+			} else if (Array.isArray(ret[key])) {
+				ret[key].push(val);
+			} else {
+				ret[key] = [ret[key], val];
+			}
+	
+			return ret;
+		}, {});
+	};
+	
+	exports.stringify = function (obj) {
+		return obj ? Object.keys(obj).sort().map(function (key) {
+			var val = obj[key];
+	
+			if (val === undefined) {
+				return '';
+			}
+	
+			if (val === null) {
+				return key;
+			}
+	
+			if (Array.isArray(val)) {
+				return val.sort().map(function (val2) {
+					return strictUriEncode(key) + '=' + strictUriEncode(val2);
+				}).join('&');
+			}
+	
+			return strictUriEncode(key) + '=' + strictUriEncode(val);
+		}).filter(function (x) {
+			return x.length > 0;
+		}).join('&') : '';
+	};
+
+
+/***/ },
+/* 405 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = function (str) {
+		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+			return '%' + c.charCodeAt(0).toString(16);
+		});
+	};
+
+
+/***/ },
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33227,7 +33336,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuanBatchListItem = __webpack_require__(405);
+	var _pager = __webpack_require__(407);
+	
+	var _pager2 = _interopRequireDefault(_pager);
+	
+	var _QuanBatchListItem = __webpack_require__(409);
 	
 	var _QuanBatchListItem2 = _interopRequireDefault(_QuanBatchListItem);
 	
@@ -33238,77 +33351,80 @@
 	    _classCallCheck(this, QuanBatchList);
 	
 	    _get(Object.getPrototypeOf(QuanBatchList.prototype), 'constructor', this).call(this, props);
-	    this.handleIssueQuan = this.handleIssueQuan.bind(this);
 	  }
 	
 	  _createClass(QuanBatchList, [{
-	    key: 'handleIssueQuan',
-	    value: function handleIssueQuan(e) {}
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props;
 	      var quanBatchList = _props.quanBatchList;
 	      var showIssueQuan = _props.showIssueQuan;
+	      var dispatchTypeList = _props.dispatchTypeList;
+	      var quanBatchListPager = _props.quanBatchListPager;
 	
 	      return _react2['default'].createElement(
-	        'table',
+	        'div',
 	        null,
 	        _react2['default'].createElement(
-	          'thead',
+	          'table',
 	          null,
 	          _react2['default'].createElement(
-	            'tr',
+	            'thead',
 	            null,
 	            _react2['default'].createElement(
-	              'th',
+	              'tr',
 	              null,
-	              '批次号'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '批次名称'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '创建时间'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '发放类型'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '发放时间'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '发放数量'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '创建人'
-	            ),
-	            _react2['default'].createElement(
-	              'th',
-	              null,
-	              '操作'
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '批次号'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '批次名称'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '创建时间'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '发放类型'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '发放时间'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '发放数量'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '创建人'
+	              ),
+	              _react2['default'].createElement(
+	                'th',
+	                null,
+	                '操作'
+	              )
 	            )
+	          ),
+	          _react2['default'].createElement(
+	            'tbody',
+	            null,
+	            quanBatchList.map(function (batch, i) {
+	              return _react2['default'].createElement(_QuanBatchListItem2['default'], _extends({ showIssueQuan: showIssueQuan, dispatchTypeList: dispatchTypeList }, batch, { key: i }));
+	            })
 	          )
 	        ),
-	        _react2['default'].createElement(
-	          'tbody',
-	          null,
-	          quanBatchList.map(function (batch, i) {
-	            return _react2['default'].createElement(_QuanBatchListItem2['default'], _extends({ showIssueQuan: showIssueQuan }, batch, { key: i }));
-	          })
-	        )
+	        _react2['default'].createElement(_pager2['default'], quanBatchListPager)
 	      );
 	    }
 	  }]);
@@ -33320,7 +33436,179 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 405 */
+/* 407 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classNames = __webpack_require__(408);
+	
+	var _classNames2 = _interopRequireDefault(_classNames);
+	
+	var ModalDialog = (function (_Component) {
+	  _inherits(ModalDialog, _Component);
+	
+	  function ModalDialog(props) {
+	    _classCallCheck(this, ModalDialog);
+	
+	    _get(Object.getPrototypeOf(ModalDialog.prototype), 'constructor', this).call(this, props);
+	  }
+	
+	  _createClass(ModalDialog, [{
+	    key: 'renderPager',
+	    value: function renderPager() {
+	      var result = [];
+	      var _props = this.props;
+	      var total = _props.total;
+	      var current = _props.current;
+	      var visible = _props.visible;
+	      var onPageChanged = _props.onPageChanged;
+	
+	      if (current > visible) {
+	        result.push(_react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)' },
+	          '1'
+	        ), ' ', _react2['default'].createElement(
+	          'span',
+	          null,
+	          '...'
+	        ));
+	      }
+	
+	      var left = current - parseInt(visible / 2);
+	      if (left < 1) {
+	        left = 1;
+	      }
+	      for (var i = left; i < current; i++) {
+	        //result.push(<a href="javascript:void(0)">{i}</a>, ' ')
+	      }
+	
+	      var right = left + visible;
+	      if (right > total) {
+	        right = total;
+	      }
+	      for (var i = current; i < right; i++) {
+	        //result.push(<a href="javascript:void(0)">{i}</a>, ' ');
+	      }
+	
+	      if (right < total) {
+	        result.push(_react2['default'].createElement(
+	          'span',
+	          null,
+	          '...'
+	        ), ' ', _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)' },
+	          total
+	        ));
+	      }
+	
+	      return result.join('');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var onPageChanged = this.props.onPageChanged;
+	
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)' },
+	          '上一页'
+	        ),
+	        this.renderPager(),
+	        _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)' },
+	          '下一页'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ModalDialog;
+	})(_react.Component);
+	
+	exports['default'] = ModalDialog;
+	module.exports = exports['default'];
+
+/***/ },
+/* 408 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = '';
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes += ' ' + arg;
+				} else if (Array.isArray(arg)) {
+					classes += ' ' + classNames.apply(null, arg);
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes += ' ' + key;
+						}
+					}
+				}
+			}
+	
+			return classes.substr(1);
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33353,6 +33641,14 @@
 	    this.handleIssueQuan = this.handleIssueQuan.bind(this);
 	  }
 	
+	  // <a href="javascript:void(0)">查看</a>
+	  // <a href="javascript:void(0)">编辑</a>
+	  // <a href="javascript:void(0)">上架</a>
+	  // <a href="javascript:void(0)">下架</a>
+	  // <a href="javascript:void(0)" onClick={this.handleIssueQuan}>分发</a>
+	  // <a href="javascript:void(0)">发放</a>
+	  // <a href="javascript:void(0)">导出</a>
+	
 	  _createClass(QuanBatchListItem, [{
 	    key: "handleIssueQuan",
 	    value: function handleIssueQuan(e) {
@@ -33368,7 +33664,14 @@
 	      var _props2 = this.props;
 	      var batchId = _props2.batchId;
 	      var title = _props2.title;
+	      var createTime = _props2.createTime;
+	      var dispatchType = _props2.dispatchType;
+	      var dispatchTypeList = _props2.dispatchTypeList;
+	      var operationUserName = _props2.operationUserName;
 	
+	      var dispatchTypeDesc = dispatchTypeList.filter(function (element) {
+	        return element.id === dispatchType;
+	      })[0].desc;
 	      return _react2["default"].createElement(
 	        "tr",
 	        null,
@@ -33385,7 +33688,12 @@
 	        _react2["default"].createElement(
 	          "td",
 	          null,
-	          batchId
+	          createTime
+	        ),
+	        _react2["default"].createElement(
+	          "td",
+	          null,
+	          dispatchTypeDesc
 	        ),
 	        _react2["default"].createElement(
 	          "td",
@@ -33400,19 +33708,14 @@
 	        _react2["default"].createElement(
 	          "td",
 	          null,
-	          batchId
-	        ),
-	        _react2["default"].createElement(
-	          "td",
-	          null,
-	          batchId
+	          operationUserName
 	        ),
 	        _react2["default"].createElement(
 	          "td",
 	          null,
 	          _react2["default"].createElement(
 	            "a",
-	            { href: "javascirpt:void(0)", onClick: this.handleIssueQuan },
+	            { href: "javascript:void(0)", onClick: this.handleIssueQuan },
 	            "分发"
 	          )
 	        )
@@ -33427,7 +33730,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 406 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33580,7 +33883,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 407 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33645,7 +33948,82 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 408 */
+/* 412 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classNames = __webpack_require__(408);
+	
+	var _classNames2 = _interopRequireDefault(_classNames);
+	
+	var ModalDialog = (function (_Component) {
+	  _inherits(ModalDialog, _Component);
+	
+	  function ModalDialog(props) {
+	    _classCallCheck(this, ModalDialog);
+	
+	    _get(Object.getPrototypeOf(ModalDialog.prototype), 'constructor', this).call(this, props);
+	  }
+	
+	  _createClass(ModalDialog, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var children = _props.children;
+	      var title = _props.title;
+	      var _props$isShow = _props.isShow;
+	      var isShow = _props$isShow === undefined ? true : _props$isShow;
+	      var close = _props.close;
+	
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: (0, _classNames2['default'])("mask", { hide: isShow === false }) },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'dialog' },
+	          _react2['default'].createElement(
+	            'div',
+	            null,
+	            title,
+	            _react2['default'].createElement(
+	              'a',
+	              { href: 'javascript:void(0)', onClick: close },
+	              'X'
+	            )
+	          ),
+	          children
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ModalDialog;
+	})(_react.Component);
+	
+	exports['default'] = ModalDialog;
+	module.exports = exports['default'];
+
+/***/ },
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33714,7 +34092,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 409 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33729,11 +34107,11 @@
 	
 	var _reduxRouter = __webpack_require__(178);
 	
-	var _shared = __webpack_require__(410);
+	var _shared = __webpack_require__(415);
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _quanBatchManagement = __webpack_require__(413);
+	var _quanBatchManagement = __webpack_require__(418);
 	
 	var _quanBatchManagement2 = _interopRequireDefault(_quanBatchManagement);
 	
@@ -33747,7 +34125,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 410 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33759,7 +34137,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(411);
+	var _reactAddonsUpdate = __webpack_require__(416);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -33778,6 +34156,9 @@
 		}, {
 			id: 4,
 			desc: '外部渠道投放'
+		}, {
+			id: 5,
+			desc: '鬼知道'
 		}],
 		dispatchChannelList: []
 	};
@@ -33802,13 +34183,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 411 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(412);
+	module.exports = __webpack_require__(417);
 
 /***/ },
-/* 412 */
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -33921,7 +34302,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 413 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33933,7 +34314,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(411);
+	var _reactAddonsUpdate = __webpack_require__(416);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -33946,7 +34327,12 @@
 			dispatchType: undefined
 		},
 		isShowIssueQuan: false,
-		selectedQuanBatchId: undefined
+		selectedQuanBatchId: undefined,
+		quanBatchListPager: {
+			total: 20,
+			current: 8,
+			visible: 5
+		}
 	};
 	
 	function quanBatchManagement(state, action) {
@@ -33956,7 +34342,7 @@
 			case _actions.RECEIVE_QUAN_BATCH_LIST:
 				{
 					return (0, _reactAddonsUpdate2['default'])(state, {
-						quanBatchList: { $set: action.result }
+						quanBatchList: { $set: action.quanBatchList }
 					});
 				}
 			case _actions.SET_QUAN_BATCH_SEARCH_CRITERIA:
@@ -33970,6 +34356,12 @@
 					return (0, _reactAddonsUpdate2['default'])(state, {
 						isShowIssueQuan: { $set: true },
 						selectedQuanBatchId: { $set: action.selectedQuanBatchId }
+					});
+				}
+			case _actions.HIDE_ISSUE_QUAN:
+				{
+					return (0, _reactAddonsUpdate2['default'])(state, {
+						isShowIssueQuan: { $set: false }
 					});
 				}
 			default:

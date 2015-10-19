@@ -85,3 +85,12 @@ export function hideIssueQuan() {
     type: HIDE_ISSUE_QUAN
   };
 }
+
+export const SET_QUAN_BATCH_LIST_CURRENT_PAGE = 'SET_QUAN_BATCH_LIST_CURRENT_PAGE';
+
+export function setQuanBatchListCurrentPage(currentPage) {
+  return {
+    type: SET_QUAN_BATCH_LIST_CURRENT_PAGE,
+    currentPage
+  };
+}

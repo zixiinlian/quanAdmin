@@ -26,15 +26,17 @@ export default class QuanBatchListItem extends Component {
         <td>{batchId}</td>
         <td>{operationUserName}</td>
         <td>
-          <a href="javascript:void(0)">查看</a>
-          <a href="javascript:void(0)">编辑</a>
-          <a href="javascript:void(0)">上架</a>
-          <a href="javascript:void(0)">下架</a>
           <a href="javascript:void(0)" onClick={this.handleIssueQuan}>分发</a>
-          <a href="javascript:void(0)">发放</a>
-          <a href="javascript:void(0)">导出</a>
         </td>
       </tr>
     );
   }
 }
+
+// <a href="javascript:void(0)">查看</a>
+// <a href="javascript:void(0)">编辑</a>
+// <a href="javascript:void(0)">上架</a>
+// <a href="javascript:void(0)">下架</a>
+// <a href="javascript:void(0)" onClick={this.handleIssueQuan}>分发</a>
+// <a href="javascript:void(0)">发放</a>
+// <a href="javascript:void(0)">导出</a>

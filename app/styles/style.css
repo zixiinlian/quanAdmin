@@ -25,3 +25,7 @@
 .hide{
 	display: none;
 }
+
+.currentPage{
+	color: red;
+}
