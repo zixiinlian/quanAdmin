@@ -12,7 +12,7 @@ export default class QuanBatchList extends Component {
   }
 
   render () {
-    const { quanBatchList, showIssueQuan } = this.props;
+    const { quanBatchList, showIssueQuan, dispatchTypeList } = this.props;
     return (
       <table>
           <thead>
@@ -30,7 +30,7 @@ export default class QuanBatchList extends Component {
           <tbody>
           {
             quanBatchList.map((batch, i) =>
-              <QuanBatchListItem showIssueQuan={showIssueQuan} {...batch} key={i} />
+              <QuanBatchListItem showIssueQuan={showIssueQuan} dispatchTypeList={dispatchTypeList} {...batch} key={i} />
             )
           }
           </tbody>

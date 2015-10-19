@@ -2,10 +2,11 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan} from '../actions';
+import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
+import ModalDialog from '../components/ModalDialog';
 
 class QuanBatchManagement extends Component {
 	constructor(props) {
@@ -25,13 +26,15 @@ class QuanBatchManagement extends Component {
 	}
 
 	renderIssueQuan(){
-		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList} = this.props;
+		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList, hideIssueQuan} = this.props;
+		let selectedQuanBatch = null;
 		if(isShowIssueQuan){
-			let selectedQuanBatch = quanBatchList.filter((element) => {
+			selectedQuanBatch = quanBatchList.filter((element) => {
 				return element.batchId === selectedQuanBatchId;
 			})[0];
-			return <IssueQuan {...selectedQuanBatch}></IssueQuan>;
 		}
+
+		return <ModalDialog isShow={isShowIssueQuan} close={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;
 	}
 
 	render() {
@@ -40,7 +43,7 @@ class QuanBatchManagement extends Component {
 			, showIssueQuan
 		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList};
-		const listProps = {quanBatchList, showIssueQuan};
+		const listProps = {quanBatchList, showIssueQuan, dispatchTypeList};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -74,6 +77,7 @@ function mapDispatchToProps(dispatch) {
   	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch),
   	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
   	showIssueQuan: bindActionCreators(showIssueQuan, dispatch),
+  	hideIssueQuan: bindActionCreators(hideIssueQuan, dispatch),
   	setQuanBatchSearchCriteria: bindActionCreators(setQuanBatchSearchCriteria, dispatch)
   };
 }

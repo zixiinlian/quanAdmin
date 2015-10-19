@@ -1,0 +1,27 @@
+.mask{
+	position:fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	text-align: center;
+	background:rgba(0,0,0,0.28);
+	z-index:9999;
+}
+
+.mask:after{
+	display: inline-block;
+	height: 100%;
+	content: "";
+	vertical-align: middle;
+}
+
+.dialog{
+    display: inline-block;
+	background: #fff;
+	min-width: 400px;
+}
+
+.hide{
+	display: none;
+}

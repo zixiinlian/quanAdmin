@@ -31175,7 +31175,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reducers = __webpack_require__(408);
+	var _reducers = __webpack_require__(409);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -32453,7 +32453,7 @@
 	
 	var _containersQuanBatchManagement2 = _interopRequireDefault(_containersQuanBatchManagement);
 	
-	var _containersQuanBatchCreation = __webpack_require__(407);
+	var _containersQuanBatchCreation = __webpack_require__(408);
 	
 	var _containersQuanBatchCreation2 = _interopRequireDefault(_containersQuanBatchCreation);
 	
@@ -32578,15 +32578,15 @@
 	
 	var _actions = __webpack_require__(400);
 	
-	var _componentsQuanBatchList = __webpack_require__(403);
+	var _componentsQuanBatchList = __webpack_require__(404);
 	
 	var _componentsQuanBatchList2 = _interopRequireDefault(_componentsQuanBatchList);
 	
-	var _componentsQuanBatchSearch = __webpack_require__(405);
+	var _componentsQuanBatchSearch = __webpack_require__(406);
 	
 	var _componentsQuanBatchSearch2 = _interopRequireDefault(_componentsQuanBatchSearch);
 	
-	var _componentsIssueQuan = __webpack_require__(406);
+	var _componentsIssueQuan = __webpack_require__(407);
 	
 	var _componentsIssueQuan2 = _interopRequireDefault(_componentsIssueQuan);
 	
@@ -32624,10 +32624,10 @@
 				var quanBatchList = _props.quanBatchList;
 	
 				if (isShowIssueQuan) {
-					var selectedQuanBatch = quanBatchList.find(function (element) {
+					var selectedQuanBatch = quanBatchList.filter(function (element) {
 						return element.batchId === selectedQuanBatchId;
-					});
-					_react2['default'].createElement(_componentsIssueQuan2['default'], selectedQuanBatch);
+					})[0];
+					return _react2['default'].createElement(_componentsIssueQuan2['default'], selectedQuanBatch);
 				}
 			}
 		}, {
@@ -32667,6 +32667,7 @@
 		var quanBatchList = _state$quanBatchManagement.quanBatchList;
 		var quanBatchSearchCriteria = _state$quanBatchManagement.quanBatchSearchCriteria;
 		var isShowIssueQuan = _state$quanBatchManagement.isShowIssueQuan;
+		var selectedQuanBatchId = _state$quanBatchManagement.selectedQuanBatchId;
 		var _state$shared = state.shared;
 		var dispatchTypeList = _state$shared.dispatchTypeList;
 		var dispatchChannelList = _state$shared.dispatchChannelList;
@@ -32676,7 +32677,8 @@
 			quanBatchSearchCriteria: quanBatchSearchCriteria,
 			dispatchTypeList: dispatchTypeList,
 			dispatchChannelList: dispatchChannelList,
-			isShowIssueQuan: isShowIssueQuan
+			isShowIssueQuan: isShowIssueQuan,
+			selectedQuanBatchId: selectedQuanBatchId
 		};
 	}
 	
@@ -32715,6 +32717,8 @@
 	var _isomorphicFetch = __webpack_require__(401);
 	
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+	
+	var _api = __webpack_require__(403);
 	
 	// import ActionTypes from '../constants/ActionTypes';
 	
@@ -32759,16 +32763,7 @@
 	function fetchQuanBatchList(quanBatchSearchCriteria) {
 	  return function (dispatch) {
 	    dispatch(requestQuanBatchList());
-	    return (0, _isomorphicFetch2['default'])('/QuanBatchList', {
-	      method: 'post',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-Type': 'application/json'
-	      },
-	      body: JSON.stringify(quanBatchSearchCriteria)
-	    }).then(function (response) {
-	      return response.json();
-	    }).then(function (json) {
+	    return (0, _api.getQuanBatchList)(quanBatchSearchCriteria).then(function (json) {
 	      return dispatch(receiveQuanBatchList(json));
 	    });
 	  };
@@ -32801,7 +32796,7 @@
 	    return (0, _isomorphicFetch2['default'])('/DispatchChannelList').then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
-	      return dispatch(receiveDispatchChannelList(json));
+	      return dispatch(receiveDispatchChannelList(json.data));
 	    });
 	  };
 	}
@@ -33174,6 +33169,42 @@
 /* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	exports.getQuanBatchList = getQuanBatchList;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var _isomorphicFetch = __webpack_require__(401);
+	
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+	
+	var apiServer = "http://192.168.155.169:8000/v1/";
+	
+	function getQuanBatchList(quanBatchSearchCriteria) {
+			var url = new URL(apiServer + "coupon/batches");
+			params = { first: "x", second: "y" };
+			Object.keys(params).forEach(function (key, value) {
+					url.searchParams.append(key, value);
+			});
+			return (0, _isomorphicFetch2["default"])(url, {
+					method: 'get'
+					// headers: {
+					// 	'Accept': 'application/json',
+					// 	'Content-Type': 'application/json'
+					// },
+			}).then(function (response) {
+					return response.json();
+			});
+	}
+
+/***/ },
+/* 404 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
@@ -33196,7 +33227,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuanBatchListItem = __webpack_require__(404);
+	var _QuanBatchListItem = __webpack_require__(405);
 	
 	var _QuanBatchListItem2 = _interopRequireDefault(_QuanBatchListItem);
 	
@@ -33289,7 +33320,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 404 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33336,7 +33367,7 @@
 	    value: function render() {
 	      var _props2 = this.props;
 	      var batchId = _props2.batchId;
-	      var batchName = _props2.batchName;
+	      var title = _props2.title;
 	
 	      return _react2["default"].createElement(
 	        "tr",
@@ -33349,7 +33380,7 @@
 	        _react2["default"].createElement(
 	          "td",
 	          null,
-	          batchName
+	          title
 	        ),
 	        _react2["default"].createElement(
 	          "td",
@@ -33396,7 +33427,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 405 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33549,7 +33580,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 406 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33586,7 +33617,7 @@
 	    value: function render() {
 	      var _props = this.props;
 	      var batchId = _props.batchId;
-	      var batchName = _props.batchName;
+	      var title = _props.title;
 	
 	      return _react2['default'].createElement(
 	        'div',
@@ -33601,7 +33632,7 @@
 	          'div',
 	          null,
 	          '批次名称：',
-	          batchName
+	          title
 	        )
 	      );
 	    }
@@ -33614,7 +33645,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 407 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33683,7 +33714,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 408 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33698,11 +33729,11 @@
 	
 	var _reduxRouter = __webpack_require__(178);
 	
-	var _shared = __webpack_require__(409);
+	var _shared = __webpack_require__(410);
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _quanBatchManagement = __webpack_require__(412);
+	var _quanBatchManagement = __webpack_require__(413);
 	
 	var _quanBatchManagement2 = _interopRequireDefault(_quanBatchManagement);
 	
@@ -33716,7 +33747,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 409 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33728,7 +33759,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(410);
+	var _reactAddonsUpdate = __webpack_require__(411);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -33771,13 +33802,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 410 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(411);
+	module.exports = __webpack_require__(412);
 
 /***/ },
-/* 411 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -33890,7 +33921,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 412 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33902,7 +33933,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(410);
+	var _reactAddonsUpdate = __webpack_require__(411);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -33925,7 +33956,7 @@
 			case _actions.RECEIVE_QUAN_BATCH_LIST:
 				{
 					return (0, _reactAddonsUpdate2['default'])(state, {
-						quanBatchList: { $set: action.quanBatchList }
+						quanBatchList: { $set: action.result }
 					});
 				}
 			case _actions.SET_QUAN_BATCH_SEARCH_CRITERIA:

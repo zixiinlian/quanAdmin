@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var static = require('express-static');
 var bodyParser = require('body-parser')
 var config = require('./webpack.config');
 
@@ -11,21 +12,22 @@ var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(static('app/styles'));
 
-app.post('/QuanBatchList', function(req, res){
-	if(Object.keys(req.body).length !== 0){
+app.get('/QuanBatchList', function(req, res){
+	if(Object.keys(req.query).length !== 0){
 		res.json([
-			{ batchId: 1, batchName: '批次1'},
-			{ batchId: 2, batchName: '批次2'}
+			{ batchId: 1, batchName: '批次1', dispatchType: 1},
+			{ batchId: 2, batchName: '批次2', dispatchType: 1}
 		]);
 	}
 	else{
 		res.json([
-			{ batchId: 1, batchName: '批次1'},
-			{ batchId: 2, batchName: '批次2'},
-			{ batchId: 3, batchName: '批次3'},
-			{ batchId: 4, batchName: '批次4'},
-			{ batchId: 5, batchName: '批次5'}
+			{ batchId: 1, batchName: '批次1', dispatchType: 1},
+			{ batchId: 2, batchName: '批次2', dispatchType: 2},
+			{ batchId: 3, batchName: '批次3', dispatchType: 3},
+			{ batchId: 4, batchName: '批次4', dispatchType: 1},
+			{ batchId: 5, batchName: '批次5', dispatchType: 1}
 		]);
 	}
 });

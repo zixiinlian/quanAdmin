@@ -6,11 +6,11 @@ export default class IssueQuan extends Component {
   }
 
   render () {
-  	const {batchId, batchName} = this.props;
+  	const {batchId, title} = this.props;
     return (
       <div>
       	<div>批次ID：{batchId}</div>
-      	<div>批次名称：{batchName}</div>
+      	<div>批次名称：{title}</div>
       </div>
     );
   }

@@ -2,7 +2,8 @@ import update from 'react-addons-update'
 import {
 	RECEIVE_QUAN_BATCH_LIST,
 	SET_QUAN_BATCH_SEARCH_CRITERIA,
-	SHOW_ISSUE_QUAN
+	SHOW_ISSUE_QUAN,
+	HIDE_ISSUE_QUAN
 } from '../actions'
 
 let initialState = {
@@ -31,6 +32,11 @@ export default function quanBatchManagement(state = initialState, action) {
 			return update(state, {
 				isShowIssueQuan: {$set: true},
 				selectedQuanBatchId: {$set: action.selectedQuanBatchId}
+			});
+		}
+		case HIDE_ISSUE_QUAN: {
+			return update(state, {
+				isShowIssueQuan: {$set: false}
 			});
 		}
 		default:{

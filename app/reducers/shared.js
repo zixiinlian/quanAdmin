@@ -16,6 +16,9 @@ let initialState = {
 	}, {
 		id: 4,
 		desc: '外部渠道投放'
+	},{
+		id: 5,
+		desc: '鬼知道'
 	}],
 	dispatchChannelList: []
 }
