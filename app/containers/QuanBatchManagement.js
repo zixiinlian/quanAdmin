@@ -21,7 +21,12 @@ class QuanBatchManagement extends Component {
 	}
 
 	componentDidMount() {
-		const { fetchQuanBatchList } = this.props;
+		const { fetchDispatchChannelList, dispatchChannelList, fetchQuanBatchList } = this.props;
+
+	    if(dispatchChannelList.length === 0){
+	      fetchDispatchChannelList();
+	    }
+
 	    fetchQuanBatchList();
 	}
 
@@ -29,9 +34,9 @@ class QuanBatchManagement extends Component {
 		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList, hideIssueQuan} = this.props;
 		let selectedQuanBatch = null;
 		if(isShowIssueQuan){
-			selectedQuanBatch = quanBatchList.filter((element) => {
+			selectedQuanBatch = quanBatchList.find((element) => {
 				return element.batchId === selectedQuanBatchId;
-			})[0];
+			});
 		}
 
 		return <ModalDialog isShow={isShowIssueQuan} close={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;

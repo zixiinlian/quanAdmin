@@ -13,9 +13,9 @@ export default class QuanBatchListItem extends Component {
 
   render () {
     const { batchId, title, createTime, dispatchType, dispatchTypeList, operationUserName } = this.props;
-    const dispatchTypeDesc = dispatchTypeList.filter((element) => {
+    const dispatchTypeDesc = dispatchTypeList.find((element) => {
       return element.id === dispatchType
-    })[0].desc;
+    }).desc;
     return (
       <tr>
         <td>{batchId}</td>
