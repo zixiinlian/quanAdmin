@@ -31175,7 +31175,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reducers = __webpack_require__(414);
+	var _reducers = __webpack_require__(416);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -32453,7 +32453,7 @@
 	
 	var _containersQuanBatchManagement2 = _interopRequireDefault(_containersQuanBatchManagement);
 	
-	var _containersQuanBatchCreation = __webpack_require__(413);
+	var _containersQuanBatchCreation = __webpack_require__(415);
 	
 	var _containersQuanBatchCreation2 = _interopRequireDefault(_containersQuanBatchCreation);
 	
@@ -32582,15 +32582,15 @@
 	
 	var _componentsQuanBatchList2 = _interopRequireDefault(_componentsQuanBatchList);
 	
-	var _componentsQuanBatchSearch = __webpack_require__(410);
+	var _componentsQuanBatchSearch = __webpack_require__(412);
 	
 	var _componentsQuanBatchSearch2 = _interopRequireDefault(_componentsQuanBatchSearch);
 	
-	var _componentsIssueQuan = __webpack_require__(411);
+	var _componentsIssueQuan = __webpack_require__(413);
 	
 	var _componentsIssueQuan2 = _interopRequireDefault(_componentsIssueQuan);
 	
-	var _componentsModalDialog = __webpack_require__(412);
+	var _componentsModalDialog = __webpack_require__(414);
 	
 	var _componentsModalDialog2 = _interopRequireDefault(_componentsModalDialog);
 	
@@ -32654,9 +32654,10 @@
 				var dispatchChannelList = _props2.dispatchChannelList;
 				var showIssueQuan = _props2.showIssueQuan;
 				var quanBatchListPager = _props2.quanBatchListPager;
+				var setQuanBatchListCurrentPage = _props2.setQuanBatchListCurrentPage;
 	
 				var searchProps = { pushState: pushState, dispatchTypeList: dispatchTypeList, setQuanBatchSearchCriteria: setQuanBatchSearchCriteria, quanBatchSearchCriteria: quanBatchSearchCriteria, fetchDispatchChannelList: fetchDispatchChannelList, dispatchChannelList: dispatchChannelList };
-				var listProps = { quanBatchList: quanBatchList, showIssueQuan: showIssueQuan, dispatchTypeList: dispatchTypeList, quanBatchListPager: quanBatchListPager };
+				var listProps = { quanBatchList: quanBatchList, showIssueQuan: showIssueQuan, dispatchTypeList: dispatchTypeList, quanBatchListPager: quanBatchListPager, setQuanBatchListCurrentPage: setQuanBatchListCurrentPage };
 				return _react2['default'].createElement(
 					'div',
 					null,
@@ -32703,6 +32704,7 @@
 			fetchDispatchChannelList: (0, _redux.bindActionCreators)(_actions.fetchDispatchChannelList, dispatch),
 			showIssueQuan: (0, _redux.bindActionCreators)(_actions.showIssueQuan, dispatch),
 			hideIssueQuan: (0, _redux.bindActionCreators)(_actions.hideIssueQuan, dispatch),
+			setQuanBatchListCurrentPage: (0, _redux.bindActionCreators)(_actions.setQuanBatchListCurrentPage, dispatch),
 			setQuanBatchSearchCriteria: (0, _redux.bindActionCreators)(_actions.setQuanBatchSearchCriteria, dispatch)
 		};
 	}
@@ -32727,6 +32729,7 @@
 	exports.fetchDispatchChannelList = fetchDispatchChannelList;
 	exports.showIssueQuan = showIssueQuan;
 	exports.hideIssueQuan = hideIssueQuan;
+	exports.setQuanBatchListCurrentPage = setQuanBatchListCurrentPage;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -32835,6 +32838,17 @@
 	function hideIssueQuan() {
 	  return {
 	    type: HIDE_ISSUE_QUAN
+	  };
+	}
+	
+	var SET_QUAN_BATCH_LIST_CURRENT_PAGE = 'SET_QUAN_BATCH_LIST_CURRENT_PAGE';
+	
+	exports.SET_QUAN_BATCH_LIST_CURRENT_PAGE = SET_QUAN_BATCH_LIST_CURRENT_PAGE;
+	
+	function setQuanBatchListCurrentPage(currentPage) {
+	  return {
+	    type: SET_QUAN_BATCH_LIST_CURRENT_PAGE,
+	    currentPage: currentPage
 	  };
 	}
 
@@ -33340,7 +33354,7 @@
 	
 	var _pager2 = _interopRequireDefault(_pager);
 	
-	var _QuanBatchListItem = __webpack_require__(409);
+	var _QuanBatchListItem = __webpack_require__(411);
 	
 	var _QuanBatchListItem2 = _interopRequireDefault(_QuanBatchListItem);
 	
@@ -33361,6 +33375,7 @@
 	      var showIssueQuan = _props.showIssueQuan;
 	      var dispatchTypeList = _props.dispatchTypeList;
 	      var quanBatchListPager = _props.quanBatchListPager;
+	      var setQuanBatchListCurrentPage = _props.setQuanBatchListCurrentPage;
 	
 	      return _react2['default'].createElement(
 	        'div',
@@ -33424,7 +33439,7 @@
 	            })
 	          )
 	        ),
-	        _react2['default'].createElement(_pager2['default'], quanBatchListPager)
+	        _react2['default'].createElement(_pager2['default'], _extends({ onPageChanged: setQuanBatchListCurrentPage }, quanBatchListPager))
 	      );
 	    }
 	  }]);
@@ -33459,102 +33474,289 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classNames = __webpack_require__(408);
+	var _reactAddonsCreateFragment = __webpack_require__(408);
+	
+	var _reactAddonsCreateFragment2 = _interopRequireDefault(_reactAddonsCreateFragment);
+	
+	var _classNames = __webpack_require__(410);
 	
 	var _classNames2 = _interopRequireDefault(_classNames);
 	
-	var ModalDialog = (function (_Component) {
-	  _inherits(ModalDialog, _Component);
+	var Pager = (function (_Component) {
+	  _inherits(Pager, _Component);
 	
-	  function ModalDialog(props) {
-	    _classCallCheck(this, ModalDialog);
+	  function Pager(props) {
+	    _classCallCheck(this, Pager);
 	
-	    _get(Object.getPrototypeOf(ModalDialog.prototype), 'constructor', this).call(this, props);
+	    _get(Object.getPrototypeOf(Pager.prototype), 'constructor', this).call(this, props);
+	    this.handleGoToPreviousPage = this.handleGoToPreviousPage.bind(this);
+	    this.handleGoToNextPage = this.handleGoToNextPage.bind(this);
+	    this.handleGoToFirstPage = this.handleGoToFirstPage.bind(this);
+	    this.handleGoToLastPage = this.handleGoToLastPage.bind(this);
+	    this.handleGoToSpecificPage = this.handleGoToSpecificPage.bind(this);
 	  }
 	
-	  _createClass(ModalDialog, [{
-	    key: 'renderPager',
-	    value: function renderPager() {
-	      var result = [];
+	  // {renderLeftPart()}
+	  //       <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>&nbsp;
+	  //       {renderRightPart()}
+	  //       {renderLastPart()}
+	
+	  _createClass(Pager, [{
+	    key: 'handleGoToPreviousPage',
+	    value: function handleGoToPreviousPage() {
 	      var _props = this.props;
-	      var total = _props.total;
 	      var current = _props.current;
-	      var visible = _props.visible;
 	      var onPageChanged = _props.onPageChanged;
 	
-	      if (current > visible) {
-	        result.push(_react2['default'].createElement(
-	          'a',
-	          { href: 'javascript:void(0)' },
-	          '1'
-	        ), ' ', _react2['default'].createElement(
-	          'span',
-	          null,
-	          '...'
-	        ));
+	      if (current !== 1) {
+	        onPageChanged(current - 1);
+	      }
+	    }
+	  }, {
+	    key: 'handleGoToNextPage',
+	    value: function handleGoToNextPage() {
+	      var _props2 = this.props;
+	      var current = _props2.current;
+	      var total = _props2.total;
+	      var onPageChanged = _props2.onPageChanged;
+	
+	      if (current !== total) {
+	        onPageChanged(current + 1);
+	      }
+	    }
+	  }, {
+	    key: 'handleGoToFirstPage',
+	    value: function handleGoToFirstPage() {
+	      var _props3 = this.props;
+	      var current = _props3.current;
+	      var onPageChanged = _props3.onPageChanged;
+	
+	      if (current !== 1) {
+	        onPageChanged(1);
+	      }
+	    }
+	  }, {
+	    key: 'handleGoToLastPage',
+	    value: function handleGoToLastPage() {
+	      var _props4 = this.props;
+	      var current = _props4.current;
+	      var onPageChanged = _props4.onPageChanged;
+	
+	      if (current !== total) {
+	        onPageChanged(total);
+	      }
+	    }
+	  }, {
+	    key: 'handleGoToSpecificPage',
+	    value: function handleGoToSpecificPage(pageNumber) {
+	      var _props5 = this.props;
+	      var current = _props5.current;
+	      var onPageChanged = _props5.onPageChanged;
+	
+	      if (current !== pageNumber) {
+	        onPageChanged(pageNumber);
+	      }
+	    }
+	  }, {
+	    key: 'renderPager',
+	    value: function renderPager() {
+	      var _this = this;
+	
+	      var result = {};
+	      var _props6 = this.props;
+	      var total = _props6.total;
+	      var current = _props6.current;
+	      var visible = _props6.visible;
+	
+	      if (total <= visible) {
+	        visible = total;
 	      }
 	
 	      var left = current - parseInt(visible / 2);
-	      if (left < 1) {
+	      if (current <= visible) {
 	        left = 1;
 	      }
-	      for (var i = left; i < current; i++) {
-	        //result.push(<a href="javascript:void(0)">{i}</a>, ' ')
+	      if (current + visible > total) {
+	        left = total - visible + 1;
 	      }
 	
 	      var right = left + visible;
 	      if (right > total) {
 	        right = total;
 	      }
-	      for (var i = current; i < right; i++) {
-	        //result.push(<a href="javascript:void(0)">{i}</a>, ' ');
-	      }
 	
-	      if (right < total) {
-	        result.push(_react2['default'].createElement(
+	      if (left !== 1) {
+	        result['firstPage'] = _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)', onClick: this.handleGoToFirstPage },
+	          '1'
+	        );
+	        result['firstPageEllipis'] = _react2['default'].createElement(
 	          'span',
 	          null,
 	          '...'
-	        ), ' ', _react2['default'].createElement(
-	          'a',
-	          { href: 'javascript:void(0)' },
-	          total
-	        ));
+	        );
 	      }
 	
-	      return result.join('');
+	      var _loop = function (i) {
+	        result['page' + i] = _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)', onClick: function () {
+	              return _this.handleGoToSpecificPage(i);
+	            } },
+	          i
+	        );
+	      };
+	
+	      for (var i = left; i < current; i++) {
+	        _loop(i);
+	      }
+	
+	      result['page' + current] = _react2['default'].createElement(
+	        'a',
+	        { href: 'javascript:void(0)', className: 'currentPage', onClick: function () {
+	            return _this.handleGoToSpecificPage(current);
+	          } },
+	        current
+	      );
+	
+	      var _loop2 = function (i) {
+	        result['page' + i] = _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)', onClick: function () {
+	              return _this.handleGoToSpecificPage(i);
+	            } },
+	          i
+	        );
+	      };
+	
+	      for (var i = current + 1; i <= right; i++) {
+	        _loop2(i);
+	      }
+	
+	      if (right !== total) {
+	        result['lastPageEllipis'] = _react2['default'].createElement(
+	          'span',
+	          null,
+	          '...'
+	        );
+	        result['lastPage'] = _react2['default'].createElement(
+	          'a',
+	          { href: 'javascript:void(0)', onClick: this.handleGoToLastPage },
+	          total
+	        );
+	      }
+	
+	      return (0, _reactAddonsCreateFragment2['default'])(result);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var onPageChanged = this.props.onPageChanged;
+	      var total = this.props.total;
 	
+	      var left = 1;
 	      return _react2['default'].createElement(
 	        'div',
-	        null,
+	        { className: (0, _classNames2['default'])({ hide: total === 0 }) },
 	        _react2['default'].createElement(
 	          'a',
-	          { href: 'javascript:void(0)' },
+	          { href: 'javascript:void(0)', onClick: this.handleGoToPreviousPage },
 	          '上一页'
 	        ),
 	        this.renderPager(),
 	        _react2['default'].createElement(
 	          'a',
-	          { href: 'javascript:void(0)' },
+	          { href: 'javascript:void(0)', onClick: this.handleGoToNextPage },
 	          '下一页'
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return ModalDialog;
+	  return Pager;
 	})(_react.Component);
 	
-	exports['default'] = ModalDialog;
+	exports['default'] = Pager;
 	module.exports = exports['default'];
 
 /***/ },
 /* 408 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(409).create;
+
+/***/ },
+/* 409 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactFragment
+	 */
+	
+	'use strict';
+	
+	var ReactChildren = __webpack_require__(110);
+	var ReactElement = __webpack_require__(43);
+	
+	var emptyFunction = __webpack_require__(16);
+	var invariant = __webpack_require__(14);
+	var warning = __webpack_require__(26);
+	
+	/**
+	 * We used to allow keyed objects to serve as a collection of ReactElements,
+	 * or nested sets. This allowed us a way to explicitly key a set a fragment of
+	 * components. This is now being replaced with an opaque data structure.
+	 * The upgrade path is to call React.addons.createFragment({ key: value }) to
+	 * create a keyed fragment. The resulting data structure is an array.
+	 */
+	
+	var numericPropertyRegex = /^\d+$/;
+	
+	var warnedAboutNumeric = false;
+	
+	var ReactFragment = {
+	  // Wrap a keyed object in an opaque proxy that warns you if you access any
+	  // of its properties.
+	  create: function (object) {
+	    if (typeof object !== 'object' || !object || Array.isArray(object)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'React.addons.createFragment only accepts a single object. Got: %s', object) : undefined;
+	      return object;
+	    }
+	    if (ReactElement.isValidElement(object)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'React.addons.createFragment does not accept a ReactElement ' + 'without a wrapper object.') : undefined;
+	      return object;
+	    }
+	
+	    !(object.nodeType !== 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'React.addons.createFragment(...): Encountered an invalid child; DOM ' + 'elements are not valid children of React components.') : invariant(false) : undefined;
+	
+	    var result = [];
+	
+	    for (var key in object) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        if (!warnedAboutNumeric && numericPropertyRegex.test(key)) {
+	          process.env.NODE_ENV !== 'production' ? warning(false, 'React.addons.createFragment(...): Child objects should have ' + 'non-numeric keys so ordering is preserved.') : undefined;
+	          warnedAboutNumeric = true;
+	        }
+	      }
+	      ReactChildren.mapIntoWithKeyPrefixInternal(object[key], result, key, emptyFunction.thatReturnsArgument);
+	    }
+	
+	    return result;
+	  }
+	};
+	
+	module.exports = ReactFragment;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -33608,7 +33810,7 @@
 
 
 /***/ },
-/* 409 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33730,7 +33932,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 410 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33883,7 +34085,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 411 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33948,7 +34150,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 412 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33971,7 +34173,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classNames = __webpack_require__(408);
+	var _classNames = __webpack_require__(410);
 	
 	var _classNames2 = _interopRequireDefault(_classNames);
 	
@@ -34023,7 +34225,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 413 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34092,7 +34294,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 414 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34107,11 +34309,11 @@
 	
 	var _reduxRouter = __webpack_require__(178);
 	
-	var _shared = __webpack_require__(415);
+	var _shared = __webpack_require__(417);
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _quanBatchManagement = __webpack_require__(418);
+	var _quanBatchManagement = __webpack_require__(420);
 	
 	var _quanBatchManagement2 = _interopRequireDefault(_quanBatchManagement);
 	
@@ -34125,7 +34327,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 415 */
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34137,7 +34339,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(416);
+	var _reactAddonsUpdate = __webpack_require__(418);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -34183,13 +34385,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 416 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(417);
+	module.exports = __webpack_require__(419);
 
 /***/ },
-/* 417 */
+/* 419 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -34302,7 +34504,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 418 */
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34314,7 +34516,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reactAddonsUpdate = __webpack_require__(416);
+	var _reactAddonsUpdate = __webpack_require__(418);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
@@ -34330,7 +34532,7 @@
 		selectedQuanBatchId: undefined,
 		quanBatchListPager: {
 			total: 20,
-			current: 8,
+			current: 1,
 			visible: 5
 		}
 	};
@@ -34362,6 +34564,14 @@
 				{
 					return (0, _reactAddonsUpdate2['default'])(state, {
 						isShowIssueQuan: { $set: false }
+					});
+				}
+			case _actions.SET_QUAN_BATCH_LIST_CURRENT_PAGE:
+				{
+					return (0, _reactAddonsUpdate2['default'])(state, {
+						quanBatchListPager: {
+							current: { $set: action.currentPage }
+						}
 					});
 				}
 			default:

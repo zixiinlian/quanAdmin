@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import createFragment from 'react-addons-create-fragment';
 import classNames from 'classNames'
 
-export default class ModalDialog extends Component {
+export default class Pager extends Component {
   constructor(props) {
     super(props);
     this.handleGoToPreviousPage = this.handleGoToPreviousPage.bind(this);
@@ -47,7 +48,7 @@ export default class ModalDialog extends Component {
   }
 
   renderPager(){
-    let result = [];
+    let result = {};
     let {total, current, visible} = this.props;
 
     if(total <= visible){
@@ -62,48 +63,49 @@ export default class ModalDialog extends Component {
       left = total - visible + 1;
     }
 
-    if(left !== 1){
-      result.push(
-        <a href="javascript:void(0)" onClick={this.handleGoToFirstPage}>1</a>,
-        ' ',
-        <span>...</span>
-      )
-    }
-
-    for(let i = left; i < current; i++){
-      result.push(<a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>, ' ')
-    }
-
-    result.push(<a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>, ' ');
-
     let right = left + visible;
     if (right > total){
       right = total;
     }
+
+    if(left !== 1){
+      result['firstPage'] = <a href="javascript:void(0)" onClick={this.handleGoToFirstPage}>1</a>
+      result['firstPageEllipis'] = <span>...</span>
+    }
+
+    for(let i = left; i < current; i++){
+      result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
+    }
+
+   result['page' + current] = <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>;    
+
     for(let i = current + 1; i <= right; i++){
-      result.push(<a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>, ' ');
+       result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
     }
 
     if(right !== total){
-      result.push(
-        <span>...</span>,
-        ' ',
-        <a href="javascript:void(0)" onClick={this.handleGoToLastPage}>{total}</a>
-      )
+      result['lastPageEllipis'] = <span>...</span>
+      result['lastPage'] = <a href="javascript:void(0)" onClick={this.handleGoToLastPage}>{total}</a>
     }
 
-    return result;
+    return createFragment(result);
   }
 
 
   render () {
   	const {total} = this.props;
+    let left = 1;
     return (
       <div className={classNames({hide: total === 0})}>
-        <a href="javascript:void(0)" onClick={this.handleGoToPreviousPage}>上一页</a>&nbsp;
+        <a href="javascript:void(0)" onClick={this.handleGoToPreviousPage}>上一页</a>
         {this.renderPager()}
-        &nbsp;<a href="javascript:void(0)" onClick={this.handleGoToNextPage}>下一页</a>
+        <a href="javascript:void(0)" onClick={this.handleGoToNextPage}>下一页</a>
       </div>
     );
   }
 }
+
+// {renderLeftPart()}
+//       <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>&nbsp;
+//       {renderRightPart()}
+//       {renderLastPart()}
