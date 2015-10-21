@@ -42,6 +42,49 @@ app.get('/DispatchChannelList', function(req, res){
 	]);
 });
 
+app.get('/QuanList', function(req, res){
+	res.json([
+		{
+			batchId: 457,
+			isDispatched: true,
+			dispatchCustomerID: 1,
+			dispatchCustomerName: "xxx",
+			dispatchedChannelID: null,
+			dispatchOrderId: null,
+			isApplyed: false,
+			applyCustomerID: null,
+			applyCustomerName: null,
+			applyOrderId: null,
+			createUserId: 1,
+			createTime: "2015-09-07T16:36:44+0800",
+			editUserId: 1,
+			editTime: "2015-09-07T16:36:44+0800",
+			status: 1,
+			cancelReason: null,
+			deductionAmount: null,
+			payAmount: null,
+			couponUsageRule: {
+				id: 432,
+				useBeginTime: "2015-09-07T16:36:43+0800",
+				useEndTime: "2016-07-07T00:00:00+0800",
+				expireDays: null,
+				expireType: 0,
+				discountType: 1,
+				discountAmount: null,
+				discountPercent: 7.3,
+				isMarketingDiscountMutex: false,
+				isProductDiscountMutex: true,
+				isBindUser: false,
+				applyProductType: 2,
+				orderAmount: 3
+			},
+			startNo: null,
+			endNo: null
+		}
+
+	]);
+});
+
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });

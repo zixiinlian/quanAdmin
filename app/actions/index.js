@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {getQuanBatchList} from '../api'
+import {getQuanBatchList, getQuanList} from '../api'
 // import ActionTypes from '../constants/ActionTypes';
 
 // export function getQuanList() {
@@ -40,6 +40,13 @@ export function fetchQuanBatchList(quanBatchSearchCriteria) {
   return dispatch => {
     dispatch(requestQuanBatchList());
     return getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json)));
+  };
+}
+
+export function fetchQuanList(quanBatchSearchCriteria) {
+  return dispatch => {
+    dispatch(requestQuanBatchList());
+    return getQuanList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json)));
   };
 }
 
@@ -94,3 +101,4 @@ export function setQuanBatchListCurrentPage(currentPage) {
     currentPage
   };
 }
+

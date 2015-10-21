@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class QuanAdminApp extends Component {
   constructor(props) {
@@ -10,7 +11,13 @@ class QuanAdminApp extends Component {
   	const { children } = this.props;
     return (
       <div>
-      	  <div>
+        <div className="siderbar">
+          siderbar: <br/>
+          <Link to={`/quan`}>优惠券管理</Link> <br/>
+          <Link to={`/QuanBatchCreation`}>添加优惠券</Link> <br/>
+          <Link to={`/QuanBatchCreation`}>添加优惠券</Link> 
+        </div>
+    	  <div>
 	        I''m master page.
 	      </div>
 	      <div>

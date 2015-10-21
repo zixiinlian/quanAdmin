@@ -15,3 +15,10 @@ export function getQuanBatchList(quanBatchSearchCriteria) {
 		})
 		.then(response => response.json())
 }
+
+export function getQuanList(){
+	return fetch('/QuanList', {
+		method: 'get'
+	})
+	.then(response => response.json());
+}
