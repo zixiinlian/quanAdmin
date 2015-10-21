@@ -6,13 +6,12 @@ export default class QuanList extends Component {
   constructor(props) {
     super(props);
   }
-  
-  onCancelQuan() {
+
+  handleCancelQuan() {
 
   }
 
   render () {
-    const { quanList, handleCancelQuan } = this.props;
     return (
       <div>
         <table>
@@ -35,8 +34,8 @@ export default class QuanList extends Component {
             </thead>
             <tbody>
             {
-              quanList.map((quan, i) =>
-                <tr>
+              this.props.quanList.map((quan, i) =>
+                <tr key={i}>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
@@ -50,7 +49,7 @@ export default class QuanList extends Component {
                   <td>11</td>
                   <td>12</td>
                   <td>
-                    <a href="javascript:void(0)" onClick={this.handleCancelQuan}>作废</a>
+                    <a href="javascript:void(0)" onClick={this.handleCancelQuan.bind(this)}>作废</a>
                   </td>
                 </tr>
               )
@@ -61,3 +60,7 @@ export default class QuanList extends Component {
     );
   }
 }
+
+QuanList.propTypes = {
+  quanList:PropTypes.array.isRequired
+};

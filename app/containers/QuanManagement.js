@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
@@ -7,19 +7,18 @@ import QuanList from '../components/QuanList';
 import { fetchQuanList, fetchDispatchChannelList } from '../actions';
 
 class QuanManagement extends Component {
+
 	constructor(props) {
 		super(props);
 	}
 
 	componentWillMount() {
-		const { fetchQuanList, fetchDispatchChannelList} = this.props;
-
-		fetchQuanList();
-		fetchDispatchChannelList();
+		this.props.fetchQuanList();
+		this.props.fetchDispatchChannelList();
 	}
 
 	render() {
-		const {quanList, dispatchChannelList, fetchQuanList, fetchDispatchChannelList} = this.props;
+		const {dispatchChannelList, quanList} = this.props;
 
 		return (
 			<div>
@@ -31,11 +30,9 @@ class QuanManagement extends Component {
 }
 
 function mapStateToProps(state) {
-	const {quanList} = state.quanManagement;
-	const {dispatchChannelList} = state.shared;
 	return {
-		quanList,
-		dispatchChannelList
+		quanList: state.quanManagement.quanList,
+		dispatchChannelList: state.shared.dispatchChannelList
 	};
 }
 
@@ -46,5 +43,11 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+QuanManagement.propTypes = {
+	quanList: PropTypes.array.isRequired,
+	dispatchChannelList: PropTypes.array.isRequired,
+	fetchQuanList: PropTypes.func.isRequired,
+	fetchDispatchChannelList: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuanManagement); 
