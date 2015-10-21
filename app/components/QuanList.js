@@ -1,10 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Pager from './pager'
-import QuanBatchListItem from './QuanListItem';
+// import QuanBatchListItem from './QuanListItem';
 
 export default class QuanList extends Component {
   constructor(props) {
     super(props);
+  }
+  
+  onCancelQuan() {
+
   }
 
   render () {
@@ -53,7 +57,6 @@ export default class QuanList extends Component {
             }
             </tbody>
         </table>
-        // <Pager onPageChanged={setQuanBatchListCurrentPage} {...quanBatchListPager}/>
       </div>
     );
   }

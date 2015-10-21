@@ -3,8 +3,6 @@ import React, { Component, PropTypes } from 'react';
 export default class QuanBatchSearch extends Component {
   constructor(props) {
     super(props);
-    this.handleSearchQuan = this.handleSearchQuan.bind(this);
-    this.handleExport = this.handleExport.bind(this);
   }
 
   componentDidMount() {
@@ -14,7 +12,7 @@ export default class QuanBatchSearch extends Component {
     }
   }
 
-  handleSearchQuan(e){
+  onSearchQuan(e){
     let quanSearchParam = {
       batchId: this.refs.batchId.value,
       quanName: this.refs.quanName.value
@@ -32,7 +30,7 @@ export default class QuanBatchSearch extends Component {
               <td>
                 批次号: <input ref="batchId" type="text"/>
               </td>
-              <td colspan="2">
+              <td colSpan="2">
                 优惠券名称: <input ref="quanName" type="text" />
               </td>
               <td>
@@ -90,7 +88,7 @@ export default class QuanBatchSearch extends Component {
         </table>
         <div>
           <input type="button" value="查询" onClick={this.handleSearchQuan} />
-          <input type="button" value="导出" onClick={this.handleExport} />
+          // <input type="button" value="导出" onClick={this.handleExport} />
         </div>
       </div>
     );
