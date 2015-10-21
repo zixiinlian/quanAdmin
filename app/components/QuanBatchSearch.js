@@ -7,15 +7,8 @@ export default class QuanBatchSearch extends Component {
     this.handleSearchQuanBatch = this.handleSearchQuanBatch.bind(this);
   }
 
-  componentDidMount() {
-    const { fetchDispatchChannelList, dispatchChannelList } = this.props;
-    if(dispatchChannelList.length === 0){
-      fetchDispatchChannelList();
-    }
-  }
-
   handleCreateBatch(e){
-    this.props.pushState(null, '/QuanBatchCreation');
+    this.props.pushState(null, '/InitiativeQuanBatchCreation');
   }
 
   handleSearchQuanBatch(e){

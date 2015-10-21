@@ -77,7 +77,7 @@ export default class Pager extends Component {
       result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
     }
 
-   result['page' + current] = <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>;    
+    result['page' + current] = <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>;    
 
     for(let i = current + 1; i <= right; i++){
        result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
@@ -104,8 +104,3 @@ export default class Pager extends Component {
     );
   }
 }
-
-// {renderLeftPart()}
-//       <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>&nbsp;
-//       {renderRightPart()}
-//       {renderLastPart()}
