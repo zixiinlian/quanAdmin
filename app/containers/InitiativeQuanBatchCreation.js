@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions';
+import {fetchDispatchChannelList} from '../actions';
+import * as actions from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
+import QuanBatchDispatchRule from '../components/QuanBatchDispatchRule';
+import QuanBatchUsageRule from '../components/QuanBatchUsageRule';
 
 class InitiativeQuanBatchCreation extends Component {
 	constructor(props) {
@@ -26,11 +29,16 @@ class InitiativeQuanBatchCreation extends Component {
 	}
 
 	render() {
-		const {dispatchChannelList} = this.props;
+		const {dispatchChannelList, deleteQuanBatchCreationDispatchProductLimit, dispatchUserRequestRule, addQuanBatchCreationDispatchProductLimit, 
+			setIsAutoOnline, setPerUserLimit, setDiscountType, couponUsageRule, setPlatformLimitList, setApplyProductType, setIsBindUser} = this.props;
 		const basicInformationProps = {dispatchChannelList};
+		const dispatchRuleProps = {...dispatchUserRequestRule, deleteQuanBatchCreationDispatchProductLimit, addQuanBatchCreationDispatchProductLimit, setIsAutoOnline, setPerUserLimit};
+		const usageRuleProps = {...couponUsageRule, setDiscountType, setPlatformLimitList, setApplyProductType, setIsBindUser};
 		return (
 			<div>
 				<QuanBatchBasicInformation ref="basicInformation" {...basicInformationProps}/>
+				<QuanBatchDispatchRule {...dispatchRuleProps}/>
+				<QuanBatchUsageRule {...usageRuleProps} />
 				<input type="button" value="保存" onClick={this.handleSave} />
 			</div>
 		);
@@ -39,16 +47,20 @@ class InitiativeQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {dispatchChannelList} = state.shared;
+	const {dispatchUserRequestRule, couponUsageRule} = state.quanBatchCreation;
 	return {
-		dispatchChannelList
+		dispatchChannelList,
+		dispatchUserRequestRule,
+		couponUsageRule
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  	pushState: bindActionCreators(pushState, dispatch),
-  	fetchDispatchChannelList: bindActionCreators(actions.fetchDispatchChannelList, dispatch)
-  };
+  	return bindActionCreators({
+	  	pushState,
+	  	...actions,
+	  	fetchDispatchChannelList
+	}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitiativeQuanBatchCreation);

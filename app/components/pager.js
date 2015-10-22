@@ -94,13 +94,17 @@ export default class Pager extends Component {
 
   render () {
   	const {total} = this.props;
-    let left = 1;
-    return (
-      <div className={classNames({hide: total === 0})}>
-        <a href="javascript:void(0)" onClick={this.handleGoToPreviousPage}>上一页</a>
-        {this.renderPager()}
-        <a href="javascript:void(0)" onClick={this.handleGoToNextPage}>下一页</a>
-      </div>
-    );
+    if(total !== 0){
+      return (
+        <div>
+          <a href="javascript:void(0)" onClick={this.handleGoToPreviousPage}>上一页</a>
+          {this.renderPager()}
+          <a href="javascript:void(0)" onClick={this.handleGoToNextPage}>下一页</a>
+        </div>
+      );
+    }
+    else{
+      return null;
+    }
   }
 }
