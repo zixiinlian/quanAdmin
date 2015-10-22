@@ -8,17 +8,28 @@ import Header from '../components/Header';
 class QuanAdminApp extends Component {
   constructor(props) {
       super(props);
+      this.state = {
+        isShow: true
+      }
+  }
+
+  handleToggleSiderbar() {
+    this.setState({
+      isShow: !this.state.isShow
+    });
   }
 
   render() {
   	const { children, siderbarList } = this.props;
     return (
-      <div className="page-container">
-        <Header></Header>
-        <SiderBar siderbarList={siderbarList}></SiderBar>
-	      <div className="page-content">
-	      	{children}
-	      </div>
+      <div className={ "page-header-fixed " + (this.state.isShow ? "" : "page-sidebar-closed") } >
+        <div className="page-container">
+          <Header></Header>
+          <SiderBar siderbarList={siderbarList} handleToggleSiderbar={this.handleToggleSiderbar.bind(this)}></SiderBar>
+  	      <div className="page-content">
+  	      	{children}
+  	      </div>
+        </div>
       </div>
     );
   }

@@ -51,6 +51,25 @@ body {
   direction: ltr;
 }
 
+.mr20{
+  margin-right: 20px;
+}
+.ml20{
+  margin-left: 20px;
+}
+.mr10{
+  margin-right: 10px;
+}
+.ml10{
+  margin-left: 10px;
+}
+.mt10{
+  margin-top: 10px;
+}
+.mb10{
+  margin-bottom: 10px;
+}
+
 /*
 Internet Explorer 10 doesn't differentiate device width from viewport width, and thus doesn't 
 properly apply the media queries in Bootstrap's CSS. To address this, 

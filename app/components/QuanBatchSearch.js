@@ -22,11 +22,15 @@ export default class QuanBatchSearch extends Component {
   render () {
     const { dispatchTypeList, dispatchChannelList } = this.props;
     return (
-      <div>
-        <input ref="batchId" type="text" className="form-control" placeholder="批次号"/>
-        <input type="text" className="form-control" placeholder="批次名称"/>
+      <div className="form-inline">
         <div className="form-group">
-          发放机构: 
+          <input ref="batchId" type="text" className="form-control" placeholder="批次号"/>
+        </div>
+        <div className="form-group ml10">
+          <input type="text" className="form-control" placeholder="批次名称"/>
+        </div>
+        <div className="form-group ml10">
+          <label>发放机构: </label>
           <select ref="dispatchChannel" className="form-control input-small">
             {
               dispatchChannelList.map((dispatchChannel) =>
@@ -35,9 +39,11 @@ export default class QuanBatchSearch extends Component {
             }
           </select>
         </div>
-        <input type="text" className="form-control" placeholder="创建人"/>
-        <div className="form-group">
-          发放方式: 
+        <div className="form-group ml10">
+          <input type="text" className="form-control" placeholder="创建人"/>
+        </div>
+        <div className="form-group ml10">
+          <label>发放方式: </label>
           <select ref="dispatchType" className="form-control input-small">
             {
               dispatchTypeList.map((dispatchType) =>
@@ -46,9 +52,9 @@ export default class QuanBatchSearch extends Component {
             }
           </select>
         </div> 
-        <div>
+        <div className="mt10 mb10">
           <input type="button" className="btn blue" value="查询" onClick={this.handleSearchQuanBatch} />
-          <input type="button" className="btn blue" value="新建优惠券批次" onClick={this.handleCreateBatch} />
+          <input type="button" className="btn blue ml10" value="新建优惠券批次" onClick={this.handleCreateBatch} />
         </div>
       </div>
     );

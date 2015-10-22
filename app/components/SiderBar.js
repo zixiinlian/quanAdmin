@@ -4,45 +4,54 @@ import { Link } from 'react-router';
 export default class SiderBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isShow: false
+    }
   }
 
-  // componentDidMount() {
-  //   const { fetchDispatchChannelList, dispatchChannelList } = this.props;
-  //   if(dispatchChannelList.length === 0){
-  //     fetchDispatchChannelList();
-  //   }
-  // }
+  handleToggleNav() {
+    this.setState({
+      isShow: !this.state.isShow
+    });
+  }
 
   render () {
-    // const { dispatchChannelList } = this.props;
+    const { handleToggleSiderbar } = this.props;
+
     return (
       <div id="menu" className="page-sidebar navbar-collapse collapse">
         <ul className="page-sidebar-menu">
           <li>
-              <div className="sidebar-toggler hidden-phone"></div>
+              <div className="sidebar-toggler hidden-phone" onClick={ handleToggleSiderbar }></div>
           </li>
-          <li id="m_1">
-            <Link to={`/`}>
+          <li id="m_1" onClick={ this.handleToggleNav.bind(this) } className={ this.state.isShow ? "active" : "" }>
+            <a href="javascript:;">
                 <i className="fa fa-home"></i>
-                <span className="title">控制面板</span>
+                <span className="title">优惠券</span>
                 <span className="arrow "></span>
-            </Link>
+            </a>
             <ul className="sub-menu">
               <li id="m_2">
+                  <Link to={`/`}>
+                      <i className="fa fa-cogs"></i>
+                      优惠券批次管理
+                  </Link>
+              </li>
+              <li id="m_3">
                   <Link to={`/quan`}>
                       <i className="fa fa-cogs"></i>
-                      应用维护
+                      优惠券管理
+                  </Link>
+              </li> 
+              <li id="m_4">
+                  <Link to={`/InitiativeQuanBatchCreation`}>
+                      <i className="fa fa-cogs"></i>
+                      添加优惠券
                   </Link>
               </li>                
             </ul>
           </li>
         </ul>
-        <div classNameName="siderbar">
-          siderbar: <br/>
-          <Link to={`/`}>优惠券批次管理</Link> <br/>
-          <Link to={`/quan`}>优惠券管理</Link> <br/>
-          <Link to={`/InitiativeQuanBatchCreation`}>添加优惠券</Link>
-        </div>
       </div>
     );
   }

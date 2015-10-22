@@ -307,3 +307,7 @@ Landscape phone to portrait tablet
     background: #1e1e1e;
   }
 }
+
+html{
+    margin-right: 301px;
+}
