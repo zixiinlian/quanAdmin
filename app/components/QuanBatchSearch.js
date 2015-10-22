@@ -23,49 +23,32 @@ export default class QuanBatchSearch extends Component {
     const { dispatchTypeList, dispatchChannelList } = this.props;
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                批次号: <input ref="batchId" type="text"/>
-              </td>
-              <td>
-                批次名称: <input type="text" />
-              </td>
-              <td>
-                发放机构: 
-                <select ref="dispatchChannel">
-                  {
-                    dispatchChannelList.map((dispatchChannel) =>
-                      <option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
-                    )
-                  }
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                创建人: <input type="text" />
-              </td>
-              <td>
-                发放方式: 
-                <select ref="dispatchType">
-                  {
-                    dispatchTypeList.map((dispatchType) =>
-                      <option key={dispatchType.id} value={dispatchType.id}>{dispatchType.desc}</option>
-                    )
-                  }
-                </select>
-              </td>
-              <td>
-                
-              </td>
-            </tr>
-          </tbody>   
-        </table>
+        <input ref="batchId" type="text" className="form-control" placeholder="批次号"/>
+        <input type="text" className="form-control" placeholder="批次名称"/>
+        <div className="form-group">
+          发放机构: 
+          <select ref="dispatchChannel" className="form-control input-small">
+            {
+              dispatchChannelList.map((dispatchChannel) =>
+                <option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
+              )
+            }
+          </select>
+        </div>
+        <input type="text" className="form-control" placeholder="创建人"/>
+        <div className="form-group">
+          发放方式: 
+          <select ref="dispatchType" className="form-control input-small">
+            {
+              dispatchTypeList.map((dispatchType) =>
+                <option key={dispatchType.id} value={dispatchType.id}>{dispatchType.desc}</option>
+              )
+            }
+          </select>
+        </div> 
         <div>
-          <input type="button" value="查询" onClick={this.handleSearchQuanBatch} />
-          <input type="button" value="新建优惠券批次" onClick={this.handleCreateBatch} />
+          <input type="button" className="btn blue" value="查询" onClick={this.handleSearchQuanBatch} />
+          <input type="button" className="btn blue" value="新建优惠券批次" onClick={this.handleCreateBatch} />
         </div>
       </div>
     );

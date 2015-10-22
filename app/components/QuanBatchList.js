@@ -11,7 +11,7 @@ export default class QuanBatchList extends Component {
     const { quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage } = this.props;
     return (
       <div>
-        <table>
+        <table className="table table-striped table-bordered table-hover table-full-width dataTable">
             <thead>
               <tr>
                 <th>批次号</th>

@@ -2,6 +2,8 @@ import 'babel-core/polyfill';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import SiderBar from '../components/SiderBar';
+import Header from '../components/Header';
 
 class QuanAdminApp extends Component {
   constructor(props) {
@@ -9,19 +11,12 @@ class QuanAdminApp extends Component {
   }
 
   render() {
-  	const { children } = this.props;
+  	const { children, siderbarList } = this.props;
     return (
-      <div>
-        <div className="siderbar">
-          siderbar: <br/>
-          <Link to={`/quan`}>优惠券管理</Link> <br/>
-          <Link to={`/QuanBatchCreation`}>添加优惠券</Link> <br/>
-          <Link to={`/QuanBatchCreation`}>添加优惠券</Link> 
-        </div>
-    	  <div>
-	        I''m master page.
-	      </div>
-	      <div>
+      <div className="page-container">
+        <Header></Header>
+        <SiderBar siderbarList={siderbarList}></SiderBar>
+	      <div className="page-content">
 	      	{children}
 	      </div>
       </div>

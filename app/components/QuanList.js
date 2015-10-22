@@ -14,7 +14,7 @@ export default class QuanList extends Component {
   render () {
     return (
       <div>
-        <table>
+        <table className="table table-striped table-bordered table-hover table-full-width dataTable">
             <thead>
               <tr>
                 <th>优惠券序列号</th>

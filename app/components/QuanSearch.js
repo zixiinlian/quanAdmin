@@ -24,70 +24,50 @@ export default class QuanBatchSearch extends Component {
     const { dispatchChannelList } = this.props;
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                批次号: <input ref="batchId" type="text"/>
-              </td>
-              <td colSpan="2">
-                优惠券名称: <input ref="quanName" type="text" />
-              </td>
-              <td>
-                发放机构: 
-                <select ref="dispatchChannel">
-                  {
-                    dispatchChannelList.map((dispatchChannel) =>
-                      <option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
-                    )
-                  }
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                优惠券码: <input ref="quanCode" type="text" />
-              </td>
-              <td>
-                优惠券序列号: <input ref="quan" type="text" />
-              </td>
-              <td>
-                领取人: <input ref="quanReceiver" type="text" />
-              </td>
-              <td>
-                使用人: <input ref="quanUser" type="text" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                使用状态: 
-                <select ref="quanStatus">
-                    <option value="0">全部</option>
-                    <option value="0">已使用</option>
-                    <option value="1">未使用</option>
-                    <option value="2">已过期</option>
-                    <option value="3">已作废</option>
-                </select>
-              </td>
-              <td>
-                是否绑定账户: 
-                <select ref="isBandUser">
-                    <option value="0">全部</option>
-                    <option value="0">是</option>
-                    <option value="1">否</option>
-                </select>
-              </td>
-              <td>
-                来源订单: <input ref="quanSource" type="text" />
-              </td>
-              <td>
-                使用订单: <input type="text" />
-              </td>
-            </tr>
-          </tbody>   
-        </table>
+
+          批次号: <input ref="batchId" type="text" placeholder="批次号" className="form-control"/>
+          优惠券名称: <input ref="quanName" type="text" placeholder="批次号" className="form-control"/>
+          <div className="form-group">
+            发放机构: 
+            <select ref="dispatchChannel" className="form-control">
+              {
+                dispatchChannelList.map((dispatchChannel) =>
+                  <option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
+                )
+              }
+            </select>
+          </div>
+          优惠券码: <input ref="quanCode" type="text"  className="form-control" placeholder="批次号"/>
+ 
+          优惠券序列号: <input ref="quan" type="text"  className="form-control" placeholder="优惠券序列号"/>
+
+          领取人: <input ref="quanReceiver" type="text"  className="form-control" placeholder="领取人"/>
+
+          使用人: <input ref="quanUser" type="text"  className="form-control" placeholder="使用人"/>
+          <div className="form-group">
+            使用状态: 
+            <select ref="quanStatus" className="form-control">
+                <option value="0">全部</option>
+                <option value="0">已使用</option>
+                <option value="1">未使用</option>
+                <option value="2">已过期</option>
+                <option value="3">已作废</option>
+            </select>
+          </div>
+          <div className="form-group">
+            是否绑定账户: 
+            <select ref="isBandUser" className="form-control">
+                <option value="0">全部</option>
+                <option value="0">是</option>
+                <option value="1">否</option>
+            </select>
+          </div>
+          来源订单: <input ref="quanSource" type="text" placeholder="批次号" className="form-control"/>
+    
+          使用订单: <input type="text" placeholder="批次号" className="form-control"/>
+
         <div>
-          <input type="button" value="查询" onClick={this.handleSearchQuan} />
+          <input type="button" value="查询" onClick={this.handleSearchQuan} className="btn blue"/>
           // <input type="button" value="导出" onClick={this.handleExport} />
         </div>
       </div>
