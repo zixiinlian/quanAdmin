@@ -29,11 +29,14 @@ class InitiativeQuanBatchCreation extends Component {
 	}
 
 	render() {
-		const {dispatchChannelList, deleteQuanBatchCreationDispatchProductLimit, dispatchUserRequestRule, addQuanBatchCreationDispatchProductLimit, 
-			setIsAutoOnline, setPerUserLimit, setDiscountType, couponUsageRule, setPlatformLimitList, setApplyProductType, setIsBindUser} = this.props;
+		const {dispatchChannelList, deleteQuanBatchCreationDispatchProductLimit, dispatchUserRequestRule, addQuanBatchCreationDispatchProductLimit
+			, setIsAutoOnline, setPerUserLimit, setDiscountType, couponUsageRule, setPlatformLimitList, setApplyProductType, setIsBindUser, setExpireType
+			, setDiscountAmount, setDiscountPercent, setExpireDays
+		} = this.props;
 		const basicInformationProps = {dispatchChannelList};
 		const dispatchRuleProps = {...dispatchUserRequestRule, deleteQuanBatchCreationDispatchProductLimit, addQuanBatchCreationDispatchProductLimit, setIsAutoOnline, setPerUserLimit};
-		const usageRuleProps = {...couponUsageRule, setDiscountType, setPlatformLimitList, setApplyProductType, setIsBindUser};
+		const usageRuleProps = {...couponUsageRule, setDiscountType, setPlatformLimitList, setApplyProductType, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent
+			, setExpireDays};
 		return (
 			<div>
 				<QuanBatchBasicInformation ref="basicInformation" {...basicInformationProps}/>

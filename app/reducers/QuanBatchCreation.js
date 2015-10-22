@@ -100,6 +100,34 @@ export default function quanBatchCreation(state = initialState, action) {
 				}
 			});
 		}
+		case actionTypes.SET_EXPIRE_TYPE: {
+			return update(state, {
+				couponUsageRule: {
+					expireType: {$set: action.expireType}
+				}
+			});
+		}
+		case actionTypes.SET_DISCOUNT_AMOUNT: {
+			return update(state, {
+				couponUsageRule: {
+					discountAmount: {$set: action.discountAmount}
+				}
+			});
+		}
+		case actionTypes.SET_DISCOUNT_PERCENT: {
+			return update(state, {
+				couponUsageRule: {
+					discountPercent: {$set: action.discountPercent}
+				}
+			});
+		}
+		case actionTypes.SET_EXPIRE_DAYS: {
+			return update(state, {
+				couponUsageRule: {
+					expireDays: {$set: action.expireDays}
+				}
+			});
+		}
 		default:{
 			return state;
 		}

@@ -54,3 +54,31 @@ export function setIsBindUser() {
     type: actionTypes.SET_IS_BIND_USER
   };
 }
+
+export function setExpireType(expireType){
+	return {
+		type: actionTypes.SET_EXPIRE_TYPE,
+		expireType
+	}
+}
+
+export function setDiscountAmount(discountAmount){
+	return {
+		type: actionTypes.SET_DISCOUNT_AMOUNT,
+		discountAmount
+	}
+}
+
+export function setDiscountPercent(discountPercent){
+	return {
+		type: actionTypes.SET_DISCOUNT_PERCENT,
+		discountPercent
+	}
+}
+
+export function setExpireDays(expireDays){
+	return {
+		type: actionTypes.SET_EXPIRE_DAYS,
+		expireDays
+	}
+}

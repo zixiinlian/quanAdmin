@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ProductListAddition from './ProductListAddition'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import ProductListAddition from './ProductListAddition';
 
 export default class QuanBatchUsageRule extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			startDate: moment()
+		}
+	}
+
+	handleChange(date) {
+		this.setState({
+		  startDate: date
+		});
 	}
 
 	render() {
 		let {discountType, setDiscountType, platformLimitList, setPlatformLimitList, applyProductType, setApplyProductType, isBindUser, setIsBindUser,
-			expireType, setExpireType
+			expireType, setExpireType, discountAmount, setDiscountAmount, discountPercent, setDiscountPercent, expireDays, setExpireDays
 		} = this.props;
 		return (
 			<div>
 				<h1>使用规则</h1>
 				<div>
 					优惠方式：售价满额<input type="text" />元 
-					<input type="radio" name="discountType" checked={discountType === 0} onChange={() => setDiscountType(0)} />立减<input type="text" />元
-					<input type="radio" name="discountType" checked={discountType === 1} onChange={() => setDiscountType(1)}/>折扣<input type="text" />折
+					<input type="radio" name="discountType" checked={discountType === 0} onChange={() => setDiscountType(0)} />立减
+					<input type="text" defaultValue={discountAmount} onBlur={(e) => setDiscountAmount(e.target.value)} />元
+					<input type="radio" name="discountType" checked={discountType === 1} onChange={() => setDiscountType(1)}/>折扣
+					<input type="text" defaultValue={discountPercent} onBlur={(e) => setDiscountPercent(e.target.value)} />折
 				</div>
 				<div>
 					适用平台：
@@ -34,9 +47,9 @@ export default class QuanBatchUsageRule extends Component {
 				<div>
 					有效期类型：
 					<input type="radio" name="expireType" checked={expireType === 0} onChange={() => setExpireType(0)} />固定时间
-					<input type="text" />元
+					<DatePicker selected={this.state.startDate} onChange={this.handleChange.bind(this)} />至<DatePicker />
 					<input type="radio" name="expireType" checked={expireType === 1} onChange={() => setExpireType(1)}/>自领取之日起
-					<input type="text" />天内有效
+					<input type="text" defaultValue={expireDays} onBlur={(e) => setExpireDays(e.target.value)} />天内有效
 				</div>
 				<div>
 					绑定账号设定：<input type="checkbox" checked={isBindUser} onChange={setIsBindUser}/>是
