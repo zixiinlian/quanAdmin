@@ -9,6 +9,7 @@ import './styles/bootstrap.min.css';
 import './styles/style.css';
 import './styles/style-responsive.css';
 import './styles/default.css';
+import './styles/style-metronic.css';
 
 const store = configureStore();
 
