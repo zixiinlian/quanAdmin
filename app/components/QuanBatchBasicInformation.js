@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
 
 export default class QuanBatchBasicInformation extends Component {
 	constructor(props) {

@@ -15,3 +15,16 @@ export function getQuanBatchList(quanBatchSearchCriteria) {
 		})
 		.then(response => response.json())
 }
+
+export function getProductList() {
+	// let url = new URL(apiServer + "coupon/batches");
+	// url.search = stringify(quanBatchSearchCriteria);
+	return fetch('/ProductList', {
+			method: 'get'
+			// headers: {
+			// 	'Accept': 'application/json',
+			// 	'Content-Type': 'application/json'
+			// },
+		})
+		.then(response => response.json())
+}

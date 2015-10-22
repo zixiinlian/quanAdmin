@@ -37,9 +37,9 @@ class QuanBatchManagement extends Component {
 			selectedQuanBatch = quanBatchList.find((element) => {
 				return element.batchId === selectedQuanBatchId;
 			});
-		}
 
-		return <ModalDialog isShow={isShowIssueQuan} close={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;
+			return <ModalDialog onClose={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;
+		}
 	}
 
 	render() {

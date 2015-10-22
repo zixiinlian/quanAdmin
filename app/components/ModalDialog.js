@@ -7,13 +7,13 @@ export default class ModalDialog extends Component {
   }
 
   render () {
-  	const {children, title, isShow = true, close} = this.props;
+  	const {children, title, onClose} = this.props;
     return (
-      <div className={classNames("mask", {hide: isShow === false})} >
+      <div className="mask" >
       	<div className="dialog">
       		<div>
       			{title}
-      			<a href="javascript:void(0)" onClick={close}>X</a>
+      			<a href="javascript:void(0)" onClick={onClose}>X</a>
       		</div>
 	      	{children}      		
       	</div>

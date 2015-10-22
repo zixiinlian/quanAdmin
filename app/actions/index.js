@@ -110,4 +110,3 @@ export function fetchQuanList(quanBatchSearchCriteria) {
       .then(json => dispatch(receiveQuanList(json)));
   };
 }
-
