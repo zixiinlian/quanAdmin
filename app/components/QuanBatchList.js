@@ -5,6 +5,7 @@ import QuanBatchListItem from './QuanBatchListItem';
 export default class QuanBatchList extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
   }
 
   render () {

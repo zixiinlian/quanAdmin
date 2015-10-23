@@ -1,16 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-let apiServer = "http://192.168.155.169:8004/v1/";
+let apiServer = "http://192.168.155.169:8004/v1";
 
 export function getQuanBatchList(quanBatchSearchCriteria) {
 	// let url = new URL(apiServer + "coupon/batches");
 	// url.search = stringify(quanBatchSearchCriteria);
-	return fetch('/QuanBatchList', {
-			method: 'get'
-			// headers: {
-			// 	'Accept': 'application/json',
-			// 	'Content-Type': 'application/json'
-			// },
+	return fetch(apiServer + '/coupon/batches', {
+			method: 'get',
+			 headers: {
+			 	'Accept': 'application/json',
+			 	'Content-Type': 'application/json'
+			 },
 		})
 		.then(response => response.json())
 }
