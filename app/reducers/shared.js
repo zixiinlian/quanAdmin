@@ -9,16 +9,16 @@ let initialState = {
 		desc: '用户主动领取'
 	}, {
 		id: 2,
-		desc: '订单满额返券'
-	}, {
-		id: 3,
 		desc: '指定用户发放'
 	}, {
+		id: 3,
+		desc: '订单满额返券'
+	}, {
 		id: 4,
-		desc: '外部渠道投放'
+		desc: '站外渠道投放'
 	},{
 		id: 5,
-		desc: '鬼知道'
+		desc: '售卖'
 	}],
 	dispatchChannelList: []
 }

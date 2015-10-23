@@ -16,7 +16,7 @@ let initialState = {
 	isShowIssueQuan: false,
 	selectedQuanBatchId: undefined,
 	quanBatchListPager: {
-		total: 20,
+		total: 0,
 		current: 1,
 		visible: 5
 	}
@@ -26,7 +26,10 @@ export default function quanBatchManagement(state = initialState, action) {
 	switch(action.type){
 		case RECEIVE_QUAN_BATCH_LIST: {
 			return update(state, {
-				quanBatchList: { $set: action.quanBatchList }
+				quanBatchList: { $set: action.quanBatchList },
+				quanBatchListPager: {
+					total: {$set: action.totalPage}
+				}
 			});
 		}
 		case SET_QUAN_BATCH_SEARCH_CRITERIA: {

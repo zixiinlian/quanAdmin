@@ -32,14 +32,15 @@ export const RECEIVE_QUAN_BATCH_LIST = 'RECEIVE_QUAN_BATCH_LIST';
 export function receiveQuanBatchList(json) {
   return {
     type: RECEIVE_QUAN_BATCH_LIST,
-    quanBatchList: json
+    quanBatchList: json.results,
+    totalPage:json.total
   };
 }
 
 export function fetchQuanBatchList(quanBatchSearchCriteria) {
   return dispatch => {
     dispatch(requestQuanBatchList());
-    return getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json)));
+    return getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
   };
 }
 

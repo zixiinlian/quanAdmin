@@ -12,7 +12,7 @@ export default class QuanBatchListItem extends Component {
   }
 
   render () {
-    const { batchId, title, createTime, dispatchType, dispatchTypeList, operationUserName } = this.props;
+    const { batchId, title, createTime, dispatchType, dispatchTypeList,couponQty, createUserName } = this.props;
     const dispatchTypeDesc = dispatchTypeList.find((element) => {
       return element.id === dispatchType
     }).desc;
@@ -23,8 +23,8 @@ export default class QuanBatchListItem extends Component {
         <td>{createTime}</td>
         <td>{dispatchTypeDesc}</td>
         <td>{batchId}</td>
-        <td>{batchId}</td>
-        <td>{operationUserName}</td>
+        <td>{couponQty}</td>
+        <td>{createUserName}</td>
         <td>
           <a href="javascript:void(0)" onClick={this.handleIssueQuan}>分发</a>
         </td>
