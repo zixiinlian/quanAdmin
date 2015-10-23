@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import 'react-date-picker/index.css';
 import ProductListAddition from './ProductListAddition';
 
 export default class QuanBatchUsageRule extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			startDate: moment()
-		}
-	}
-
-	handleChange(date) {
-		this.setState({
-		  startDate: date
-		});
 	}
 
 	render() {
@@ -47,7 +37,7 @@ export default class QuanBatchUsageRule extends Component {
 				<div>
 					有效期类型：
 					<input type="radio" name="expireType" checked={expireType === 0} onChange={() => setExpireType(0)} />固定时间
-					<DatePicker selected={this.state.startDate} onChange={this.handleChange.bind(this)} />至<DatePicker />
+					至
 					<input type="radio" name="expireType" checked={expireType === 1} onChange={() => setExpireType(1)}/>自领取之日起
 					<input type="text" defaultValue={expireDays} onBlur={(e) => setExpireDays(e.target.value)} />天内有效
 				</div>

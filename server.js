@@ -92,6 +92,12 @@ app.get('/', function(req, res) {
 app.get('/InitiativeQuanBatchCreation', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
+app.get('/OrderQuanBatchCreation', function(req, res) {
+  res.sendFile(__dirname + '/app/index.html');
+});
+app.get('/UserPackageQuanBatchCreation', function(req, res) {
+  res.sendFile(__dirname + '/app/index.html');
+});
 console.log(path.join(__dirname, '/app/styles'));
 app.use(express.static(path.join(__dirname, '/app/styles')));
 

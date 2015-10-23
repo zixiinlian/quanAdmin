@@ -1,4 +1,5 @@
-import * as actionTypes from '../actionTypes/quanBatchCreation'
+import * as actionTypes from '../actionTypes/quanBatchCreation';
+import {postJson} from '../api'
 
 export function deleteQuanBatchCreationDispatchProductLimit(index) {
   return {
@@ -81,4 +82,74 @@ export function setExpireDays(expireDays){
 		type: actionTypes.SET_EXPIRE_DAYS,
 		expireDays
 	}
+}
+
+export function setTitle(title){
+  return {
+    type: actionTypes.SET_TITLE,
+    title
+  }
+}
+
+export function setSellerID(sellerID){
+  return {
+    type: actionTypes.SET_SELLER_ID,
+    sellerID
+  }
+}
+
+export function setUserPackageId(userPackageId){
+  return {
+    type: actionTypes.SET_USER_PACKAGE_ID,
+    userPackageId
+  }
+}
+
+export function setPackageUsersQty(packageUsersQty){
+  return {
+    type: actionTypes.SET_PACKAGE_USERS_QTY,
+    packageUsersQty
+  }
+}
+
+export function setPackageDescription(packageDescription){
+  return {
+    type: actionTypes.SET_PACKAGE_DESCRIPTION,
+    packageDescription
+  }
+}
+
+export function setIsSale(setIsSale){
+  return {
+    type: actionTypes.SET_IS_SALE,
+    setIsSale
+  }
+}
+
+export function setSaleAmount(saleAmount){
+  return {
+    type: actionTypes.SET_SALE_AMOUNT,
+    saleAmount
+  }
+}
+
+export function setDispatchType(dispatchType){
+  return {
+    type: actionTypes.SET_DISPATCH_TYPE,
+    dispatchType
+  }
+}
+
+export function setQuanBatch(quanBatchSearchCriteria) {
+  return (dispatch, getState) => {
+    let {basicInformation, dispatchUserPackageRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      dispatchUserPackageRule,
+      couponUsageRule
+    }
+    postJson('coupon/batches', data);
+    // .then(json => dispatch(receiveQuanBatch(json)));
+  };
 }

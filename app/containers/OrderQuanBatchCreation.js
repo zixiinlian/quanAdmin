@@ -8,7 +8,7 @@ import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
 import QuanBatchDispatchRule from '../components/QuanBatchDispatchRule';
 import QuanBatchUsageRule from '../components/QuanBatchUsageRule';
 
-class InitiativeQuanBatchCreation extends Component {
+class OrderQuanBatchCreation extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -55,7 +55,7 @@ function mapStateToProps(state) {
 			title,
 			sellerID
 		},
-		quanBatchType: 0
+		quanBatchType: 1
 	};
 }
 
@@ -67,4 +67,4 @@ function mapDispatchToProps(dispatch) {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InitiativeQuanBatchCreation);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderQuanBatchCreation);

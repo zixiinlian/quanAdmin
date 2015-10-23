@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ProductListAddition from './ProductListAddition'
+import UserLimit from './UserLimit'
+import OrderLimit from './OrderLimit'
 
 export default class QuanBatchDispatchRule extends Component {
 	constructor(props) {
@@ -9,9 +9,11 @@ export default class QuanBatchDispatchRule extends Component {
 
 	render() {
 		const {isAutoOnline, productLimitList, perUserLimit, deleteQuanBatchCreationDispatchProductLimit, addQuanBatchCreationDispatchProductLimit
-			, setPerUserLimit, setIsAutoOnline} = this.props;
+			, setPerUserLimit, setIsAutoOnline, quanBatchType} = this.props;
 		const listAdditionProps = {productLimitList, deleteQuanBatchCreationDispatchProductLimit, addQuanBatchCreationDispatchProductLimit};
-
+		const UserLimitProps = {perUserLimit, deleteQuanBatchCreationDispatchProductLimit, addQuanBatchCreationDispatchProductLimit
+			, setPerUserLimit, productLimitList};
+		const OrderLimitProps = {};
 		return (
 			<div>
 				<h1>发放规则</h1>
@@ -34,14 +36,9 @@ export default class QuanBatchDispatchRule extends Component {
 					<input type="text" />张
 				</div>
 				<div>
-					数量限制：每用户限领<input type="text" />张
+					数量限制：{quanBatchType === 0 ? '每用户限领' : '每订单限领'}<input type="text" />张
 				</div>
-				<div>
-					用户限制：
-					<input type="radio" name="userLimit" checked={perUserLimit == 0} onChange={() => {setPerUserLimit(0)}}/>无限制
-					<input type="radio" name="userLimit" checked={perUserLimit == 1} onChange={() => {setPerUserLimit(1)}}/>指定班级用户
-					{perUserLimit == 1 ? <ProductListAddition {...listAdditionProps} /> : null}
-				</div>
+				{quanBatchType === 0 ? <UserLimit {...UserLimitProps} /> : <OrderLimit {...OrderLimitProps} /> }
 			</div>
 		);
 	}

@@ -5,22 +5,15 @@ export default class QuanBatchBasicInformation extends Component {
 		super(props);
 	}
 
-	value(){
-		let {dispatchChannel} = this.refs;
-		return {
-			dispatchChannel: dispatchChannel.value
-		};
-	}
-
 	render() {
-		const {dispatchChannelList} = this.props;
+		const {dispatchChannelList, sellerID, setSellerID, title, setTitle} = this.props;
 
 		return (
 			<div>
 				<h1>基本信息</h1>
 				<div>
 					<span>发放机构:</span>
-					<select ref="dispatchChannel">
+					<select value={sellerID} onChange={(e) => setSellerID(e.target.value)}>
           			{
           				dispatchChannelList.map((dispatchChannel) =>
                       		<option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
@@ -30,7 +23,7 @@ export default class QuanBatchBasicInformation extends Component {
 				</div>
 				<div>
 					<span>批次名称:</span>
-					<input type="text" />
+					<input type="text" defaultValue={title} onBlur={(e) => setTitle(e.target.value)} />
 				</div>
 			</div>
 		);
