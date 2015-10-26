@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import 'react-date-picker/index.css';
+//import 'react-date-picker/index.css';
 import ProductListAddition from './ProductListAddition';
 
 export default class QuanBatchUsageRule extends Component {

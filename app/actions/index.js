@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {getQuanBatchList} from '../api'
+import {getQuanBatchList,getSellerList} from '../api'
 // import ActionTypes from '../constants/ActionTypes';
 
 // export function getQuanList() {
@@ -67,6 +67,27 @@ export function fetchDispatchChannelList() {
     return fetch(`/DispatchChannelList`)
       .then(response => response.json())
       .then(json => dispatch(receiveDispatchChannelList(json)));
+  };
+}
+
+/**
+ * 获得机构列表
+ * @returns {Function}
+ */
+
+export const RECEIVE_SELLER_LIST = 'RECEIVE_SELLER_LIST';
+
+export function receiveSellerList(json) {
+  return {
+    type: RECEIVE_SELLER_LIST,
+    sellerList: json
+  };
+}
+
+
+export function fetchSellerList() {
+  return dispatch => {
+    return getSellerList().then(json => dispatch(receiveSellerList(json.data)));
   };
 }
 
