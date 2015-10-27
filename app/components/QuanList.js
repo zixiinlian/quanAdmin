@@ -7,6 +7,8 @@ export default class QuanList extends Component {
     super(props);
   }
 
+
+
   handleCancelQuan() {
 
   }
@@ -62,5 +64,5 @@ export default class QuanList extends Component {
 }
 
 QuanList.propTypes = {
-  quanList:PropTypes.array.isRequired
+  quanList:PropTypes.array
 };

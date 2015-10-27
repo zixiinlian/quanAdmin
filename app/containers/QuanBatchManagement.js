@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import {fetchQuanBatchList, fetchDispatchChannelList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage} from '../actions';
+import {fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
@@ -21,10 +21,9 @@ class QuanBatchManagement extends Component {
 	}
 
 	componentDidMount() {
-		const { fetchDispatchChannelList, dispatchChannelList, fetchQuanBatchList } = this.props;
-
-	    if(dispatchChannelList.length === 0){
-	      fetchDispatchChannelList();
+		const { fetchSellerList,sellerList,fetchQuanBatchList } = this.props;
+	    if(!sellerList || sellerList.length === 0){
+			fetchSellerList();
 	    }
 
 	    fetchQuanBatchList();
@@ -44,12 +43,11 @@ class QuanBatchManagement extends Component {
 
 	render() {
 		const {
-			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList
+			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList
 			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage
 		} = this.props;
-		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchDispatchChannelList, dispatchChannelList};
+		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList};
 		const listProps = {quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage};
-		console.log(this.props);
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -66,12 +64,12 @@ QuanBatchManagement.propTypes = {
 
 function mapStateToProps(state) {
 	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager} = state.quanBatchManagement;
-	const {dispatchTypeList, dispatchChannelList} = state.shared;
+	const {dispatchTypeList,sellerList} = state.shared;
 	return {
 		quanBatchList,
 		quanBatchSearchCriteria,
 		dispatchTypeList,
-		dispatchChannelList,
+		sellerList,
 		isShowIssueQuan,
 		selectedQuanBatchId,
 		quanBatchListPager
@@ -82,7 +80,7 @@ function mapDispatchToProps(dispatch) {
   return {
   	pushState: bindActionCreators(pushState, dispatch),
   	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch),
-  	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
+  	fetchSellerList: bindActionCreators(fetchSellerList, dispatch),
   	showIssueQuan: bindActionCreators(showIssueQuan, dispatch),
   	hideIssueQuan: bindActionCreators(hideIssueQuan, dispatch),
   	setQuanBatchListCurrentPage: bindActionCreators(setQuanBatchListCurrentPage, dispatch),

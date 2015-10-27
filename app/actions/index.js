@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {getQuanBatchList} from '../api'
+import * as api from '../api';
 // import ActionTypes from '../constants/ActionTypes';
 
 // export function getQuanList() {
@@ -40,7 +40,7 @@ export function receiveQuanBatchList(json) {
 export function fetchQuanBatchList(quanBatchSearchCriteria) {
   return dispatch => {
     dispatch(requestQuanBatchList());
-    return getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
+    return api.getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
   };
 }
 
@@ -67,6 +67,27 @@ export function fetchDispatchChannelList() {
     return fetch(`/DispatchChannelList`)
       .then(response => response.json())
       .then(json => dispatch(receiveDispatchChannelList(json)));
+  };
+}
+
+/**
+ * 获得机构列表
+ * @returns {Function}
+ */
+
+export const RECEIVE_SELLER_LIST = 'RECEIVE_SELLER_LIST';
+
+export function receiveSellerList(json) {
+  return {
+    type: RECEIVE_SELLER_LIST,
+    sellerList: json
+  };
+}
+
+
+export function fetchSellerList() {
+  return dispatch => {
+    return api.getSellerList().then(json => dispatch(receiveSellerList(json.data)));
   };
 }
 
@@ -100,14 +121,16 @@ export const RECEIVE_QUAN_LIST = 'RECEIVE_QUAN_LIST';
 export function receiveQuanList(json){
   return {
     type: RECEIVE_QUAN_LIST,
-    quanList: json
+    quanList: json.results,
+    pageIndex: json.pageIndex,
+    pageSize: json.pageSize,
+    total: json.total
   }
 }
 
 export function fetchQuanList(quanBatchSearchCriteria) {
   return dispatch => {
-    return fetch(`/QuanList`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveQuanList(json)));
+    return api.getQuanList()
+      .then(json => dispatch(receiveQuanList(json.data)));
   };
 }

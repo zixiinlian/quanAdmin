@@ -1,6 +1,7 @@
 import update from 'react-addons-update'
 import {
-	RECEIVE_DISPATCH_CHANNEL_LIST
+	RECEIVE_DISPATCH_CHANNEL_LIST,
+	RECEIVE_SELLER_LIST
 } from '../actions'
 
 let initialState = {
@@ -20,7 +21,7 @@ let initialState = {
 		id: 5,
 		desc: '售卖'
 	}],
-	dispatchChannelList: []
+	sellerList: []
 }
 
 export default function shared(state = initialState, action) {
@@ -28,6 +29,11 @@ export default function shared(state = initialState, action) {
 		case RECEIVE_DISPATCH_CHANNEL_LIST: {
 			return update(state, {
 				dispatchChannelList: { $set: action.dispatchChannelList }
+			});
+		}
+		case RECEIVE_SELLER_LIST: {
+			return update(state, {
+				sellerList: { $set: action.sellerList }
 			});
 		}
 		default:{

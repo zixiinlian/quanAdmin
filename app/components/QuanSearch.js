@@ -6,8 +6,8 @@ export default class QuanBatchSearch extends Component {
   }
 
   componentDidMount() {
-    const { fetchDispatchChannelList, dispatchChannelList } = this.props;
-    if(dispatchChannelList.length === 0){
+    const { fetchDispatchChannelList, sellerList } = this.props;
+    if(sellerList.length === 0){
       fetchDispatchChannelList();
     }
   }
@@ -21,7 +21,7 @@ export default class QuanBatchSearch extends Component {
   }
 
   render () {
-    const { dispatchChannelList } = this.props;
+    const { sellerList } = this.props;
     return (
       <div>
         <div className="form-inline">
@@ -37,8 +37,8 @@ export default class QuanBatchSearch extends Component {
             <label>发放机构: </label>
             <select ref="dispatchChannel" className="form-control input-small">
               {
-                dispatchChannelList.map((dispatchChannel) =>
-                  <option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
+                sellerList.map((seller) =>
+                  <option key={seller.id} value={seller.businessSellerId}>{seller.name}</option>
                 )
               }
             </select>

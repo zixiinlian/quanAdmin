@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import QuanSearch from '../components/QuanSearch';
 import QuanList from '../components/QuanList';
-import { fetchQuanList, fetchDispatchChannelList } from '../actions';
+import { fetchQuanList, fetchSellerList } from '../actions';
 
 class QuanManagement extends Component {
 
@@ -14,40 +14,40 @@ class QuanManagement extends Component {
 
 	componentWillMount() {
 		this.props.fetchQuanList();
-		this.props.fetchDispatchChannelList();
+		this.props.fetchSellerList();
 	}
 
 	render() {
-		const {dispatchChannelList, quanList} = this.props;
+		const {sellerList, quanList} = this.props;
 
 		return (
 			<div>
-				<QuanSearch dispatchChannelList={dispatchChannelList}></QuanSearch>
+				<QuanSearch sellerList={sellerList}></QuanSearch>
 				<QuanList quanList={quanList}></QuanList>
 			</div>
 		);
 	}
-}
+} 
 
 function mapStateToProps(state) {
 	return {
 		quanList: state.quanManagement.quanList,
-		dispatchChannelList: state.shared.dispatchChannelList
+		sellerList: state.shared.sellerList
 	};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
   	fetchQuanList: bindActionCreators(fetchQuanList, dispatch),
-  	fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch)
+  	fetchSellerList: bindActionCreators(fetchSellerList, dispatch)
   };
 }
 
 QuanManagement.propTypes = {
-	quanList: PropTypes.array.isRequired,
-	dispatchChannelList: PropTypes.array.isRequired,
+	quanList: PropTypes.array,
+	sellerList: PropTypes.array.isRequired,
 	fetchQuanList: PropTypes.func.isRequired,
-	fetchDispatchChannelList: PropTypes.func.isRequired
+	fetchSellerList: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuanManagement); 
