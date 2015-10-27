@@ -119,10 +119,9 @@ export function setPackageDescription(packageDescription){
   }
 }
 
-export function setIsSale(setIsSale){
+export function setIsSale(){
   return {
     type: actionTypes.SET_IS_SALE,
-    setIsSale
   }
 }
 
@@ -140,7 +139,28 @@ export function setDispatchType(dispatchType){
   }
 }
 
-export function setQuanBatch(quanBatchSearchCriteria) {
+export function setOrderAmount(orderAmount){
+  return {
+    type: actionTypes.SET_ORDER_AMOUNT,
+    orderAmount
+  }
+}
+
+export function setCouponQty(couponQty){
+  return {
+    type: actionTypes.SET_COUPON_QTY,
+    couponQty
+  }
+}
+
+export function setDispatchSaleRulePerUserLimit(perUserLimit){
+  return {
+    type: actionTypes.SET_DISPATCH_SALE_RULE_PER_USER_LIMIT,
+    perUserLimit
+  }
+}
+
+export function setUserPackageQuanBatch() {
   return (dispatch, getState) => {
     let {basicInformation, dispatchUserPackageRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
     let data = {
@@ -149,7 +169,35 @@ export function setQuanBatch(quanBatchSearchCriteria) {
       dispatchUserPackageRule,
       couponUsageRule
     }
-    postJson('coupon/batches', data);
+    postJson('/coupon/batches', data);
+    // .then(json => dispatch(receiveQuanBatch(json)));
+  };
+}
+
+export function setChannelQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, dispatchChannelRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      dispatchChannelRule,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data);
+    // .then(json => dispatch(receiveQuanBatch(json)));
+  };
+}
+
+export function setSaleQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, dispatchSaleRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      dispatchSaleRule,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data);
     // .then(json => dispatch(receiveQuanBatch(json)));
   };
 }

@@ -4,7 +4,8 @@ import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
 	title: '',
-	sellerID: '2'
+	sellerID: '2',
+	couponQty: ''
 }
 
 export default function basicInformation(state = initialState, action){
@@ -17,6 +18,11 @@ export default function basicInformation(state = initialState, action){
 		case actionTypes.SET_SELLER_ID: {
 			return update(state, {
 				sellerID: {$set: action.sellerID}
+			});
+		}
+		case actionTypes.SET_COUPON_QTY: {
+			return update(state, {
+				couponQty: {$set: action.couponQty}
 			});
 		}
 		default:{

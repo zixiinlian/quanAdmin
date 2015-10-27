@@ -23,7 +23,7 @@ export default class QuanBatchBasicInformation extends Component {
 				</div>
 				<div>
 					<span>批次名称:</span>
-					<input type="text" defaultValue={title} onBlur={(e) => setTitle(e.target.value)} />
+					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 				</div>
 			</div>
 		);

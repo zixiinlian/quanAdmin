@@ -3,7 +3,7 @@ import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
 	orderAmount: '',
-	discountType: 0,
+	discountType: 2,
 	discountAmount: '',
 	discountPercent: '',
 	platformLimitList: [],
@@ -25,7 +25,7 @@ export default function couponUsageRule(state = initialState, action) {
 		case actionTypes.SET_PLATEFORM_LIMIT_LIST: {
 			let newState;
 			let platformLimitList = state.platformLimitList;
-			let index = platformLimitList.indexOf(action.platform);
+			let index = platformLimitList.findIndex((e) => e.platformID === action.platform);
 			if(index !== -1){
 				newState = update(state, {
 					platformLimitList: {$splice: [[index, 1]]}
@@ -33,7 +33,7 @@ export default function couponUsageRule(state = initialState, action) {
 			}
 			else{
 				newState = update(state, {
-					platformLimitList: {$push: [action.platform]}
+					platformLimitList: {$push: [{platformID: action.platform}]}
 				})
 			}
 			return newState;
@@ -67,6 +67,11 @@ export default function couponUsageRule(state = initialState, action) {
 		case actionTypes.SET_EXPIRE_DAYS: {
 			return update(state, {
 				expireDays: {$set: action.expireDays}
+			});
+		}
+		case actionTypes.SET_ORDER_AMOUNT: {
+			return update(state, {
+				orderAmount: {$set: action.orderAmount}
 			});
 		}
 		default:{

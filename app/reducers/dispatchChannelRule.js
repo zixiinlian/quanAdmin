@@ -2,18 +2,19 @@ import update from 'react-addons-update'
 import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
-	isSale: '',
+	isSale: 0,
 	saleAmount: ''
 }
 
-export default function dispatchUserPackageRule(state = initialState, action){
+export default function dispatchChannelRule(state = initialState, action){
 	switch(action.type){
-		case actionTypes.SET_USER_PACKAGE_ID: {
+		case actionTypes.SET_IS_SALE: {
+			let isSale = state.isSale === 0 ? 1 : 0;
 			return update(state, {
-				isSale: {$set: action.isSale}
+				isSale: {$set: isSale}
 			});
 		}
-		case actionTypes.SET_PACKAGE_USERS_QTY: {
+		case actionTypes.SET_SALE_AMOUNT: {
 			return update(state, {
 				saleAmount: {$set: action.saleAmount}
 			});

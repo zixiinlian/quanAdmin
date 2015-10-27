@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import createFragment from 'react-addons-create-fragment';
 import classNames from 'classNames'
 
 export default class Pager extends Component {
@@ -47,7 +46,7 @@ export default class Pager extends Component {
     }
   }
 
-  renderPager(){
+  calculatePager(){
     let result = {};
     let {total, current, visible} = this.props;
 
@@ -68,37 +67,26 @@ export default class Pager extends Component {
       right = total;
     }
 
-    if(left !== 1){
-      result['firstPage'] = <a href="javascript:void(0)" onClick={this.handleGoToFirstPage}>1</a>
-      result['firstPageEllipis'] = <span>...</span>
-    }
+    let pages = Array.from({length: right - left + 1}, (e, i) => i + left);
 
-    for(let i = left; i < current; i++){
-      result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
-    }
-
-    result['page' + current] = <a href="javascript:void(0)" className="currentPage" onClick={() => this.handleGoToSpecificPage(current)}>{current}</a>;    
-
-    for(let i = current + 1; i <= right; i++){
-       result['page' + i] = <a href="javascript:void(0)" onClick={() => this.handleGoToSpecificPage(i)}>{i}</a>;
-    }
-
-    if(right !== total){
-      result['lastPageEllipis'] = <span>...</span>
-      result['lastPage'] = <a href="javascript:void(0)" onClick={this.handleGoToLastPage}>{total}</a>
-    }
-
-    return createFragment(result);
+    return {left, current, right, pages};
   }
 
 
   render () {
   	const {total} = this.props;
+    const {left, current, right, pages} = this.calculatePager();
     if(total !== 0){
       return (
         <div>
           <a href="javascript:void(0)" onClick={this.handleGoToPreviousPage}>上一页</a>
-          {this.renderPager()}
+          {left !== 1 ? <a href="javascript:void(0)" onClick={this.handleGoToFirstPage}>1</a> : null}
+          {left !== 1 ? <span>...</span> : null}
+          {
+            pages.map(e => <a key={e} href="javascript:void(0)" className={classNames({currentPage: e === current})} onClick={() => this.handleGoToSpecificPage(e)}>{e}</a>)
+          }
+          {right !== total ? <span>...</span> : null}
+          {right !== total ? <a href="javascript:void(0)" onClick={this.handleGoToLastPage}>{total}</a> : null}
           <a href="javascript:void(0)" onClick={this.handleGoToNextPage}>下一页</a>
         </div>
       );
