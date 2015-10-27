@@ -14,7 +14,7 @@ export default class Header extends Component {
                 <span>公共业务平台</span>
             </a>
             <a href="javascript:;" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <img src="/assets/img/menu-toggler.png" alt="" />
+                <img src="http://backend.hujiang.com//assets/img/menu-toggler.png" alt="" />
             </a>
             <ul className="nav navbar-nav pull-right">
                 <li className="dropdown user">

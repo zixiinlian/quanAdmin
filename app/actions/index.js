@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {getQuanBatchList,getSellerList} from '../api'
+import * as api from '../api';
 // import ActionTypes from '../constants/ActionTypes';
 
 // export function getQuanList() {
@@ -40,7 +40,7 @@ export function receiveQuanBatchList(json) {
 export function fetchQuanBatchList(quanBatchSearchCriteria) {
   return dispatch => {
     dispatch(requestQuanBatchList());
-    return getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
+    return api.getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
   };
 }
 
@@ -87,7 +87,7 @@ export function receiveSellerList(json) {
 
 export function fetchSellerList() {
   return dispatch => {
-    return getSellerList().then(json => dispatch(receiveSellerList(json.data)));
+    return api.getSellerList().then(json => dispatch(receiveSellerList(json.data)));
   };
 }
 
@@ -121,14 +121,16 @@ export const RECEIVE_QUAN_LIST = 'RECEIVE_QUAN_LIST';
 export function receiveQuanList(json){
   return {
     type: RECEIVE_QUAN_LIST,
-    quanList: json
+    quanList: json.results,
+    pageIndex: json.pageIndex,
+    pageSize: json.pageSize,
+    total: json.total
   }
 }
 
 export function fetchQuanList(quanBatchSearchCriteria) {
   return dispatch => {
-    return fetch(`/QuanList`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveQuanList(json)));
+    return api.getQuanList()
+      .then(json => dispatch(receiveQuanList(json.data)));
   };
 }
