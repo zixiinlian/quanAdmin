@@ -289,6 +289,18 @@ export function setOrderReturnQuanBatch() {
   };
 }
 
+export function setPreferentialQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+  };
+}
+
 export function setIsShareWithBasicAdjustSingle() {
   return {
     type: actionTypes.SET_IS_SHARE_WITH_BASIC_ADJUST_SINGLE
