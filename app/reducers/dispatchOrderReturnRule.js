@@ -3,8 +3,8 @@ import update from 'react-addons-update'
 import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
-	beginDate: '2014-07-01',
-	endDate: '2015-07-01',
+	beginDate: '2015-12-01',
+	endDate: '2016-12-01',
 	isAutoOnline: true,
 	perUserLimit: '',
 	orderAmount: '',

@@ -29,9 +29,6 @@ class OrderReturnQuanBatchCreation extends Component {
 
 	render() {
 		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setOrderReturnQuanBatch} = this.props;
-		dispatchRule.userScope = dispatchRule.productScope;
-		dispatchRule.productLimitList = dispatchRule.includeProductLimitList;
-		addProductLimitList
 		return (
 			<div>
 				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions} />
@@ -45,7 +42,7 @@ class OrderReturnQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {sellerList} = state.shared;
-	const {dispatchOrderReturnRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
+	const {dispatchOrderReturnRule, couponUsageRule, basicInformation, commonInformation: {dispatchType}} = state.quanBatchCreation;
 	const {couponQty, couponImage} = basicInformation;
 	return {
 		basicInformation: {
@@ -53,10 +50,12 @@ function mapStateToProps(state) {
 			...basicInformation
 		},
 		dispatchRule: {
+			...dispatchOrderReturnRule,
 			userScope: dispatchOrderReturnRule.productScope,
 			productLimitList: dispatchOrderReturnRule.includeProductLimitList,
 			couponQty,
-			couponImage
+			couponImage,
+			dispatchType
 		},
 		usageRule: couponUsageRule
 	};

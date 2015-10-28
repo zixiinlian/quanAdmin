@@ -9,7 +9,7 @@ export default class UserRequestDispatchRule extends Component {
 	render() {
 		const {
 			beginDate, endDate, isAutoOnline, setIsAutoOnline, couponQty, setCouponQty, perUserLimit, setPerUserLimit, productLimitList
-			, deleteProductLimitList, addProductLimitList, dispatchType, userScope, setUserScope
+			, deleteProductLimitList, addProductLimitList, dispatchType, userScope, setUserScope, orderAmount, setOrderAmount
 		} = this.props;
 		const listAdditionProps = {deleteProductLimitList, addProductLimitList, productLimitList};
 		return (
@@ -34,8 +34,15 @@ export default class UserRequestDispatchRule extends Component {
 					<input type="text" value={couponQty} onChange={e => setCouponQty(e.target.value)} />张
 				</div>
 				<div>
-					数量限制：{dispatchType === 1 ? '每用户限领' : '每订单限领'}<input type="text" value={perUserLimit} onChange={e=> setPerUserLimit(e.target.value)} />张
+					数量限制：{dispatchType === 1 ? '每用户限领' : '每用户限返'}<input type="text" value={perUserLimit} onChange={e=> setPerUserLimit(e.target.value)} />张
 				</div>
+				{
+					dispatchType === 3 ? (
+						<div>
+							满额条件（订单售价）：<input type="text" value={orderAmount} onChange={e => setOrderAmount(e.target.value)} />元
+						</div>
+					) : null
+				}
 				<div>
 					{dispatchType === 1 ? '用户限制：' : '订单限制：'}
 					<input type="radio" name="userLimit" checked={userScope == 0} onChange={() => {setUserScope(0)}}/>无限制
