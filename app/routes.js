@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router';
 import QuanAdminApp from './containers/QuanAdminApp';
 import QuanBatchManagement from './containers/QuanBatchManagement';
-import InitiativeQuanBatchCreation from './containers/InitiativeQuanBatchCreation';
-import OrderQuanBatchCreation from './containers/OrderQuanBatchCreation';
+import UserRequestQuanBatchCreation from './containers/UserRequestQuanBatchCreation';
+import OrderReturnQuanBatchCreation from './containers/OrderReturnQuanBatchCreation';
 import UserPackageQuanBatchCreation from './containers/UserPackageQuanBatchCreation';
 import ChannelQuanBatchCreation from './containers/ChannelQuanBatchCreation';
 import SaleQuanBatchCreation from './containers/SaleQuanBatchCreation';
@@ -12,8 +12,8 @@ import QuanManagement from './containers/QuanManagement';
 export default (
 	<Route component={QuanAdminApp}>
 		<Route path="/" component={QuanBatchManagement} />
-		<Route path="/InitiativeQuanBatchCreation" component={InitiativeQuanBatchCreation} />
-		<Route path="/OrderQuanBatchCreation" component={OrderQuanBatchCreation} />
+		<Route path="/UserRequestQuanBatchCreation" component={UserRequestQuanBatchCreation} />
+		<Route path="/OrderReturnQuanBatchCreation" component={OrderReturnQuanBatchCreation} />
 		<Route path="/UserPackageQuanBatchCreation" component={UserPackageQuanBatchCreation} />
 		<Route path="/ChannelQuanBatchCreation" component={ChannelQuanBatchCreation} />
 		<Route path="/SaleQuanBatchCreation" component={SaleQuanBatchCreation} />

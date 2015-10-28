@@ -4,14 +4,15 @@ import { pushState } from 'redux-router';
 import { bindActionCreators } from 'redux';
 import {fetchSellerList} from '../actions';
 import {
-	setTitle, setSellerID, setCouponQty, setDispatchSaleRulePerUserLimit, setDiscountType, setPlatformLimitList, setApplyProductType
-	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setSaleQuanBatch, setDispatchType, setOrderAmount
+	setTitle, setSellerID, setCouponQty, setIsAutoOnline, setDispatchUserRequestRulePerUserLimit, setUserScope, setDiscountType, setPlatformLimitList, setApplyProductType
+	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserRequestQuanBatch, setDispatchType, setOrderAmount, addProductLimitList
+	, deleteProductLimitList
 } from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
-import SaleDispatchRule from '../components/SaleDispatchRule';
+import UserRequestDispatchRule from '../components/UserRequestDispatchRule';
 import QuanBatchUsageRule from '../components/QuanBatchUsageRule';
 
-class SaleQuanBatchCreation extends Component {
+class UserRequestQuanBatchCreation extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -23,17 +24,17 @@ class SaleQuanBatchCreation extends Component {
 	      fetchSellerList();
 	    }
 
-	    setDispatchType(5);
+	    setDispatchType(1);
 	}
 
 	render() {
-		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setSaleQuanBatch} = this.props;
+		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setUserRequestQuanBatch} = this.props;
 		return (
 			<div>
-				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions}/>
-				<SaleDispatchRule {...dispatchRule} {...dispatchRuleActions} />
+				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions} />
+				<UserRequestDispatchRule {...dispatchRule} {...dispatchRuleActions} />
 				<QuanBatchUsageRule {...usageRule} {...usageRuleActions} />
-				<input type="button" value="保存" onClick={setSaleQuanBatch} />
+				<input type="button" value="保存" onClick={setUserRequestQuanBatch} />
 			</div>
 		);
 	}
@@ -41,26 +42,28 @@ class SaleQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {sellerList} = state.shared;
-	const {dispatchSaleRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
-	const {couponQty} = basicInformation;
+	const {dispatchUserRequestRule, couponUsageRule, basicInformation, commonInformation: {dispatchType}} = state.quanBatchCreation;
+	const {couponQty, couponImage} = basicInformation;
 	return {
 		basicInformation: {
 			sellerList,
 			...basicInformation
 		},
 		dispatchRule: {
-			...dispatchSaleRule,
-			couponQty
+			...dispatchUserRequestRule,
+			couponQty,
+			couponImage,
+			dispatchType
 		},
 		usageRule: couponUsageRule
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
+  	return {
 		...bindActionCreators({
 			pushState,
-			setSaleQuanBatch,
+			setUserRequestQuanBatch,
 			setDispatchType,
 			fetchSellerList
 		}, dispatch),
@@ -69,8 +72,12 @@ function mapDispatchToProps(dispatch) {
 			setSellerID
 		}, dispatch),
 		dispatchRuleActions: bindActionCreators({
-			setDispatchSaleRulePerUserLimit,
-			setCouponQty
+			setCouponQty,
+			setIsAutoOnline,
+			setPerUserLimit: setDispatchUserRequestRulePerUserLimit,
+			setUserScope,
+			addProductLimitList,
+			deleteProductLimitList
 		}, dispatch),
 		usageRuleActions: bindActionCreators({
 			setDiscountType,
@@ -86,4 +93,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaleQuanBatchCreation);
+export default connect(mapStateToProps, mapDispatchToProps)(UserRequestQuanBatchCreation);

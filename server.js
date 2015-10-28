@@ -89,10 +89,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
 
-app.get('/InitiativeQuanBatchCreation', function(req, res) {
+app.get('/UserRequestQuanBatchCreation', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
-app.get('/OrderQuanBatchCreation', function(req, res) {
+app.get('/OrderReturnQuanBatchCreation', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
 app.get('/UserPackageQuanBatchCreation', function(req, res) {

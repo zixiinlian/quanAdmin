@@ -1,5 +1,12 @@
 import fetch from 'isomorphic-fetch';
 
+function errorHandle(response){
+	if(response.status < 200 || response.status > 300){
+		throw {isServerError: true, message: "网络错误，请稍后重试!"};
+	}
+	return response;
+}
+
 let apiServer = "http://192.168.155.169:8004/v1";
 // TODO delete.
 // apiServer = "http://localhost:9000/v1";
@@ -62,7 +69,15 @@ export function postJson(url, data) {
 		},
 		'body': data
 	})
-	.then(response => response.json());
+	.then(errorHandle)
+	.then(response => response.json())
+	.then(data => {
+		if(data.status === 0){
+			return data;
+		}
+
+		throw {isServerError: false, message: data.message};
+	});
 }
 
 export function get(url,data){

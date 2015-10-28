@@ -1,19 +1,34 @@
 import * as actionTypes from '../actionTypes/quanBatchCreation';
 import {postJson} from '../api'
 
-export function deleteQuanBatchCreationDispatchProductLimit(index) {
+export function deleteProductLimitList(index) {
   return {
-    type: actionTypes.DELETE_QUAN_BATCH_CREATION_DISPATCH_PRODUCT_LIMIT,
+    type: actionTypes.DELETE_PRODUCT_LIMIT_LIST,
     index
   };
 }
 
-export function addQuanBatchCreationDispatchProductLimit(productList) {
+export function addProductLimitList(productList) {
   return {
-    type: actionTypes.ADD_QUAN_BATCH_CREATION_DISPATCH_PRODUCT_LIMIT,
+    type: actionTypes.ADD_PRODUCT_LIMIT_LIST,
     productList
   };
 }
+
+export function deleteIncludeProductLimitList(index) {
+  return {
+    type: actionTypes.DELETE_INCLUDE_PRODUCT_LIMIT_LIST,
+    index
+  };
+}
+
+export function addIncludeProductLimitList(productList) {
+  return {
+    type: actionTypes.ADD_INCLUDE_PRODUCT_LIMIT_LIST,
+    productList
+  };
+}
+
 
 export function setPerUserLimit(perUserLimit) {
   return {
@@ -25,6 +40,13 @@ export function setPerUserLimit(perUserLimit) {
 export function setIsAutoOnline(isAutoOnline) {
   return {
     type: actionTypes.SET_IS_AUTO_ONLINE,
+    isAutoOnline
+  };
+}
+
+export function setDispatchOrderReturnRuleIsAutoOnline(isAutoOnline) {
+  return {
+    type: actionTypes.SET_DISPATCH_ORDER_RETURN_RULE_IS_AUTO_ONLINE,
     isAutoOnline
   };
 }
@@ -146,6 +168,13 @@ export function setOrderAmount(orderAmount){
   }
 }
 
+export function setDispatchOrderReturnRuleOrderAmount(orderAmount){
+  return {
+    type: actionTypes.SET_DISPATCH_ORDER_RETURN_RULE_ORDER_AMOUNT,
+    orderAmount
+  }
+}
+
 export function setCouponQty(couponQty){
   return {
     type: actionTypes.SET_COUPON_QTY,
@@ -160,6 +189,41 @@ export function setDispatchSaleRulePerUserLimit(perUserLimit){
   }
 }
 
+export function setDispatchUserRequestRulePerUserLimit(perUserLimit){
+  return {
+    type: actionTypes.SET_DISPATCH_USER_REQUEST_RULE_PER_USER_LIMIT,
+    perUserLimit
+  }
+}
+
+export function setDispatchOrderReturnRulePerUserLimit(perUserLimit){
+  return {
+    type: actionTypes.SET_DISPATCH_ORDER_RETURN_RULE_PER_USER_LIMIT,
+    perUserLimit
+  }
+}
+
+export function setBatchId(batchId){
+  return {
+    type: actionTypes.SET_BATCH_ID,
+    batchId
+  }
+}
+
+export function setUserScope(userScope){
+  return {
+    type: actionTypes.SET_USER_SCOPE,
+    userScope
+  }
+}
+
+export function setProductScope(productScope){
+  return {
+    type: actionTypes.SET_PRODUCT_SCOPE,
+    productScope
+  }
+}
+
 export function setUserPackageQuanBatch() {
   return (dispatch, getState) => {
     let {basicInformation, dispatchUserPackageRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
@@ -169,8 +233,7 @@ export function setUserPackageQuanBatch() {
       dispatchUserPackageRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data);
-    // .then(json => dispatch(receiveQuanBatch(json)));
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -183,8 +246,7 @@ export function setChannelQuanBatch() {
       dispatchChannelRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data);
-    // .then(json => dispatch(receiveQuanBatch(json)));
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -197,7 +259,32 @@ export function setSaleQuanBatch() {
       dispatchSaleRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data);
-    // .then(json => dispatch(receiveQuanBatch(json)));
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+  };
+}
+
+export function setUserRequestQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, dispatchUserRequestRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      dispatchUserRequestRule,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+  };
+}
+
+export function setOrderReturnQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, dispatchOrderReturnRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      dispatchOrderReturnRule,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }

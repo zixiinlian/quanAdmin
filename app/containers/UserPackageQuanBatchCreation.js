@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { bindActionCreators } from 'redux';
-import {fetchDispatchChannelList} from '../actions';
+import {fetchSellerList} from '../actions';
 import {
 	setTitle, setSellerID, setUserPackageId, setPackageUsersQty, setPackageDescription, setDiscountType, setPlatformLimitList, setApplyProductType
 	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserPackageQuanBatch, setDispatchType, setOrderAmount
@@ -17,10 +17,10 @@ class UserPackageQuanBatchCreation extends Component {
 	}
 
 	componentDidMount() {
-		const { fetchDispatchChannelList, basicInformation: {dispatchChannelList}, setDispatchType } = this.props;
+		const { fetchSellerList, basicInformation: {sellerList}, setDispatchType } = this.props;
 		
-	    if(dispatchChannelList.length === 0){
-	      fetchDispatchChannelList();
+	    if(sellerList.length === 0){
+	      fetchSellerList();
 	    }
 
 	    setDispatchType(2);
@@ -40,11 +40,11 @@ class UserPackageQuanBatchCreation extends Component {
 }
 
 function mapStateToProps(state) {
-	const {dispatchChannelList} = state.shared;
+	const {sellerList} = state.shared;
 	const {dispatchUserPackageRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
 	return {
 		basicInformation: {
-			dispatchChannelList,
+			sellerList,
 			...basicInformation
 		},
 		dispatchRule: dispatchUserPackageRule,
@@ -56,10 +56,10 @@ function mapDispatchToProps(dispatch) {
 	return {
 		...bindActionCreators({
 			pushState,
-			setQuanBatch,
-			setDispatchType
+			setUserPackageQuanBatch,
+			setDispatchType,
+			fetchSellerList
 		}, dispatch),
-		fetchDispatchChannelList: bindActionCreators(fetchDispatchChannelList, dispatch),
 		basicInformationActions: bindActionCreators({
 			setTitle,
 			setSellerID

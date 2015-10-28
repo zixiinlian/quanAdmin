@@ -6,7 +6,7 @@ export default class QuanBatchBasicInformation extends Component {
 	}
 
 	render() {
-		const {dispatchChannelList, sellerID, setSellerID, title, setTitle} = this.props;
+		const {sellerList, sellerID, setSellerID, title, setTitle} = this.props;
 
 		return (
 			<div>
@@ -15,8 +15,8 @@ export default class QuanBatchBasicInformation extends Component {
 					<span>发放机构:</span>
 					<select value={sellerID} onChange={(e) => setSellerID(e.target.value)}>
           			{
-          				dispatchChannelList.map((dispatchChannel) =>
-                      		<option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.desc}</option>
+          				sellerList.map((dispatchChannel) =>
+                      		<option key={dispatchChannel.id} value={dispatchChannel.id}>{dispatchChannel.name}</option>
                     	)
                   	}
 	                </select>

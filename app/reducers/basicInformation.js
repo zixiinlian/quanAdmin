@@ -3,9 +3,11 @@ import update from 'react-addons-update'
 import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
+	batchId: '',
 	title: '',
 	sellerID: '2',
-	couponQty: ''
+	couponQty: '',
+	couponImage: ''
 }
 
 export default function basicInformation(state = initialState, action){
@@ -23,6 +25,11 @@ export default function basicInformation(state = initialState, action){
 		case actionTypes.SET_COUPON_QTY: {
 			return update(state, {
 				couponQty: {$set: action.couponQty}
+			});
+		}
+		case actionTypes.SET_BATCH_ID: {
+			return update(state, {
+				batchId: {$set: action.batchId}
 			});
 		}
 		default:{
