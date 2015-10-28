@@ -11,7 +11,21 @@ export default class QuanBatchUsageRule extends Component {
 	render() {
 		let {discountType, setDiscountType, platformLimitList, setPlatformLimitList, applyProductType, setApplyProductType, isBindUser, setIsBindUser
 			, expireType, setExpireType, discountAmount, setDiscountAmount, discountPercent, setDiscountPercent, expireDays, setExpireDays, orderAmount
-			, setOrderAmount
+			, setOrderAmount,
+			isShareWithBasicAdjustSingle,
+			isShareWithTimeLimitSingle,
+			isShareWithGroupPurchaseSingle,
+			isShareWithOrderMinusMulti,
+			isShareWithOrderDiscountMulti,
+			isShareWithOrderPresentMulti,
+			isShareWithOrderChangeMulti,
+			setIsShareWithBasicAdjustSingle,
+			setIsShareWithTimeLimitSingle,
+			setIsShareWithGroupPurchaseSingle,
+			setIsShareWithOrderMinusMulti,
+			setIsShareWithOrderDiscountMulti,
+			setIsShareWithOrderPresentMulti,
+			setIsShareWithOrderChangeMulti
 		} = this.props;
 		let isIncludeSpecificPlatform = (platformID => platformLimitList.find((e) => e.platformID === platformID));
 		return (
@@ -42,6 +56,19 @@ export default class QuanBatchUsageRule extends Component {
 					至
 					<input type="radio" name="expireType" checked={expireType === 1} onChange={() => setExpireType(1)}/>自领取之日起
 					<input type="text" value={expireDays} onChange={(e) => setExpireDays(e.target.value)} />天内有效
+				</div>
+				<div>
+					单品促销设定：
+					<input type="checkbox" checked={isShareWithBasicAdjustSingle} onChange={setIsShareWithBasicAdjustSingle}/>与单品基础调价共享
+					<input type="checkbox" checked={isShareWithTimeLimitSingle} onChange={setIsShareWithTimeLimitSingle}/>与单品限时特价共享
+					<input type="checkbox" checked={isShareWithGroupPurchaseSingle} onChange={setIsShareWithGroupPurchaseSingle}/>与单品团购共享
+				</div>
+				<div>
+					多品促销设定：
+					<input type="checkbox" checked={isShareWithOrderMinusMulti} onChange={setIsShareWithOrderMinusMulti}/>与多品满额立减共享
+					<input type="checkbox" checked={isShareWithOrderDiscountMulti} onChange={setIsShareWithOrderDiscountMulti}/>与多品满额折扣共享
+					<input type="checkbox" checked={isShareWithOrderPresentMulti} onChange={setIsShareWithOrderPresentMulti}/>多品满额赠送共享
+					<input type="checkbox" checked={isShareWithOrderChangeMulti} onChange={setIsShareWithOrderChangeMulti}/>与多品满额换购共享
 				</div>
 				<div>
 					绑定账号设定：<input type="checkbox" checked={isBindUser} onChange={setIsBindUser}/>是
