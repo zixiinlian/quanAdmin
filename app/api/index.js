@@ -9,7 +9,7 @@ function errorHandle(response){
 
 let apiServer = "http://192.168.155.169:8004/v1";
 // TODO delete.
-// apiServer = "http://localhost:9000/v1";
+apiServer = "http://localhost:9000/v1";
 
 /**
  * 获取优惠券批次列表
@@ -36,13 +36,45 @@ export function getQuanList(){
  */
 export function getSellerList() {
 	return fetch(apiServer + '/sellers', {
-		method: 'get',
+		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		}
 	})
 		.then(response => response.json())
+}
+
+/**
+ * 上架优惠券
+ * @param batchId
+ * @param operationUserId
+ * @returns {Promise.<T>|*}
+ */
+export function putOnQuanBatch(batchId,operateUserId){
+	return fetch(apiServer + '/coupon/batches/'+batchId+'/on/by/'+operateUserId,{
+		method:'PATCH',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		}
+	}).then(response => response.json());
+}
+
+/**
+ * 下架优惠券
+ * @param batchId
+ * @param operationUserId
+ * @returns {Promise.<T>|*}
+ */
+export function putOffQuanBatch(batchId,operateUserId){
+	return fetch(apiServer + '/coupon/batches/'+batchId+'/off/by/'+operateUserId,{
+		method:'PATCH',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		}
+	}).then(response => response.json());
 }
 
 export function getProductList() {
@@ -62,7 +94,7 @@ export function postJson(url, data) {
 	url = new URL(apiServer + url);
 	data = JSON.stringify(data);
 	return fetch(url, {
-		method: 'post',
+		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'

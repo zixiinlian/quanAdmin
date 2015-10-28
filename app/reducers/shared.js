@@ -21,7 +21,11 @@ let initialState = {
 		id: 5,
 		desc: '售卖'
 	}],
-	sellerList: []
+	sellerList: [],
+	loginUser:{
+		id:457,
+		name:'xxx'
+	}
 }
 
 export default function shared(state = initialState, action) {

@@ -5,11 +5,10 @@ import QuanBatchListItem from './QuanBatchListItem';
 export default class QuanBatchList extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
   }
 
   render () {
-    const { quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage } = this.props;
+    const { quanBatchList,showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser } = this.props;
     return (
       <div>
         <table className="table table-striped table-bordered table-hover table-full-width dataTable">
@@ -28,7 +27,7 @@ export default class QuanBatchList extends Component {
             <tbody>
             {
               quanBatchList.map((batch, i) =>
-                <QuanBatchListItem showIssueQuan={showIssueQuan} dispatchTypeList={dispatchTypeList} {...batch} key={i} />
+                <QuanBatchListItem showIssueQuan={showIssueQuan} doPutOnQuanBatch={doPutOnQuanBatch} doPutOffQuanBatch={doPutOffQuanBatch} loginUser={loginUser} dispatchTypeList={dispatchTypeList} {...batch} key={i} />
               )
             }
             </tbody>

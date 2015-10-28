@@ -33,7 +33,9 @@ export function receiveQuanBatchList(json) {
   return {
     type: RECEIVE_QUAN_BATCH_LIST,
     quanBatchList: json.results,
-    totalPage:json.total
+    totalPage: parseInt(json.total / json.pageSize),
+    pageIndex: json.pageIndex,
+    pageSize: json.pageSize,
   };
 }
 
@@ -133,4 +135,42 @@ export function fetchQuanList(quanBatchSearchCriteria) {
     return api.getQuanList()
       .then(json => dispatch(receiveQuanList(json.data)));
   };
+}
+
+/**
+ * 上架优惠券批次
+ * @type {string}
+ */
+export const SET_PUT_ON_QUAN_BATCH = 'SET_PUT_ON_QUAN_BATCH';
+
+export function setPutOnQuanBatch(result) {
+  return {
+    type: SET_PUT_ON_QUAN_BATCH,
+    result
+  };
+}
+
+export function doPutOnQuanBatch(batchId,operatorUserId){
+  return dispatch => {
+    return api.putOnQuanBatch(batchId,operatorUserId).then(json => dispatch(setPutOnQuanBatch(json)));
+  }
+}
+
+/**
+ * 下架优惠券批次
+ * @type {string}
+ */
+export const SET_PUT_OFF_QUAN_BATCH = 'SET_PUT_OFF_QUAN_BATCH';
+
+export function setPutOffQuanBatch(result) {
+  return {
+    type: SET_PUT_OFF_QUAN_BATCH,
+    result
+  }
+}
+
+export function doPutOffQuanBatch(batchId,operateUserId){
+  return dispatch => {
+    return api.putOffQuanBatch(batchId,operateUserId).then(json => dispatch(setPutOffQuanBatch(json)));
+  }
 }
