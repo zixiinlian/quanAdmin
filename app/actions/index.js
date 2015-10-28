@@ -33,7 +33,7 @@ export function receiveQuanBatchList(json) {
   return {
     type: RECEIVE_QUAN_BATCH_LIST,
     quanBatchList: json.results,
-    totalPage: json.total / json.pageSize,
+    totalPage: parseInt(json.total / json.pageSize),
     pageIndex: json.pageIndex,
     pageSize: json.pageSize,
   };

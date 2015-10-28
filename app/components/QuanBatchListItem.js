@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { pushState } from 'redux-router';
 
 export default class QuanBatchListItem extends Component {
   constructor(props) {

@@ -25,7 +25,7 @@ export default class QuanList extends Component {
                 <th>领取人</th>
                 <th>来源订单</th>
                 <th>领取时间</th>
-                <th>绑定账户</th>
+                <th>是否绑定账户</th>
                 <th>使用人</th>
                 <th>使用时间</th>
                 <th>使用订单</th>
@@ -38,18 +38,18 @@ export default class QuanList extends Component {
             {
               this.props.quanList.map((quan, i) =>
                 <tr key={i}>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                  <td>6</td>
-                  <td>7</td>
-                  <td>8</td>
-                  <td>9</td>
-                  <td>10</td>
-                  <td>11</td>
-                  <td>12</td>
+                  <td>{quan.couponCode}</td>
+                  <td>{quan.batchId}</td>
+                  <td>{quan.status}</td>
+                  <td>{quan.dispatchCustomerName}</td>
+                  <td>{quan.dispatchOrderId}</td>
+                  <td>{quan.dispatchTime}</td>
+                  <td>{quan.couponUsageRule.isBindUser ? '是':'否'}</td>
+                  <td>{quan.applyCustomerName}</td>
+                  <td>{quan.applyTime}</td>
+                  <td>{quan.applyOrderId}</td>
+                  <td>{quan.payAmount}</td>
+                  <td>{quan.deductionAmount}</td>
                   <td>
                     <a href="javascript:void(0)" onClick={this.handleCancelQuan.bind(this)}>作废</a>
                   </td>

@@ -47,7 +47,7 @@ class QuanBatchManagement extends Component {
 			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser
 		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList};
-		const listProps = {quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser};
+		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
