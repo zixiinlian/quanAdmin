@@ -44,6 +44,22 @@ export default function dispatchUserRequestRule(state = initialState, action){
 				userScope: {$set: action.userScope}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let dispatchRule = action.quanBatch.dispatchUserRequestRule;
+			if(!dispatchRule){
+				dispatchRule = initialState;
+			}
+			let {beginDate, endDate, isAutoOnline, perUserLimit, userScope, productLimitList=[]} = dispatchRule;
+			productLimitList || (productLimitList = []);
+			return update(state, {
+				beginDate: {$set: beginDate},
+				endDate: {$set: endDate},
+				isAutoOnline: {$set: isAutoOnline},
+				perUserLimit: {$set: perUserLimit},
+				userScope: {$set: userScope},
+				productLimitList: {$set: productLimitList}
+			});
+		}
 		default:{
 			return state;
 		}

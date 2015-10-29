@@ -52,6 +52,29 @@ export default function dispatchOrderReturnRule(state = initialState, action){
 				orderAmount: {$set: action.orderAmount}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let dispatchRule = action.quanBatch.dispatchOrderReturnRule;
+			if(!dispatchRule){
+				dispatchRule = initialState;
+			}
+			let {
+				beginDate, endDate, isAutoOnline, perUserLimit, orderAmount, productScope, includeProductLimitList = []
+				, excludeProductLimitList = [], categoryLimitList = []
+			} = dispatchRule;
+			includeProductLimitList || (includeProductLimitList = []);
+			excludeProductLimitList || (excludeProductLimitList = []);
+			categoryLimitList || (categoryLimitList = []);
+			return update(state, {
+				beginDate: {$set: beginDate},
+				endDate: {$set: endDate},
+				isAutoOnline: {$set: isAutoOnline},
+				perUserLimit: {$set: perUserLimit},
+				orderAmount: {$set: orderAmount},
+				includeProductLimitList: {$set: includeProductLimitList},
+				excludeProductLimitList: {$set: excludeProductLimitList},
+				categoryLimitList: {$set: categoryLimitList}
+			});
+		}
 		default:{
 			return state;
 		}

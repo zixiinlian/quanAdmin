@@ -17,7 +17,6 @@ let apiServer = "http://192.168.155.169:8004/v1";
  * @returns {Promise.<T>|*}
  */
 export function getQuanBatchList(quanBatchSearchCriteria) {
-	console.log(quanBatchSearchCriteria)
 	return get( apiServer+ '/coupon/batches',quanBatchSearchCriteria)
 		.then(response => response.json())
 }
@@ -90,7 +89,7 @@ export function getProductList() {
 		.then(response => response.json())
 }
 
-export function postJson(url, data) {
+export function postJson(url, data, method='POST') {
 	url = new URL(apiServer + url);
 	data = JSON.stringify(data);
 	return fetch(url, {

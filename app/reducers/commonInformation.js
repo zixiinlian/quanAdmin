@@ -13,6 +13,13 @@ export default function commonInformation(state = initialState, action){
 				dispatchType: {$set: action.dispatchType}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let {dispatchType, operationUserId} = action.quanBatch;
+			return update(state, {
+				dispatchType: {$set: dispatchType},
+				operationUserId: {$set: operationUserId}
+			});
+		}
 		default:{
 			return state;
 		}

@@ -74,6 +74,26 @@ export default function couponUsageRule(state = initialState, action) {
 				orderAmount: {$set: action.orderAmount}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let { 
+				orderAmount, discountType, discountAmount, discountPercent, platformLimitList, applyProductType, expireType
+				, useBeginTime, useEndTime, expireDays, isBindUser 
+			} = action.quanBatch.couponUsageRule;
+			platformLimitList || (platformLimitList = []);
+			return update(state, {
+				orderAmount: {$set: orderAmount},
+				discountType: {$set: discountType},
+				discountAmount: {$set: discountAmount},
+				discountPercent: {$set: discountPercent},
+				platformLimitList: {$set: platformLimitList},
+				applyProductType: {$set: applyProductType},
+				expireType: {$set: expireType},
+				useBeginTime: {$set: useBeginTime},
+				useEndTime: {$set: useEndTime},
+				expireDays: {$set: expireDays},
+				isBindUser: {$set: isBindUser}
+			});
+		}
 		default:{
 			return state;
 		}

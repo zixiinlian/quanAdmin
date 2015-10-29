@@ -20,6 +20,9 @@ let initialState = {
 	},{
 		id: 5,
 		desc: '售卖'
+	},{
+		id: 7,
+		desc: '优惠券'
 	}],
 	sellerList: [],
 	loginUser:{

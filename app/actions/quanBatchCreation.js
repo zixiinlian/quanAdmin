@@ -224,6 +224,14 @@ export function setProductScope(productScope){
   }
 }
 
+export function setQuanBatchCreation(quanBatch, isViewMode){
+  return {
+    type: actionTypes.SET_QUAN_BATCH_CREATION,
+    quanBatch,
+    isViewMode
+  }
+}
+
 export function setUserPackageQuanBatch() {
   return (dispatch, getState) => {
     let {basicInformation, dispatchUserPackageRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;

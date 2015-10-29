@@ -12,6 +12,16 @@ export default function dispatchSaleRule(state = initialState, action){
 				perUserLimit: {$set: action.perUserLimit}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let dispatchRule = action.quanBatch.dispatchSaleRule;
+			if(!dispatchRule){
+				dispatchRule = initialState;
+			}
+			let {perUserLimit} = dispatchRule;
+			return update(state, {
+				perUserLimit: {$set: perUserLimit}
+			});
+		}
 		default:{
 			return state;
 		}

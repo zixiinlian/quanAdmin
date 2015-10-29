@@ -10,11 +10,11 @@ import {
 let initialState = {
 	quanBatchList: [],
 	quanBatchSearchCriteria: {
-		batchId: undefined,
-		dispatchType: undefined
+		batchId: '',
+		dispatchType: ''
 	},
 	isShowIssueQuan: false,
-	selectedQuanBatchId: undefined,
+	selectedQuanBatchId: '',
 	quanBatchListPager: {
 		total: 0,
 		current: 1,

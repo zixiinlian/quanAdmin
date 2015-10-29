@@ -19,6 +19,17 @@ export default function dispatchChannelRule(state = initialState, action){
 				saleAmount: {$set: action.saleAmount}
 			});
 		}
+		case actionTypes.SET_QUAN_BATCH_CREATION: {
+			let dispatchRule = action.quanBatch.dispatchChannelRule;
+			if(!dispatchRule){
+				dispatchRule = initialState;
+			}
+			let {isSale, saleAmount} = dispatchRule;
+			return update(state, {
+				isSale: {$set: isSale},
+				saleAmount: {$set: saleAmount}
+			});
+		}
 		default:{
 			return state;
 		}

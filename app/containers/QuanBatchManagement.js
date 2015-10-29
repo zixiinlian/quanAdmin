@@ -2,7 +2,10 @@ import React, { Component, PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import {fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch} from '../actions';
+import {
+	fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage
+	,doPutOnQuanBatch,doPutOffQuanBatch, viewQuanBatch, editQuanBatch
+} from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
@@ -44,10 +47,11 @@ class QuanBatchManagement extends Component {
 	render() {
 		const {
 			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList
-			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser
+			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch
 		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList};
-		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser};
+		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch
+			,doPutOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -78,17 +82,19 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-	pushState: bindActionCreators(pushState, dispatch),
-	fetchQuanBatchList: bindActionCreators(fetchQuanBatchList, dispatch),
-	fetchSellerList: bindActionCreators(fetchSellerList, dispatch),
-	showIssueQuan: bindActionCreators(showIssueQuan, dispatch),
-	hideIssueQuan: bindActionCreators(hideIssueQuan, dispatch),
-	setQuanBatchListCurrentPage: bindActionCreators(setQuanBatchListCurrentPage, dispatch),
-	setQuanBatchSearchCriteria: bindActionCreators(setQuanBatchSearchCriteria, dispatch),
-	doPutOnQuanBatch:bindActionCreators(doPutOnQuanBatch,dispatch),
-	doPutOffQuanBatch:bindActionCreators(doPutOffQuanBatch,dispatch)
-  };
+  return bindActionCreators({
+  	pushState,
+  	fetchQuanBatchList,
+  	fetchSellerList,
+  	showIssueQuan,
+  	hideIssueQuan,
+  	setQuanBatchListCurrentPage,
+  	setQuanBatchSearchCriteria,
+  	doPutOnQuanBatch,
+  	doPutOffQuanBatch, 
+  	viewQuanBatch, 
+  	editQuanBatch
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuanBatchManagement);

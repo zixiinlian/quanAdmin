@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import {pushState} from 'redux-router';
+import {setQuanBatchCreation} from './quanBatchCreation'
 import * as api from '../api';
 // import ActionTypes from '../constants/ActionTypes';
 
@@ -172,5 +174,86 @@ export function setPutOffQuanBatch(result) {
 export function doPutOffQuanBatch(batchId,operateUserId){
   return dispatch => {
     return api.putOffQuanBatch(batchId,operateUserId).then(json => dispatch(setPutOffQuanBatch(json)));
+  }
+}
+
+function setBatchQuan(state, pageIndex){
+  let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
+    let {basicInformation, commonInformation, couponUsageRule} = state.quanBatchCreation;
+    for(let key in basicInformation){
+      basicInformation[key] = quanBatch[key];
+    }
+    for(let key in commonInformation){
+      commonInformation[key] = quanBatch[key];
+    }
+    for(let key in couponUsageRule){
+      couponUsageRule[key] = quanBatch.couponUsageRule[key];
+    }
+
+    let destDispatchRule, originDispatchRule, url;
+    
+    for(let key in destDispatchRule){
+      if(key === 'platformLimitList' && originDispatchRule[key] === null){
+        destDispatchRule[key] = [];
+      }
+      else{
+        destDispatchRule[key] = originDispatchRule[key];
+      }
+    }
+
+    return url;
+}
+
+export function viewQuanBatch(pageIndex){
+  return (dispatch, getState) => {
+    let state = getState();
+    let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
+    dispatch(setQuanBatchCreation(quanBatch, true));
+    let url = setBatchQuan(state, pageIndex);
+    switch(quanBatch.dispatchType){
+      case 1:
+        url = '/UserRequestQuanBatchCreation';
+        break;
+      case 2:
+        url = '/UserPackageQuanBatchCreation';
+        break;
+      case 3:
+        url = '/OrderReturnQuanBatchCreation';
+        break;
+      case 4:
+        url = '/ChannelQuanBatchCreation';
+        break;
+      case 5:
+        url = '/SaleQuanBatchCreation';
+        break;
+    }
+    dispatch(pushState(null, url));
+  }
+}
+
+export function editQuanBatch(pageIndex){
+  return (dispatch, getState) => {
+    let state = getState();
+    let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
+    dispatch(setQuanBatchCreation(quanBatch, false));
+    let url = setBatchQuan(state, pageIndex);
+    switch(quanBatch.dispatchType){
+      case 1:
+        url = '/UserRequestQuanBatchCreation';
+        break;
+      case 2:
+        url = '/UserPackageQuanBatchCreation';
+        break;
+      case 3:
+        url = '/OrderReturnQuanBatchCreation';
+        break;
+      case 4:
+        url = '/ChannelQuanBatchCreation';
+        break;
+      case 5:
+        url = '/SaleQuanBatchCreation';
+        break;
+    }
+    dispatch(pushState(null, url));
   }
 }
