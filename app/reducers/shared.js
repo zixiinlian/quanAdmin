@@ -22,7 +22,7 @@ let initialState = {
 		desc: '售卖'
 	},{
 		id: 7,
-		desc: '优惠券'
+		desc: '优惠型优惠券'
 	}],
 	sellerList: [],
 	loginUser:{

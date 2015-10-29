@@ -6,11 +6,19 @@ import {fetchSellerList} from '../actions';
 import {
 	setTitle, setSellerID, setCouponQty, setIsAutoOnline, setDispatchUserRequestRulePerUserLimit, setUserScope, setDiscountType, setPlatformLimitList, setApplyProductType
 	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserRequestQuanBatch, setDispatchType, setOrderAmount, addProductLimitList
-	, deleteProductLimitList
+	, deleteProductLimitList,
+	setIsShareWithBasicAdjustSingle,
+	setIsShareWithTimeLimitSingle,
+	setIsShareWithGroupPurchaseSingle,
+	setIsShareWithOrderMinusMulti,
+	setIsShareWithOrderDiscountMulti,
+	setIsShareWithOrderPresentMulti,
+	setIsShareWithOrderChangeMulti
 } from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
 import UserRequestDispatchRule from '../components/UserRequestDispatchRule';
 import QuanBatchUsageRule from '../components/QuanBatchUsageRule';
+
 
 class UserRequestQuanBatchCreation extends Component {
 	constructor(props) {
@@ -88,7 +96,14 @@ function mapDispatchToProps(dispatch) {
 			setDiscountAmount,
 			setDiscountPercent,
 			setExpireDays,
-			setOrderAmount
+			setOrderAmount,
+			setIsShareWithBasicAdjustSingle,
+			setIsShareWithTimeLimitSingle,
+			setIsShareWithGroupPurchaseSingle,
+			setIsShareWithOrderMinusMulti,
+			setIsShareWithOrderDiscountMulti,
+			setIsShareWithOrderPresentMulti,
+			setIsShareWithOrderChangeMulti
 		}, dispatch)
 	}
 }

@@ -9,7 +9,7 @@ function errorHandle(response){
 
 let apiServer = "http://192.168.155.169:8004/v1";
 // TODO delete.
-//apiServer = "http://localhost:9000/v1";
+// apiServer = "http://localhost:9000/v1";
 
 /**
  * 获取优惠券批次列表

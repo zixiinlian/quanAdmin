@@ -7,6 +7,7 @@ import OrderReturnQuanBatchCreation from './containers/OrderReturnQuanBatchCreat
 import UserPackageQuanBatchCreation from './containers/UserPackageQuanBatchCreation';
 import ChannelQuanBatchCreation from './containers/ChannelQuanBatchCreation';
 import SaleQuanBatchCreation from './containers/SaleQuanBatchCreation';
+import PreferentialQuanBatchCreation from './containers/PreferentialQuanBatchCreation';
 import QuanManagement from './containers/QuanManagement';
 
 export default (
@@ -17,6 +18,7 @@ export default (
 		<Route path="/UserPackageQuanBatchCreation" component={UserPackageQuanBatchCreation} />
 		<Route path="/ChannelQuanBatchCreation" component={ChannelQuanBatchCreation} />
 		<Route path="/SaleQuanBatchCreation" component={SaleQuanBatchCreation} />
+		<Route path="/preferCouponDetail" component={PreferentialQuanBatchCreation} />
 		<Route path="/quan" component={QuanManagement} />
 	</Route>
 );

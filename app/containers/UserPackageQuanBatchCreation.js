@@ -5,7 +5,14 @@ import { bindActionCreators } from 'redux';
 import {fetchSellerList} from '../actions';
 import {
 	setTitle, setSellerID, setUserPackageId, setPackageUsersQty, setPackageDescription, setDiscountType, setPlatformLimitList, setApplyProductType
-	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserPackageQuanBatch, setDispatchType, setOrderAmount
+	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserPackageQuanBatch, setDispatchType, setOrderAmount,
+	setIsShareWithBasicAdjustSingle,
+	setIsShareWithTimeLimitSingle,
+	setIsShareWithGroupPurchaseSingle,
+	setIsShareWithOrderMinusMulti,
+	setIsShareWithOrderDiscountMulti,
+	setIsShareWithOrderPresentMulti,
+	setIsShareWithOrderChangeMulti
 } from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
 import UserPackageDispatchRule from '../components/UserPackageDispatchRule';
@@ -78,7 +85,14 @@ function mapDispatchToProps(dispatch) {
 			setDiscountAmount,
 			setDiscountPercent,
 			setExpireDays,
-			setOrderAmount
+			setOrderAmount,
+			setIsShareWithBasicAdjustSingle,
+			setIsShareWithTimeLimitSingle,
+			setIsShareWithGroupPurchaseSingle,
+			setIsShareWithOrderMinusMulti,
+			setIsShareWithOrderDiscountMulti,
+			setIsShareWithOrderPresentMulti,
+			setIsShareWithOrderChangeMulti
 		}, dispatch)
 	}
 }

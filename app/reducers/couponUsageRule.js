@@ -12,7 +12,14 @@ let initialState = {
 	useBeginTime: '',
 	useEndTime: '',
 	expireDays: '',
-	isBindUser: true
+	isBindUser: true,
+	isShareWithBasicAdjustSingle: 1,
+	isShareWithTimeLimitSingle: 0,
+	isShareWithGroupPurchaseSingle: 0,
+	isShareWithOrderMinusMulti: 1,
+	isShareWithOrderDiscountMulti: 1,
+	isShareWithOrderPresentMulti: 1,
+	isShareWithOrderChangeMulti: 1
 }
 
 export default function couponUsageRule(state = initialState, action) {
@@ -92,6 +99,46 @@ export default function couponUsageRule(state = initialState, action) {
 				useEndTime: {$set: useEndTime},
 				expireDays: {$set: expireDays},
 				isBindUser: {$set: isBindUser}
+		case actionTypes.SET_IS_SHARE_WITH_BASIC_ADJUST_SINGLE: {
+			let isShareWithBasicAdjustSingle = !state.isShareWithBasicAdjustSingle;
+			return update(state, {
+				isShareWithBasicAdjustSingle: {$set: isShareWithBasicAdjustSingle}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_TIME_LIMIT_SINGLE: {
+			let isShareWithTimeLimitSingle = !state.isShareWithTimeLimitSingle;
+			return update(state, {
+				isShareWithTimeLimitSingle: {$set: isShareWithTimeLimitSingle}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_GROUP_PURCHASE_SINGLE: {
+			let isShareWithGroupPurchaseSingle = !state.isShareWithGroupPurchaseSingle;
+			return update(state, {
+				isShareWithGroupPurchaseSingle: {$set: isShareWithGroupPurchaseSingle}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_ORDER_MINUS_MULTI: {
+			let isShareWithOrderMinusMulti = !state.isShareWithOrderMinusMulti;
+			return update(state, {
+				isShareWithOrderMinusMulti: {$set: isShareWithOrderMinusMulti}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_ORDER_DISCOUNT_MULTI: {
+			let isShareWithOrderDiscountMulti = !state.isShareWithOrderDiscountMulti;
+			return update(state, {
+				isShareWithOrderDiscountMulti: {$set: isShareWithOrderDiscountMulti}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_ORDER_PRESENT_MULTI: {
+			let isShareWithOrderPresentMulti = !state.isShareWithOrderPresentMulti;
+			return update(state, {
+				isShareWithOrderPresentMulti: {$set: isShareWithOrderPresentMulti}
+			});
+		}
+		case actionTypes.SET_IS_SHARE_WITH_ORDER_CHANGE_MULTI: {
+			let isShareWithOrderChangeMulti = !state.isShareWithOrderChangeMulti;
+			return update(state, {
+				isShareWithOrderChangeMulti: {$set: isShareWithOrderChangeMulti}
 			});
 		}
 		default:{

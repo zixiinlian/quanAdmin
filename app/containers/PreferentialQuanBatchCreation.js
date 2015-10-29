@@ -6,6 +6,7 @@ import {fetchSellerList} from '../actions';
 import {
 	setTitle, setSellerID, setCouponQty, setIsSale, setSaleAmount, setDiscountType, setPlatformLimitList, setApplyProductType
 	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setChannelQuanBatch, setDispatchType, setOrderAmount,
+	setPreferentialQuanBatch,
 	setIsShareWithBasicAdjustSingle,
 	setIsShareWithTimeLimitSingle,
 	setIsShareWithGroupPurchaseSingle,
@@ -15,7 +16,7 @@ import {
 	setIsShareWithOrderChangeMulti
 } from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
-import ChannelDispatchRule from '../components/ChannelDispatchRule';
+import PreferentialDispatchRule from '../components/PreferentialDispatchRule';
 import QuanBatchUsageRule from '../components/QuanBatchUsageRule';
 
 class ChannelQuanBatchCreation extends Component {
@@ -30,17 +31,17 @@ class ChannelQuanBatchCreation extends Component {
 	      fetchSellerList();
 	    }
 
-	    setDispatchType(4);
+	    setDispatchType(7);
 	}
 
 	render() {
-		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setChannelQuanBatch} = this.props;
+		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setPreferentialQuanBatch} = this.props;
 		return (
 			<div>
 				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions}/>
-				<ChannelDispatchRule {...dispatchRule} {...dispatchRuleActions} />
+				<PreferentialDispatchRule {...dispatchRule} {...dispatchRuleActions} />
 				<QuanBatchUsageRule {...usageRule} {...usageRuleActions} />
-				<input type="button" value="保存" onClick={setChannelQuanBatch} />
+				<input type="button" value="保存" onClick={setPreferentialQuanBatch} />
 			</div>
 		);
 	}
@@ -48,7 +49,7 @@ class ChannelQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {sellerList} = state.shared;
-	const {dispatchChannelRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
+	const {couponUsageRule, basicInformation} = state.quanBatchCreation;
 	const {couponQty} = basicInformation;
 	return {
 		basicInformation: {
@@ -56,7 +57,6 @@ function mapStateToProps(state) {
 			...basicInformation
 		},
 		dispatchRule: {
-			...dispatchChannelRule,
 			couponQty
 		},
 		usageRule: couponUsageRule
@@ -67,7 +67,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		...bindActionCreators({
 			pushState,
-			setChannelQuanBatch,
+			setPreferentialQuanBatch,
 			setDispatchType,
 			fetchSellerList
 		}, dispatch),
@@ -76,8 +76,6 @@ function mapDispatchToProps(dispatch) {
 			setSellerID
 		}, dispatch),
 		dispatchRuleActions: bindActionCreators({
-			setIsSale,
-			setSaleAmount,
 			setCouponQty
 		}, dispatch),
 		usageRuleActions: bindActionCreators({

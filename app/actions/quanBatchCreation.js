@@ -296,3 +296,52 @@ export function setOrderReturnQuanBatch() {
     postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
+
+export function setPreferentialQuanBatch() {
+  return (dispatch, getState) => {
+    let {basicInformation, couponUsageRule, commonInformation} = getState().quanBatchCreation;
+    let data = {
+      ...basicInformation,
+      ...commonInformation,
+      couponUsageRule
+    }
+    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+  };
+}
+
+export function setIsShareWithBasicAdjustSingle() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_BASIC_ADJUST_SINGLE
+  };
+}
+
+export function setIsShareWithTimeLimitSingle() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_TIME_LIMIT_SINGLE
+  };
+}
+export function setIsShareWithGroupPurchaseSingle() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_GROUP_PURCHASE_SINGLE
+  };
+}
+export function setIsShareWithOrderMinusMulti() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_ORDER_MINUS_MULTI
+  };
+}
+export function setIsShareWithOrderDiscountMulti() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_ORDER_DISCOUNT_MULTI
+  };
+}
+export function setIsShareWithOrderPresentMulti() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_ORDER_PRESENT_MULTI
+  };
+}
+export function setIsShareWithOrderChangeMulti() {
+  return {
+    type: actionTypes.SET_IS_SHARE_WITH_ORDER_CHANGE_MULTI
+  };
+}
