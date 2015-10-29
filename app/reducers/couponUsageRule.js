@@ -99,6 +99,8 @@ export default function couponUsageRule(state = initialState, action) {
 				useEndTime: {$set: useEndTime},
 				expireDays: {$set: expireDays},
 				isBindUser: {$set: isBindUser}
+			});
+		}
 		case actionTypes.SET_IS_SHARE_WITH_BASIC_ADJUST_SINGLE: {
 			let isShareWithBasicAdjustSingle = !state.isShareWithBasicAdjustSingle;
 			return update(state, {

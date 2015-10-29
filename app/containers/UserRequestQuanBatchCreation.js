@@ -36,13 +36,13 @@ class UserRequestQuanBatchCreation extends Component {
 	}
 
 	render() {
-		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setUserRequestQuanBatch} = this.props;
+		const {isViewMode, basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setUserRequestQuanBatch} = this.props;
 		return (
 			<div>
 				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions} />
 				<UserRequestDispatchRule {...dispatchRule} {...dispatchRuleActions} />
 				<QuanBatchUsageRule {...usageRule} {...usageRuleActions} />
-				<input type="button" value="保存" onClick={setUserRequestQuanBatch} />
+				{isViewMode ? null : <input type="button" value="保存" onClick={setUserRequestQuanBatch} />}
 			</div>
 		);
 	}
@@ -50,7 +50,7 @@ class UserRequestQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {sellerList} = state.shared;
-	const {dispatchUserRequestRule, couponUsageRule, basicInformation, commonInformation: {dispatchType}} = state.quanBatchCreation;
+	const {isViewMode, dispatchUserRequestRule, couponUsageRule, basicInformation, commonInformation: {dispatchType}} = state.quanBatchCreation;
 	const {couponQty, couponImage} = basicInformation;
 	return {
 		basicInformation: {
@@ -63,6 +63,7 @@ function mapStateToProps(state) {
 			couponImage,
 			dispatchType
 		},
+		isViewMode,
 		usageRule: couponUsageRule
 	};
 }

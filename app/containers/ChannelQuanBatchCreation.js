@@ -34,13 +34,13 @@ class ChannelQuanBatchCreation extends Component {
 	}
 
 	render() {
-		const { basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setChannelQuanBatch} = this.props;
+		const {isViewMode, basicInformation, dispatchRule, usageRule, basicInformationActions, dispatchRuleActions, usageRuleActions, setChannelQuanBatch} = this.props;
 		return (
 			<div>
 				<QuanBatchBasicInformation {...basicInformation} {...basicInformationActions}/>
 				<ChannelDispatchRule {...dispatchRule} {...dispatchRuleActions} />
 				<QuanBatchUsageRule {...usageRule} {...usageRuleActions} />
-				<input type="button" value="保存" onClick={setChannelQuanBatch} />
+				{isViewMode? null : <input type="button" value="保存" onClick={setChannelQuanBatch} />}
 			</div>
 		);
 	}
@@ -48,7 +48,7 @@ class ChannelQuanBatchCreation extends Component {
 
 function mapStateToProps(state) {
 	const {sellerList} = state.shared;
-	const {dispatchChannelRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
+	const {isViewMode, dispatchChannelRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
 	const {couponQty} = basicInformation;
 	return {
 		basicInformation: {
@@ -59,6 +59,7 @@ function mapStateToProps(state) {
 			...dispatchChannelRule,
 			couponQty
 		},
+		isViewMode,
 		usageRule: couponUsageRule
 	};
 }
