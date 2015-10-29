@@ -35,16 +35,20 @@ export function receiveQuanBatchList(json) {
   return {
     type: RECEIVE_QUAN_BATCH_LIST,
     quanBatchList: json.results,
-    totalPage: parseInt(json.total / json.pageSize),
-    pageIndex: json.pageIndex,
-    pageSize: json.pageSize,
+    total: Math.ceil(json.total / json.pageSize),
+    current: json.pageIndex
   };
 }
 
-export function fetchQuanBatchList(quanBatchSearchCriteria) {
-  return dispatch => {
+export function fetchQuanBatchList() {
+  return (dispatch, getState) => {
     dispatch(requestQuanBatchList());
-    return api.getQuanBatchList(quanBatchSearchCriteria).then(json => dispatch(receiveQuanBatchList(json.data)));
+    let {quanBatchManagement: {quanBatchListPager, quanBatchSearchCriteria}} = getState();
+    return api.getJson('/coupon/batches', {
+      ...quanBatchSearchCriteria,
+      pageSize: quanBatchListPager.visible,
+      pageIndex: quanBatchListPager.current
+    }).then(json => dispatch(receiveQuanBatchList(json.data)));
   };
 }
 

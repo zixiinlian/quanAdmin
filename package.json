@@ -28,17 +28,18 @@
     "classnames": "^2.2.0",
     "history": "^1.12.5",
     "isomorphic-fetch": "^2.1.1",
+    "jquery-param": "^0.2.0",
+    "moment": "^2.10.6",
     "query-string": "^3.0.0",
     "react": "^0.14.0",
     "react-addons-create-fragment": "^0.14.0",
     "react-addons-update": "^0.14.0",
+    "react-datepicker": "latest",
     "react-dom": "^0.14.0",
     "react-redux": "^3.1.0",
     "react-router": "^1.0.0-rc3",
     "redux": "^3.0.2",
     "redux-router": "^1.0.0-beta3",
-    "redux-thunk": "^1.0.0",
-    "moment":"^2.10.6",
-    "react-datepicker":"latest"
+    "redux-thunk": "^1.0.0"
   }
 }

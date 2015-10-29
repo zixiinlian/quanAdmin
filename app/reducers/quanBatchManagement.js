@@ -12,7 +12,10 @@ let initialState = {
 	quanBatchList: [],
 	quanBatchSearchCriteria: {
 		batchId: '',
-		dispatchType: ''
+		title: '',
+		dispatchType: '',
+		sellerID: '',
+		createUserName: ''
 	},
 	isShowIssueQuan: false,
 	selectedQuanBatchId: '',
@@ -29,7 +32,8 @@ export default function quanBatchManagement(state = initialState, action) {
 			return update(state, {
 				quanBatchList: { $set: action.quanBatchList },
 				quanBatchListPager: {
-					total: {$set: action.totalPage}
+					total: {$set: action.total},
+					current: {$set: action.current}
 				}
 			});
 		}

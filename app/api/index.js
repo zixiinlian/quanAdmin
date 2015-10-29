@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import param from 'jquery-param';
 
 function errorHandle(response){
 	if(response.status < 200 || response.status > 300){
@@ -8,18 +9,6 @@ function errorHandle(response){
 }
 
 let apiServer = "http://192.168.155.169:8004/v1";
-// TODO delete.
-// apiServer = "http://localhost:9000/v1";
-
-/**
- * 获取优惠券批次列表
- * @param quanBatchSearchCriteria
- * @returns {Promise.<T>|*}
- */
-export function getQuanBatchList(quanBatchSearchCriteria) {
-	return get( apiServer+ '/coupon/batches',quanBatchSearchCriteria)
-		.then(response => response.json())
-}
 
 /**
  * 获取优惠券列表
@@ -79,15 +68,37 @@ export function postJson(url, data, method='POST') {
 	});
 }
 
-export function get(url,data){
-	if(data && data!=null && data!=''){
-		url = url.concat("?");
-		for(var i in data){
-			if(data[i] && data[i]!=null){
-				url = url.concat(i,"=",data[i],"&");
-			}
+export function getJson(url, data) {
+	url = new URL(apiServer + url);
+	url.search = param(data);
+	return fetch(url, {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+		}
+	})
+	.then(errorHandle)
+	.then(response => response.json())
+	.then(data => {
+		if(data.status === 0){
+			return data;
 		}
 
-	}
-	return fetch(url);
+		throw {isServerError: false, message: data.message};
+	});
 }
+
+
+
+// export function get(url,data){
+// 	if(data && data!=null && data!=''){
+// 		url = url.concat("?");
+// 		for(var i in data){
+// 			if(data[i] && data[i]!=null){
+// 				url = url.concat(i,"=",data[i],"&");
+// 			}
+// 		}
+
+// 	}
+// 	return fetch(url);
+// }
