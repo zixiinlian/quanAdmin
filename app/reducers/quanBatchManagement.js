@@ -4,7 +4,8 @@ import {
 	SET_QUAN_BATCH_SEARCH_CRITERIA,
 	SHOW_ISSUE_QUAN,
 	HIDE_ISSUE_QUAN,
-	SET_QUAN_BATCH_LIST_CURRENT_PAGE
+	SET_QUAN_BATCH_LIST_CURRENT_PAGE,
+	SET_QUAN_BATCH_STATUS
 } from '../actions'
 
 let initialState = {
@@ -46,6 +47,13 @@ export default function quanBatchManagement(state = initialState, action) {
 		case HIDE_ISSUE_QUAN: {
 			return update(state, {
 				isShowIssueQuan: {$set: false}
+			});
+		}
+		case SET_QUAN_BATCH_STATUS: {
+			return update(state, {
+				quanBatchList: {
+					[action.index]: {status: {$set: action.status}} 
+				}
 			});
 		}
 		case SET_QUAN_BATCH_LIST_CURRENT_PAGE: {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import {
 	fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage
-	,doPutOnQuanBatch,doPutOffQuanBatch, viewQuanBatch, editQuanBatch
+	, viewQuanBatch, editQuanBatch, putOffQuanBatch, putOnQuanBatch
 } from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
@@ -47,11 +47,12 @@ class QuanBatchManagement extends Component {
 	render() {
 		const {
 			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList
-			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch,doPutOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch
+			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch, putOffQuanBatch,loginUser
+			, viewQuanBatch, editQuanBatch
 		} = this.props;
 		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList};
-		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage,doPutOnQuanBatch
-			,doPutOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch};
+		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch
+			, putOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -67,7 +68,7 @@ QuanBatchManagement.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager,doPutOnQuanBatch,doPutOffQuanBatch} = state.quanBatchManagement;
+	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager} = state.quanBatchManagement;
 	const {dispatchTypeList,sellerList,loginUser} = state.shared;
 	return {
 		quanBatchList,
@@ -90,10 +91,10 @@ function mapDispatchToProps(dispatch) {
   	hideIssueQuan,
   	setQuanBatchListCurrentPage,
   	setQuanBatchSearchCriteria,
-  	doPutOnQuanBatch,
-  	doPutOffQuanBatch, 
   	viewQuanBatch, 
-  	editQuanBatch
+  	editQuanBatch,
+  	putOffQuanBatch,
+  	putOnQuanBatch
   }, dispatch);
 }
 

@@ -143,18 +143,21 @@ export function fetchQuanList(quanBatchSearchCriteria) {
  * 上架优惠券批次
  * @type {string}
  */
-export const SET_PUT_ON_QUAN_BATCH = 'SET_PUT_ON_QUAN_BATCH';
+export const SET_QUAN_BATCH_STATUS = 'SET_QUAN_BATCH_STATUS';
 
-export function setPutOnQuanBatch(result) {
+export function setQuanBatchStatus(index, status) {
   return {
-    type: SET_PUT_ON_QUAN_BATCH,
-    result
+    type: SET_QUAN_BATCH_STATUS,
+    index,
+    status
   };
 }
 
-export function doPutOnQuanBatch(batchId,operatorUserId){
-  return dispatch => {
-    return api.putOnQuanBatch(batchId,operatorUserId).then(json => dispatch(setPutOnQuanBatch(json)));
+export function putOnQuanBatch(index){
+  return (dispatch, getState) => {
+    let state = getState();
+    let quanBatch = state.quanBatchManagement.quanBatchList[index];
+    return api.postJson('/coupon/batches/'+ quanBatch.batchId + '/on/by/1', undefined, "PATCH").then(json => dispatch(setQuanBatchStatus(index, 1)));
   }
 }
 
@@ -162,46 +165,12 @@ export function doPutOnQuanBatch(batchId,operatorUserId){
  * 下架优惠券批次
  * @type {string}
  */
-export const SET_PUT_OFF_QUAN_BATCH = 'SET_PUT_OFF_QUAN_BATCH';
-
-export function setPutOffQuanBatch(result) {
-  return {
-    type: SET_PUT_OFF_QUAN_BATCH,
-    result
+export function putOffQuanBatch(index){
+  return (dispatch, getState) => {
+    let state = getState();
+    let quanBatch = state.quanBatchManagement.quanBatchList[index];
+    return api.postJson('/coupon/batches/'+ quanBatch.batchId +'/off/by/1', undefined, "PATCH").then(json => dispatch(setQuanBatchStatus(index, 0)));
   }
-}
-
-export function doPutOffQuanBatch(batchId,operateUserId){
-  return dispatch => {
-    return api.putOffQuanBatch(batchId,operateUserId).then(json => dispatch(setPutOffQuanBatch(json)));
-  }
-}
-
-function setBatchQuan(state, pageIndex){
-  let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
-    let {basicInformation, commonInformation, couponUsageRule} = state.quanBatchCreation;
-    for(let key in basicInformation){
-      basicInformation[key] = quanBatch[key];
-    }
-    for(let key in commonInformation){
-      commonInformation[key] = quanBatch[key];
-    }
-    for(let key in couponUsageRule){
-      couponUsageRule[key] = quanBatch.couponUsageRule[key];
-    }
-
-    let destDispatchRule, originDispatchRule, url;
-    
-    for(let key in destDispatchRule){
-      if(key === 'platformLimitList' && originDispatchRule[key] === null){
-        destDispatchRule[key] = [];
-      }
-      else{
-        destDispatchRule[key] = originDispatchRule[key];
-      }
-    }
-
-    return url;
 }
 
 export function viewQuanBatch(pageIndex){
@@ -209,7 +178,7 @@ export function viewQuanBatch(pageIndex){
     let state = getState();
     let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
     dispatch(setQuanBatchCreation(quanBatch, true));
-    let url = setBatchQuan(state, pageIndex);
+    let url;
     switch(quanBatch.dispatchType){
       case 1:
         url = '/UserRequestQuanBatchCreation';
@@ -236,7 +205,7 @@ export function editQuanBatch(pageIndex){
     let state = getState();
     let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
     dispatch(setQuanBatchCreation(quanBatch, false));
-    let url = setBatchQuan(state, pageIndex);
+    let url;
     switch(quanBatch.dispatchType){
       case 1:
         url = '/UserRequestQuanBatchCreation';

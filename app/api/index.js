@@ -44,38 +44,6 @@ export function getSellerList() {
 		.then(response => response.json())
 }
 
-/**
- * 上架优惠券
- * @param batchId
- * @param operationUserId
- * @returns {Promise.<T>|*}
- */
-export function putOnQuanBatch(batchId,operateUserId){
-	return fetch(apiServer + '/coupon/batches/'+batchId+'/on/by/'+operateUserId,{
-		method:'PATCH',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		}
-	}).then(response => response.json());
-}
-
-/**
- * 下架优惠券
- * @param batchId
- * @param operationUserId
- * @returns {Promise.<T>|*}
- */
-export function putOffQuanBatch(batchId,operateUserId){
-	return fetch(apiServer + '/coupon/batches/'+batchId+'/off/by/'+operateUserId,{
-		method:'PATCH',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		}
-	}).then(response => response.json());
-}
-
 export function getProductList() {
 	// let url = new URL(apiServer + "coupon/batches");
 	// url.search = stringify(quanBatchSearchCriteria);
@@ -93,7 +61,7 @@ export function postJson(url, data, method='POST') {
 	url = new URL(apiServer + url);
 	data = JSON.stringify(data);
 	return fetch(url, {
-		method: 'POST',
+		method: method,
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
