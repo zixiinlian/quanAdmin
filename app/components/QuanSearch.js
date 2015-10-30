@@ -6,17 +6,22 @@ export default class QuanBatchSearch extends Component {
   }
 
   componentDidMount() {
-    const { fetchDispatchChannelList, sellerList } = this.props;
-    if(sellerList.length === 0){
-      fetchDispatchChannelList();
-    }
+
   }
 
-  onSearchQuan(e){
-    let quanSearchParam = {
-      batchId: this.refs.batchId.value,
-      quanName: this.refs.quanName.value
+  handleSearchQuan(){
+   let quanSearchParam= {
+        batchId:this.refs.batchId.value,
+        title:this.refs.title.value,
+        couponCode:this.refs.couponCode.value,
+        serialNumber:this.refs.serialNumber.value,
+        dispatchCustomerID:this.refs.dispatchCustomerID.value,
+        applyCustomerID:this.refs.applyCustomerID.value,
+        isBindUser:this.refs.isBindUser.value,
+        dispatchOrderId:this.refs.dispatchOrderId.value,
+        applyOrderId:this.refs.applyOrderId.value
     };
+
     this.props.setQuanSearch(quanSearchParam);
   }
 
@@ -31,7 +36,7 @@ export default class QuanBatchSearch extends Component {
           </div>
           <div className="form-group ml10">
             <label>优惠券名称: </label>
-            <input ref="quanName" type="text" className="form-control input-small"/>
+            <input ref="title" type="text" className="form-control input-small"/>
           </div>
           <div className="form-group ml10">
             <label>发放机构: </label>
@@ -47,19 +52,19 @@ export default class QuanBatchSearch extends Component {
         <div className="form-inline mt10">
           <div className="form-group">
             <label>优惠券码: </label>
-            <input ref="quanCode" type="text"  className="form-control input-small" />
+            <input ref="couponCode" type="text"  className="form-control input-small" />
           </div>
           <div className="form-group ml10">
             <label>优惠券序列号: </label>
-            <input ref="quan" type="text"  className="form-control input-small" />
+            <input ref="serialNumber" type="text"  className="form-control input-small" />
           </div>
           <div className="form-group ml10">
             <label>领取人: </label>
-            <input ref="quanReceiver" type="text"  className="form-control input-small" />
+            <input ref="dispatchCustomerID" type="text"  className="form-control input-small" />
           </div>
           <div className="form-group ml10">
             <label>使用人: </label>
-            <input ref="quanUser" type="text"  className="form-control input-small"/>
+            <input ref="applyCustomerID" type="text"  className="form-control input-small"/>
           </div>
         </div>
         <div className="form-inline mt10">
@@ -75,23 +80,23 @@ export default class QuanBatchSearch extends Component {
           </div>
           <div className="form-group ml10">
             <label>是否绑定账户: </label>
-            <select ref="isBandUser" className="form-control input-small">
-                <option value="0">全部</option>
-                <option value="0">是</option>
-                <option value="1">否</option>
+            <select ref="isBindUser" className="form-control input-small">
+                <option value="">全部</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
             </select>
           </div>
           <div className="form-group ml10">
             <label>来源订单: </label>
-            <input ref="quanSource" type="text" className="form-control input-small"/>
+            <input ref="dispatchOrderId" type="text" className="form-control input-small"/>
           </div>
           <div className="form-group ml10">
             <label>使用订单: </label>
-            <input type="text" className="form-control input-small"/>
+            <input ref="applyOrderId" type="text" className="form-control input-small"/>
           </div>
         </div>
         <div className="mt10 mb10">
-          <input type="button" value="查询" onClick={this.handleSearchQuan} className="btn blue"/>
+          <input type="button" value="查询" onClick={this.handleSearchQuan.bind(this)} className="btn blue"/>
           <input type="button" value="导出" onClick={this.handleExport} className="btn blue ml10"/>
         </div>
       </div>

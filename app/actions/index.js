@@ -125,23 +125,23 @@ export function setQuanBatchListCurrentPage(currentPage) {
   };
 }
 
-export const RECEIVE_QUAN_LIST = 'RECEIVE_QUAN_LIST';
-export function receiveQuanList(json){
-  return {
-    type: RECEIVE_QUAN_LIST,
-    quanList: json.results,
-    pageIndex: json.pageIndex,
-    pageSize: json.pageSize,
-    total: json.total
-  }
-}
-
-export function fetchQuanList(quanBatchSearchCriteria) {
-  return dispatch => {
-    return api.getQuanList()
-      .then(json => dispatch(receiveQuanList(json.data)));
-  };
-}
+//export const RECEIVE_QUAN_LIST = 'RECEIVE_QUAN_LIST';
+//export function receiveQuanList(json){
+//  return {
+//    type: RECEIVE_QUAN_LIST,
+//    quanList: json.results,
+//    pageIndex: json.pageIndex,
+//    pageSize: json.pageSize,
+//    total: json.total
+//  }
+//}
+//
+//export function fetchQuanList(quanBatchSearchCriteria) {
+//  return dispatch => {
+//    return api.getQuanList()
+//      .then(json => dispatch(receiveQuanList(json.data)));
+//  };
+//}
 
 /**
  * 上架优惠券批次

@@ -17,7 +17,7 @@ class QuanBatchManagement extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		if( nextProps.quanBatchSearchCriteria !== this.props.quanBatchSearchCriteria || 
+		if( nextProps.quanBatchSearchCriteria !== this.props.quanBatchSearchCriteria ||
 			nextProps.quanBatchListPager.current !== this.props.quanBatchListPager.current){
 	    	this.props.fetchQuanBatchList();
 		}

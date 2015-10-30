@@ -29,7 +29,6 @@ export default class QuanBatchSearch extends Component {
 
   handleSearchQuanBatch(e){
     let {batchId, title, dispatchType, sellerID, createUserName} = this.state;
-    let {setQuanBatchSearchCriteria} = this.props;
     let quanBatchSearchCriteria = {
       batchId,
       title,

@@ -10,14 +10,7 @@ function errorHandle(response){
 
 let apiServer = "http://192.168.155.169:8004/v1";
 
-/**
- * 获取优惠券列表
- * @returns {Promise.<T>|*}
- */
-export function getQuanList(){
-	return get(apiServer + "/coupons").then(response => response.json());
-}
-
+apiServer = "http://localhost:9000/v1";
 /**
  * 获取机构列表
  * @returns {Promise.<T>|*}
@@ -87,18 +80,3 @@ export function getJson(url, data) {
 		throw {isServerError: false, message: data.message};
 	});
 }
-
-
-
-// export function get(url,data){
-// 	if(data && data!=null && data!=''){
-// 		url = url.concat("?");
-// 		for(var i in data){
-// 			if(data[i] && data[i]!=null){
-// 				url = url.concat(i,"=",data[i],"&");
-// 			}
-// 		}
-
-// 	}
-// 	return fetch(url);
-// }
