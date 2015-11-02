@@ -345,3 +345,15 @@ export function setIsShareWithOrderChangeMulti() {
     type: actionTypes.SET_IS_SHARE_WITH_ORDER_CHANGE_MULTI
   };
 }
+export function setUseBeginTime(date) {
+  return {
+    type: actionTypes.SET_USE_BEGIN_TIME,
+    date
+  };
+}
+export function setUseEndTime(date) {
+  return {
+    type: actionTypes.SET_USE_END_TIME,
+    date
+  };
+}

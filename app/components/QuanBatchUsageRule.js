@@ -1,11 +1,82 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import 'react-date-picker/index.css';
+import DatePicker from 'react-datepicker/dist/react-datepicker';
+import moment from 'moment';
 import ProductListAddition from './ProductListAddition';
 
 export default class QuanBatchUsageRule extends Component {
 	constructor(props) {
 		super(props);
+	}
+
+	handleSetUseBeginTimeDate(date){
+		let {useBeginTime} = this.props,
+			useBeginTimeDate,
+			useBeginTimeHour = 0,
+			value = date.format("YYYY-MM-DD");
+		if(useBeginTime){
+			useBeginTime = moment(useBeginTime);
+			useBeginTimeDate = useBeginTime.format("YYYY-MM-DD");
+			useBeginTimeHour = useBeginTime.hour();
+		}
+		if(useBeginTimeDate === value){
+			return;
+		}
+
+		if(useBeginTimeHour < 10){
+			useBeginTimeHour = "0" + useBeginTimeHour;
+		}
+		this.props.setUseBeginTime(value + " " + useBeginTimeHour + ':00:00');
+	}
+
+	handleSetUseBeginTimeHour(e){
+		let {useBeginTime} = this.props;
+		if(!useBeginTime){
+			alert("请先选择日期！");
+			return;
+		}
+		useBeginTime = moment(useBeginTime);
+		let useBeginTimeDate = useBeginTime.format("YYYY-MM-DD");
+		let value = e.target.value;
+		if(value < 10){
+			value = "0" + value;
+		}
+		this.props.setUseBeginTime(useBeginTimeDate + " " + value + ':00:00');
+	}
+
+	handleSetUseEndTimeDate(date){
+		let {useEndTime} = this.props,
+			useEndTimeDate,
+			useEndTimeHour = 0,
+			value = date.format("YYYY-MM-DD");
+		if(useEndTime){
+			useEndTime = moment(useEndTime);
+			useEndTimeDate = useEndTime.format("YYYY-MM-DD");
+			useEndTimeHour = useEndTime.hour();
+		}
+		if(useEndTimeDate === value){
+			return;
+		}
+
+		if(useEndTimeHour < 10){
+			useEndTimeHour = "0" + useEndTimeHour;
+		}
+		this.props.setUseEndTime(value + " " + useEndTimeHour + ':00:00');
+	}
+
+	handleSetUseEndTimeHour(e){
+		let {useEndTime} = this.props;	
+		if(!useEndTime){
+			alert("请先选择日期！");
+			return;
+		}
+		useEndTime = moment(useEndTime);
+		let useEndTimeDate = useEndTime.format("YYYY-MM-DD");
+		let value = e.target.value;
+		if(value < 10){
+			value = "0" + value;
+		}
+		this.props.setUseEndTime(useEndTimeDate + " " + value+ ':00:00');
 	}
 
 	render() {
@@ -25,9 +96,19 @@ export default class QuanBatchUsageRule extends Component {
 			setIsShareWithOrderMinusMulti,
 			setIsShareWithOrderDiscountMulti,
 			setIsShareWithOrderPresentMulti,
-			setIsShareWithOrderChangeMulti
+			setIsShareWithOrderChangeMulti,
+			useBeginTime, useEndTime
 		} = this.props;
 		let isIncludeSpecificPlatform = (platformID => platformLimitList.find((e) => e.platformID === platformID));
+		let useBeginTimeHour = 0, useEndTimeHour = 0;
+		if(useBeginTime){
+			useBeginTime = moment(useBeginTime);
+			useBeginTimeHour = useBeginTime.hour();
+		}
+		if(useEndTime){
+			useEndTime = moment(useEndTime);
+			useEndTimeHour = useEndTime.hour();
+		}
 		return (
 			<div>
 				<h1>使用规则</h1>
@@ -53,9 +134,21 @@ export default class QuanBatchUsageRule extends Component {
 				<div>
 					有效期类型：
 					<input type="radio" name="expireType" checked={expireType === 0} onChange={() => setExpireType(0)} />固定时间
+					<DatePicker selected={useBeginTime} onChange={this.handleSetUseBeginTimeDate.bind(this)} disabled={expireType !== 0} />
+					<select value={useBeginTimeHour} onChange={ this.handleSetUseBeginTimeHour.bind(this) } disabled={expireType !== 0}>
+					{
+						Array.from({length:24}).map((element, index) => <option key={index} value={index}>{index}</option>)
+					}
+					</select>
 					至
+					<DatePicker selected={useEndTime} onChange={this.handleSetUseEndTimeDate.bind(this)} disabled={expireType !== 0} />
+					<select value={useEndTimeHour} onChange={ this.handleSetUseEndTimeHour.bind(this) } disabled={expireType !== 0}>
+					{
+						Array.from({length:24}).map((element, index) => <option key={index} value={index}>{index}</option>)
+					}
+					</select>
 					<input type="radio" name="expireType" checked={expireType === 1} onChange={() => setExpireType(1)}/>自领取之日起
-					<input type="text" value={expireDays} onChange={(e) => setExpireDays(e.target.value)} />天内有效
+					<input type="text" value={expireDays} onChange={(e) => setExpireDays(e.target.value)} disabled={expireType !== 1} />天内有效
 				</div>
 				<div>
 					单品促销设定：

@@ -9,8 +9,8 @@ let initialState = {
 	platformLimitList: [],
 	applyProductType: 0,
 	expireType: 0,
-	useBeginTime: '',
-	useEndTime: '',
+	useBeginTime: undefined,
+	useEndTime: undefined,
 	expireDays: '',
 	isBindUser: true,
 	isShareWithBasicAdjustSingle: 1,
@@ -141,6 +141,26 @@ export default function couponUsageRule(state = initialState, action) {
 			let isShareWithOrderChangeMulti = !state.isShareWithOrderChangeMulti;
 			return update(state, {
 				isShareWithOrderChangeMulti: {$set: isShareWithOrderChangeMulti}
+			});
+		}
+		case actionTypes.SET_USE_BEGIN_TIME: {
+			let {useEndTime} = state;
+			if (useEndTime && action.date >= useEndTime) {
+				alert("开始时间必须早于结束时间！");
+				return state;
+			};
+			return update(state, {
+				useBeginTime: {$set: action.date}
+			});
+		}
+		case actionTypes.SET_USE_END_TIME: {
+			let {useBeginTime} = state;
+			if (useBeginTime && action.date <= useBeginTime) {
+				alert("开始时间必须早于结束时间！");
+				return state;
+			};
+			return update(state, {
+				useEndTime: {$set: action.date}
 			});
 		}
 		default:{

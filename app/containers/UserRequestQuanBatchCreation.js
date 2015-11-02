@@ -6,7 +6,7 @@ import {fetchSellerList} from '../actions';
 import {
 	setTitle, setSellerID, setCouponQty, setIsAutoOnline, setDispatchUserRequestRulePerUserLimit, setUserScope, setDiscountType, setPlatformLimitList, setApplyProductType
 	, setIsBindUser, setExpireType, setDiscountAmount, setDiscountPercent, setExpireDays, setUserRequestQuanBatch, setDispatchType, setOrderAmount, addProductLimitList
-	, deleteProductLimitList,
+	, deleteProductLimitList, setUseBeginTime, setUseEndTime,
 	setIsShareWithBasicAdjustSingle,
 	setIsShareWithTimeLimitSingle,
 	setIsShareWithGroupPurchaseSingle,
@@ -104,7 +104,9 @@ function mapDispatchToProps(dispatch) {
 			setIsShareWithOrderMinusMulti,
 			setIsShareWithOrderDiscountMulti,
 			setIsShareWithOrderPresentMulti,
-			setIsShareWithOrderChangeMulti
+			setIsShareWithOrderChangeMulti,
+			setUseBeginTime,
+			setUseEndTime
 		}, dispatch)
 	}
 }
