@@ -1,8 +1,11 @@
 import update from 'react-addons-update'
 import {
 	RECEIVE_DISPATCH_CHANNEL_LIST,
-	RECEIVE_SELLER_LIST
+	RECEIVE_SELLER_LIST,
 } from '../actions'
+import {
+	DO_LOGIN
+} from '../actionTypes/login'
 
 let initialState = {
 	dispatchTypeList: [{
@@ -26,8 +29,8 @@ let initialState = {
 	}],
 	sellerList: [],
 	loginUser:{
-		id:457,
-		name:'xxx'
+		id:197,
+		name:"suncheng"
 	}
 }
 
@@ -41,6 +44,12 @@ export default function shared(state = initialState, action) {
 		case RECEIVE_SELLER_LIST: {
 			return update(state, {
 				sellerList: { $set: action.sellerList }
+			});
+		}
+		case DO_LOGIN:{
+			console.log(action.loginUser);
+			return update(state,{
+				loginUser:{$set : action.loginUser}
 			});
 		}
 		default:{

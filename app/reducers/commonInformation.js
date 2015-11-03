@@ -3,9 +3,9 @@ import * as actionTypes from '../actionTypes/quanBatchCreation'
 
 let initialState = {
 	dispatchType: '',
-	operationUserId: 1
+	operationUserId: '',
+	operationUserName:''
 }
-
 export default function commonInformation(state = initialState, action){
 	switch(action.type){
 		case actionTypes.SET_DISPATCH_TYPE: {
@@ -14,10 +14,12 @@ export default function commonInformation(state = initialState, action){
 			});
 		}
 		case actionTypes.SET_QUAN_BATCH_CREATION: {
-			let {dispatchType, operationUserId} = action.quanBatch;
+			let {dispatchType} = action.quanBatch;
 			return update(state, {
 				dispatchType: {$set: dispatchType},
-				operationUserId: {$set: operationUserId}
+				operationUserId: {$set: action.loginUser.id},
+				operationUserName: {$set: action.loginUser.name}
+
 			});
 		}
 		default:{

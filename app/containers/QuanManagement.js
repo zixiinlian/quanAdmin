@@ -33,15 +33,15 @@ class QuanManagement extends Component {
 		let selectedCoupon = null;
 		if(isShowCancelQuanModal){
 			selectedCoupon = quanList[selectedCouponIndex];
-			let modalProps = {...selectedCoupon,selectedCouponIndex,doQuanCancel};
+			let modalProps = {...selectedCoupon,selectedCouponIndex,doQuanCancel,hideCancelQuanModal};
 			return <ModalDialog onClose={hideCancelQuanModal} title="作废优惠券"><CancelQuanModal {...modalProps}></CancelQuanModal></ModalDialog>;
 		}
 	}
 
 	render() {
-		const {sellerList,quanList,setQuanListCurrentPage,quanPager,quanSearchParam,setQuanSearch,showCancelQuanModal,hideCancelQuanModal} = this.props;
+		const {sellerList,quanList,setQuanListCurrentPage,quanPager,quanSearchParam,setQuanSearch,showCancelQuanModal} = this.props;
 		const searchProps = {pushState, sellerList,quanSearchParam,setQuanSearch};
-		const listProps = {quanList,setQuanListCurrentPage,quanPager,showCancelQuanModal,hideCancelQuanModal};
+		const listProps = {quanList,setQuanListCurrentPage,quanPager,showCancelQuanModal};
 		return (
 			<div>
 				<QuanSearch {...searchProps} ></QuanSearch>

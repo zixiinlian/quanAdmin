@@ -47,9 +47,13 @@ class UserPackageQuanBatchCreation extends Component {
 }
 
 function mapStateToProps(state) {
-	const {sellerList} = state.shared;
+	const {sellerList,loginUser} = state.shared;
 	const {isViewMode, dispatchUserPackageRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
 	return {
+		commonInformation:{
+			operationUserId:loginUser.id,
+			operationUserName:loginUser.name
+		},
 		basicInformation: {
 			sellerList,
 			...basicInformation

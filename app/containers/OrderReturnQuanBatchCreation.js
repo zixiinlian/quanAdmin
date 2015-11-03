@@ -48,10 +48,14 @@ class OrderReturnQuanBatchCreation extends Component {
 }
 
 function mapStateToProps(state) {
-	const {sellerList} = state.shared;
+	const {sellerList,loginUser} = state.shared;
 	const {isViewMode, dispatchOrderReturnRule, couponUsageRule, basicInformation, commonInformation: {dispatchType}} = state.quanBatchCreation;
 	const {couponQty, couponImage} = basicInformation;
 	return {
+		commonInformation:{
+			operationUserId:loginUser.id,
+			operationUserName:loginUser.name
+		},
 		basicInformation: {
 			sellerList,
 			...basicInformation

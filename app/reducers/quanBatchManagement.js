@@ -5,7 +5,9 @@ import {
 	SHOW_ISSUE_QUAN,
 	HIDE_ISSUE_QUAN,
 	SET_QUAN_BATCH_LIST_CURRENT_PAGE,
-	SET_QUAN_BATCH_STATUS
+	SET_QUAN_BATCH_STATUS,
+	SHOW_QUAN_BATCH_TYPE_QUAN,
+	HIDE_QUAN_BATCH_TYPE_QUAN
 } from '../actions'
 
 let initialState = {
@@ -18,6 +20,7 @@ let initialState = {
 		createUserName: ''
 	},
 	isShowIssueQuan: false,
+	isShowSelectQuanModal:false,
 	selectedQuanBatchId: '',
 	quanBatchListPager: {
 		total: 0,
@@ -65,6 +68,16 @@ export default function quanBatchManagement(state = initialState, action) {
 				quanBatchListPager: {
 					current: {$set: action.currentPage}
 				}
+			});
+		}
+		case SHOW_QUAN_BATCH_TYPE_QUAN: {
+			return update(state, {
+				isShowSelectQuanModal:{$set:true}
+			});
+		}
+		case HIDE_QUAN_BATCH_TYPE_QUAN: {
+			return update(state, {
+				isShowSelectQuanModal:{$set:false}
 			});
 		}
 		default:{

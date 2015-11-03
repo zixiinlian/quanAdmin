@@ -121,7 +121,6 @@ export default class QuanBatchUsageRule extends Component {
 				</div>
 				<div>
 					适用平台：
-					<input type="checkbox" checked={isIncludeSpecificPlatform(0)} onChange={() => setPlatformLimitList(0)}/>全平台
 					<input type="checkbox" checked={isIncludeSpecificPlatform(1)} onChange={() => setPlatformLimitList(1)}/>移动
 					<input type="checkbox" checked={isIncludeSpecificPlatform(2)} onChange={() => setPlatformLimitList(2)}/>PC
 				</div>

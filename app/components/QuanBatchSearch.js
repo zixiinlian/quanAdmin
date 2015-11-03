@@ -24,7 +24,8 @@ export default class QuanBatchSearch extends Component {
   }
 
   handleCreateBatch(e){
-    this.props.pushState(null, '/InitiativeQuanBatchCreation');
+    console.log(this.props);
+    this.props.showQuanBatchTypeModal();
   }
 
   handleSearchQuanBatch(e){

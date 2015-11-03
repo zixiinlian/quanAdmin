@@ -199,6 +199,9 @@ export function viewQuanBatch(pageIndex){
       case 5:
         url = '/SaleQuanBatchCreation';
         break;
+      case 7:
+        url = '/PreferentialQuanBatchCreation';
+        break;
     }
     dispatch(pushState(null, url));
   }
@@ -208,7 +211,7 @@ export function editQuanBatch(pageIndex){
   return (dispatch, getState) => {
     let state = getState();
     let quanBatch = state.quanBatchManagement.quanBatchList[pageIndex];
-    dispatch(setQuanBatchCreation(quanBatch, false));
+    dispatch(setQuanBatchCreation(quanBatch,false,state.shared.loginUser));
     let url;
     switch(quanBatch.dispatchType){
       case 1:
@@ -225,6 +228,56 @@ export function editQuanBatch(pageIndex){
         break;
       case 5:
         url = '/SaleQuanBatchCreation';
+        break;
+      case 6:
+        url = '/PreferentialQuanBatchCreation';
+        break;
+      case 7:
+        url = '/PreferentialQuanBatchCreation';
+        break;
+    }
+    dispatch(pushState(null, url));
+  }
+}
+
+export const SHOW_QUAN_BATCH_TYPE_QUAN = 'SHOW_QUAN_BATCH_TYPE_QUAN';
+
+export function showQuanBatchTypeModal() {
+  return {
+    type: SHOW_QUAN_BATCH_TYPE_QUAN
+  };
+}
+
+export const HIDE_QUAN_BATCH_TYPE_QUAN = 'HIDE_QUAN_BATCH_TYPE_QUAN';
+
+export function hideQuanBatchTypeModal() {
+  return {
+    type: HIDE_QUAN_BATCH_TYPE_QUAN
+  };
+}
+
+export function selectQuanBatchType(index){
+  return (dispatch, getState) => {
+    getState().quanBatchManagement.isShowSelectQuanModal = false;
+    let url;
+    switch(index){
+      case 1:
+        url = '/UserRequestQuanBatchCreation';
+        break;
+      case 2:
+        url = '/UserPackageQuanBatchCreation';
+        break;
+      case 3:
+        url = '/OrderReturnQuanBatchCreation';
+        break;
+      case 4:
+        url = '/ChannelQuanBatchCreation';
+        break;
+      case 5:
+        url = '/SaleQuanBatchCreation';
+        break;
+      case 7:
+        url = '/PreferentialQuanBatchCreation';
         break;
     }
     dispatch(pushState(null, url));

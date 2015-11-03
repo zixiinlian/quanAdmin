@@ -47,10 +47,14 @@ class ChannelQuanBatchCreation extends Component {
 }
 
 function mapStateToProps(state) {
-	const {sellerList} = state.shared;
+	const {sellerList,loginUser} = state.shared;
 	const {isViewMode, dispatchChannelRule, couponUsageRule, basicInformation} = state.quanBatchCreation;
 	const {couponQty} = basicInformation;
 	return {
+		commonInformation:{
+			operationUserId:loginUser.id,
+			operationUserName:loginUser.name
+		},
 		basicInformation: {
 			sellerList,
 			...basicInformation

@@ -14,7 +14,7 @@ export default class CancelQuanModal extends Component {
       	<div>优惠券名称：{title}</div>
         <div>
           <button onClick={e => this.props.doQuanCancel(selectedCouponIndex)} >作废</button>
-          <button>取消</button>
+          <button onClick={e => this.props.hideCancelQuanModal()}>取消</button>
         </div>
       </div>
     );

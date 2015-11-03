@@ -104,10 +104,13 @@ app.get('/ChannelQuanBatchCreation', function(req, res) {
 app.get('/SaleQuanBatchCreation', function(req, res) {
   res.sendFile(__dirname + '/app/index.html');
 });
-app.get('/preferCouponDetail', function(req, res) {
+app.get('/PreferentialQuanBatchCreation', function(req, res) {
 	res.sendFile(__dirname + '/app/index.html');
 });
 app.get('/quan', function(req, res) {
+	res.sendFile(__dirname + '/app/index.html');
+});
+app.get('/login', function(req, res) {
 	res.sendFile(__dirname + '/app/index.html');
 });
 console.log(path.join(__dirname, '/app/styles'));

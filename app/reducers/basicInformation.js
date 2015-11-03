@@ -7,7 +7,8 @@ let initialState = {
 	title: '',
 	sellerID: '2',
 	couponQty: '',
-	couponImage: ''
+	couponImage: '',
+	operationUserId:''
 }
 
 export default function basicInformation(state = initialState, action){
@@ -39,7 +40,7 @@ export default function basicInformation(state = initialState, action){
 				title: {$set: title},
 				sellerID: {$set: sellerID},
 				couponQty: {$set: couponQty},
-				couponImage: {$set: couponImage}
+				couponImage: {$set: couponImage},
 			});
 		}
 		default:{

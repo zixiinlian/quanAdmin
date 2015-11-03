@@ -224,11 +224,12 @@ export function setProductScope(productScope){
   }
 }
 
-export function setQuanBatchCreation(quanBatch, isViewMode){
+export function setQuanBatchCreation(quanBatch, isViewMode,loginUser){
   return {
     type: actionTypes.SET_QUAN_BATCH_CREATION,
     quanBatch,
-    isViewMode
+    isViewMode,
+    loginUser
   }
 }
 
@@ -240,8 +241,10 @@ export function setUserPackageQuanBatch() {
       ...commonInformation,
       dispatchUserPackageRule,
       couponUsageRule
-    }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    };
+    let method = data.batchId === ""?"POST":"PUT";
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+
   };
 }
 
@@ -254,7 +257,9 @@ export function setChannelQuanBatch() {
       dispatchChannelRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    let method = data.batchId === ""?"POST":"PUT";
+
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -267,7 +272,9 @@ export function setSaleQuanBatch() {
       dispatchSaleRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    let method = data.batchId === ""?"POST":"PUT";
+
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -280,7 +287,8 @@ export function setUserRequestQuanBatch() {
       dispatchUserRequestRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    let method = data.batchId === ""?"POST":"PUT";
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -293,7 +301,8 @@ export function setOrderReturnQuanBatch() {
       dispatchOrderReturnRule,
       couponUsageRule
     }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    let method = data.batchId === ""?"POST":"PUT";
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 
@@ -305,7 +314,8 @@ export function setPreferentialQuanBatch() {
       ...commonInformation,
       couponUsageRule
     }
-    postJson('/coupon/batches', data).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
+    let method = data.batchId === ""?"POST":"PUT";
+    postJson('/coupon/batches', data,method).then(json => dispatch(setBatchId(json.data))).catch(error => alert(error.message));
   };
 }
 

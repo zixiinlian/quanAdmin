@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import {
 	fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage
-	, viewQuanBatch, editQuanBatch, putOffQuanBatch, putOnQuanBatch
+	, viewQuanBatch, editQuanBatch, putOffQuanBatch, putOnQuanBatch,
+	showQuanBatchTypeModal,hideQuanBatchTypeModal,selectQuanBatchType
 } from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
 import IssueQuan from '../components/IssueQuan';
+import SelectQuanBatchTypeModal from '../components/SelectQuanBatchTypeModal';
 import ModalDialog from '../components/ModalDialog';
 
 class QuanBatchManagement extends Component {
@@ -39,8 +41,14 @@ class QuanBatchManagement extends Component {
 			selectedQuanBatch = quanBatchList.find((element) => {
 				return element.batchId === selectedQuanBatchId;
 			});
-
 			return <ModalDialog onClose={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;
+		}
+	}
+
+	renderSelectQuanType(){
+		const {isShowSelectQuanModal, hideQuanBatchTypeModal,selectQuanBatchType} = this.props;
+		if(isShowSelectQuanModal){
+			return <ModalDialog onClose={hideQuanBatchTypeModal} title="选择新建优惠券类型"><SelectQuanBatchTypeModal selectQuanBatchType={selectQuanBatchType}></SelectQuanBatchTypeModal></ModalDialog>;
 		}
 	}
 
@@ -48,9 +56,10 @@ class QuanBatchManagement extends Component {
 		const {
 			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList
 			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch, putOffQuanBatch,loginUser
-			, viewQuanBatch, editQuanBatch
+			, viewQuanBatch, editQuanBatch,showQuanBatchTypeModal
 		} = this.props;
-		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList};
+
+		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList,showQuanBatchTypeModal};
 		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch
 			, putOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch};
 		return (
@@ -58,6 +67,7 @@ class QuanBatchManagement extends Component {
 				<QuanBatchSearch {...searchProps} />
 				<QuanBatchList {...listProps} />
 				{ this.renderIssueQuan() }
+				{ this.renderSelectQuanType() }
 			</div>
 		);
 	}
@@ -68,7 +78,7 @@ QuanBatchManagement.propTypes = {
 };
 
 function mapStateToProps(state) {
-	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager} = state.quanBatchManagement;
+	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager,isShowSelectQuanModal} = state.quanBatchManagement;
 	const {dispatchTypeList,sellerList,loginUser} = state.shared;
 	return {
 		quanBatchList,
@@ -78,7 +88,8 @@ function mapStateToProps(state) {
 		isShowIssueQuan,
 		selectedQuanBatchId,
 		quanBatchListPager,
-		loginUser
+		loginUser,
+		isShowSelectQuanModal
 	};
 }
 
@@ -94,7 +105,10 @@ function mapDispatchToProps(dispatch) {
   	viewQuanBatch, 
   	editQuanBatch,
   	putOffQuanBatch,
-  	putOnQuanBatch
+  	putOnQuanBatch,
+	  showQuanBatchTypeModal,
+	  hideQuanBatchTypeModal,
+	  selectQuanBatchType
   }, dispatch);
 }
 
