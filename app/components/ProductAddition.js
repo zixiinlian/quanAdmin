@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
-import {getProductList} from '../api';
+import {fetchProductList} from '../actions/quanBatchCreation';
 import Pager from './pager'
 
 export default class ProductAddition extends Component {
@@ -17,6 +17,10 @@ export default class ProductAddition extends Component {
 			isProductListSelected: [],
 			isAllSelected: false
 		}
+	}
+
+	componentDidMount() {
+		fetchProductList({pageNumber:1,pageSize:10});
 	}
 
 	handleSearchProduct(){

@@ -13,7 +13,8 @@ import {
 	setIsShareWithOrderMinusMulti,
 	setIsShareWithOrderDiscountMulti,
 	setIsShareWithOrderPresentMulti,
-	setIsShareWithOrderChangeMulti
+	setIsShareWithOrderChangeMulti,
+	fetchProductList
 } from '../actions/quanBatchCreation';
 import QuanBatchBasicInformation from '../components/QuanBatchBasicInformation';
 import UserRequestDispatchRule from '../components/UserRequestDispatchRule';
@@ -90,7 +91,8 @@ function mapDispatchToProps(dispatch) {
 			setPerUserLimit: setDispatchUserRequestRulePerUserLimit,
 			setUserScope,
 			addProductLimitList,
-			deleteProductLimitList
+			deleteProductLimitList,
+		fetchProductList
 		}, dispatch),
 		usageRuleActions: bindActionCreators({
 			setDiscountType,

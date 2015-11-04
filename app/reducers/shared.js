@@ -28,6 +28,7 @@ let initialState = {
 		desc: '优惠型优惠券'
 	}],
 	sellerList: [],
+	dispatchChannelList:[],
 	loginUser:{
 		id:197,
 		name:"suncheng"
@@ -47,7 +48,6 @@ export default function shared(state = initialState, action) {
 			});
 		}
 		case DO_LOGIN:{
-			console.log(action.loginUser);
 			return update(state,{
 				loginUser:{$set : action.loginUser}
 			});

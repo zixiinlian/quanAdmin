@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {pushState} from 'redux-router';
-import {setQuanBatchCreation} from './quanBatchCreation'
+import {setQuanBatchCreation,setOperationUser} from './quanBatchCreation'
 import * as api from '../api';
 // import ActionTypes from '../constants/ActionTypes';
 
@@ -72,8 +72,8 @@ export function receiveDispatchChannelList(json) {
 
 export function fetchDispatchChannelList() {
   return dispatch => {
-    return fetch(`/DispatchChannelList`)
-      .then(response => response.json())
+    return api.getJson('/channels')
+      .then(response => response.data)
       .then(json => dispatch(receiveDispatchChannelList(json)));
   };
 }
@@ -124,24 +124,6 @@ export function setQuanBatchListCurrentPage(currentPage) {
     currentPage
   };
 }
-
-//export const RECEIVE_QUAN_LIST = 'RECEIVE_QUAN_LIST';
-//export function receiveQuanList(json){
-//  return {
-//    type: RECEIVE_QUAN_LIST,
-//    quanList: json.results,
-//    pageIndex: json.pageIndex,
-//    pageSize: json.pageSize,
-//    total: json.total
-//  }
-//}
-//
-//export function fetchQuanList(quanBatchSearchCriteria) {
-//  return dispatch => {
-//    return api.getQuanList()
-//      .then(json => dispatch(receiveQuanList(json.data)));
-//  };
-//}
 
 /**
  * 上架优惠券批次
@@ -259,6 +241,7 @@ export function hideQuanBatchTypeModal() {
 export function selectQuanBatchType(index){
   return (dispatch, getState) => {
     getState().quanBatchManagement.isShowSelectQuanModal = false;
+    dispatch(setOperationUser(getState().shared.loginUser));
     let url;
     switch(index){
       case 1:
@@ -281,5 +264,19 @@ export function selectQuanBatchType(index){
         break;
     }
     dispatch(pushState(null, url));
+  }
+}
+
+export const BATCH_DISPATCH_QUAN = 'BATCH_DISPATCH_QUAN';
+
+export function setBatchDispatchQuan(){
+  return {
+    type: BATCH_DISPATCH_QUAN
+  };
+}
+
+export function batchDispatchQuan(dispatchQuanParams){
+  return dispatch => {
+    api.postJson("/coupons/dispatch/batch",dispatchQuanParams).then(json => dispatch(setBatchDispatchQuan())).catch(error => alert(error.message));
   }
 }

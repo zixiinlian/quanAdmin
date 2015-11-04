@@ -14,6 +14,8 @@ export default class QuanBatchListItem extends Component {
     const dispatchTypeDesc = dispatchTypeList.find((element) => {
       return element.id === dispatchType
     }).desc;
+    let isShowIssus = dispatchType === 4 && status === 1;
+    let isShowDispatch = dispatchType === 2 && status === 1;
     return (
       <tr>
         <td>{batchId}</td>
@@ -27,10 +29,17 @@ export default class QuanBatchListItem extends Component {
           <a href="javascript:void(0)" onClick={ e => viewQuanBatch(index) }>查看</a>
           <a href="javascript:void(0)" onClick={ e => editQuanBatch(index) }>编辑</a>
           { 
-            status == 0 ? <a href="javascript:void(0)" onClick={ e => putOnQuanBatch(index) }>上架</a> 
+            status === 0 ? <a href="javascript:void(0)" onClick={ e => putOnQuanBatch(index) }>上架</a>
             : <a href="javascript:void(0)" onClick={ e => putOffQuanBatch(index) }>下架</a>
           }
-          <a href="javascript:void(0)" onClick={ () => showIssueQuan(batchId) }>分发</a>
+          {
+            isShowDispatch ? <a href="javascript:void(0)" onClick={ e => putOnQuanBatch(index) }>发放</a>
+                : ''
+          }
+          {
+            isShowIssus ?
+            <a href="javascript:void(0)" onClick={ () => showIssueQuan(batchId) }>分发</a> :''
+          }
         </td>
       </tr>
     );

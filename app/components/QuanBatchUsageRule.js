@@ -26,7 +26,7 @@ export default class QuanBatchUsageRule extends Component {
 		if(useBeginTimeHour < 10){
 			useBeginTimeHour = "0" + useBeginTimeHour;
 		}
-		this.props.setUseBeginTime(value + " " + useBeginTimeHour + ':00:00');
+	//	this.props.setUseBeginTime(value + " " + useBeginTimeHour + ':00:00');
 	}
 
 	handleSetUseBeginTimeHour(e){
@@ -41,7 +41,7 @@ export default class QuanBatchUsageRule extends Component {
 		if(value < 10){
 			value = "0" + value;
 		}
-		this.props.setUseBeginTime(useBeginTimeDate + " " + value + ':00:00');
+	//	this.props.setUseBeginTime(useBeginTimeDate + " " + value + ':00:00');
 	}
 
 	handleSetUseEndTimeDate(date){

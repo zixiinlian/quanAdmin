@@ -46,7 +46,6 @@ export function setQuanStatus(index, status) {
 }
 
 export function doQuanCancel(index) {
-  console.log(index);
   return (dispatch, getState) => {
     let state = getState();
     let quan = state.quanManagement.quanList[index];

@@ -5,7 +5,8 @@ import { pushState } from 'redux-router';
 import {
 	fetchQuanBatchList,fetchSellerList, setQuanBatchSearchCriteria, showIssueQuan, hideIssueQuan, setQuanBatchListCurrentPage
 	, viewQuanBatch, editQuanBatch, putOffQuanBatch, putOnQuanBatch,
-	showQuanBatchTypeModal,hideQuanBatchTypeModal,selectQuanBatchType
+	showQuanBatchTypeModal,hideQuanBatchTypeModal,selectQuanBatchType,
+	fetchDispatchChannelList,batchDispatchQuan
 } from '../actions';
 import QuanBatchList from '../components/QuanBatchList';
 import QuanBatchSearch from '../components/QuanBatchSearch';
@@ -26,22 +27,25 @@ class QuanBatchManagement extends Component {
 	}
 
 	componentDidMount() {
-		const { fetchSellerList,sellerList,fetchQuanBatchList } = this.props;
+		const { fetchSellerList,sellerList,dispatchChannelList,fetchDispatchChannelList,fetchQuanBatchList } = this.props;
 	    if(!sellerList || sellerList.length === 0){
 			fetchSellerList();
 	    }
 
+		if(! dispatchChannelList || dispatchChannelList.length === 0){
+			fetchDispatchChannelList();
+		}
 	    fetchQuanBatchList();
 	}
 
 	renderIssueQuan(){
-		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList, hideIssueQuan} = this.props;
+		const {isShowIssueQuan, selectedQuanBatchId, quanBatchList, hideIssueQuan,dispatchChannelList,batchDispatchQuan} = this.props;
 		let selectedQuanBatch = null;
 		if(isShowIssueQuan){
 			selectedQuanBatch = quanBatchList.find((element) => {
 				return element.batchId === selectedQuanBatchId;
 			});
-			return <ModalDialog onClose={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch}></IssueQuan></ModalDialog>;
+			return <ModalDialog onClose={hideIssueQuan} title="站外渠道按卡号段分发"><IssueQuan {...selectedQuanBatch} hideIssueQuan={hideIssueQuan} dispatchChannelList={dispatchChannelList} batchDispatchQuan={batchDispatchQuan}></IssueQuan></ModalDialog>;
 		}
 	}
 
@@ -54,14 +58,14 @@ class QuanBatchManagement extends Component {
 
 	render() {
 		const {
-			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList
+			pushState, quanBatchList, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList,fetchDispatchChannelList,dispatchChannelList
 			, showIssueQuan, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch, putOffQuanBatch,loginUser
 			, viewQuanBatch, editQuanBatch,showQuanBatchTypeModal
 		} = this.props;
 
-		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList, sellerList,showQuanBatchTypeModal};
+		const searchProps = {pushState, dispatchTypeList, setQuanBatchSearchCriteria, quanBatchSearchCriteria, fetchSellerList,sellerList,showQuanBatchTypeModal};
 		const listProps = {pushState,quanBatchList, showIssueQuan, dispatchTypeList, quanBatchListPager, setQuanBatchListCurrentPage, putOnQuanBatch
-			, putOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch};
+			, putOffQuanBatch,loginUser, viewQuanBatch, editQuanBatch,fetchDispatchChannelList,dispatchChannelList};
 		return (
 			<div>
 				<QuanBatchSearch {...searchProps} />
@@ -79,12 +83,13 @@ QuanBatchManagement.propTypes = {
 
 function mapStateToProps(state) {
 	const {quanBatchList, quanBatchSearchCriteria, isShowIssueQuan, selectedQuanBatchId, quanBatchListPager,isShowSelectQuanModal} = state.quanBatchManagement;
-	const {dispatchTypeList,sellerList,loginUser} = state.shared;
+	const {dispatchTypeList,sellerList,dispatchChannelList,loginUser} = state.shared;
 	return {
 		quanBatchList,
 		quanBatchSearchCriteria,
 		dispatchTypeList,
 		sellerList,
+		dispatchChannelList,
 		isShowIssueQuan,
 		selectedQuanBatchId,
 		quanBatchListPager,
@@ -98,6 +103,7 @@ function mapDispatchToProps(dispatch) {
   	pushState,
   	fetchQuanBatchList,
   	fetchSellerList,
+	fetchDispatchChannelList,
   	showIssueQuan,
   	hideIssueQuan,
   	setQuanBatchListCurrentPage,
@@ -108,7 +114,8 @@ function mapDispatchToProps(dispatch) {
   	putOnQuanBatch,
 	  showQuanBatchTypeModal,
 	  hideQuanBatchTypeModal,
-	  selectQuanBatchType
+	  selectQuanBatchType,
+	  batchDispatchQuan
   }, dispatch);
 }
 

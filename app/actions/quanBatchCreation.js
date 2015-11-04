@@ -233,6 +233,13 @@ export function setQuanBatchCreation(quanBatch, isViewMode,loginUser){
   }
 }
 
+export function setOperationUser(loginUser){
+  return {
+    type: actionTypes.SET_OPERATION_USER,
+    loginUser
+  }
+}
+
 export function setUserPackageQuanBatch() {
   return (dispatch, getState) => {
     let {basicInformation, dispatchUserPackageRule, couponUsageRule, commonInformation} = getState().quanBatchCreation;
@@ -366,4 +373,22 @@ export function setUseEndTime(date) {
     type: actionTypes.SET_USE_END_TIME,
     date
   };
+}
+
+export function setProductList(productList){
+  return {
+    type : actionTypes.SET_PRODUCT_LIST,
+    productList
+  }
+}
+
+export function fetchProductList(data){
+  return dispatch => {
+    let url = new URL("http://backend2.hjsoa.hujiang.com/ProductList?format=json");
+    url.search = param(data);
+    return fetch(url, {
+      method: 'get'
+    }).then(response => response.json())
+    .then(json => dispatch(setProductList(json)));
+  }
 }

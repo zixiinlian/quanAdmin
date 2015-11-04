@@ -10,7 +10,6 @@ export function login(json) {
 }
 
 export function doLogin(username,password){
-    console.log(username);
     return dispatch => {
         let loginUser = {
             id:457,

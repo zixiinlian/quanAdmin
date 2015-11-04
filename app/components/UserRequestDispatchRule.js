@@ -9,9 +9,9 @@ export default class UserRequestDispatchRule extends Component {
 	render() {
 		const {
 			beginDate, endDate, isAutoOnline, setIsAutoOnline, couponQty, setCouponQty, perUserLimit, setPerUserLimit, productLimitList
-			, deleteProductLimitList, addProductLimitList, dispatchType, userScope, setUserScope, orderAmount, setOrderAmount
+			, deleteProductLimitList, addProductLimitList, dispatchType, userScope, setUserScope, orderAmount, setOrderAmount,fetchProductList
 		} = this.props;
-		const listAdditionProps = {deleteProductLimitList, addProductLimitList, productLimitList};
+		const listAdditionProps = {deleteProductLimitList, addProductLimitList, productLimitList,fetchProductList};
 		return (
 			<div>
 				<h1>发放规则</h1>
